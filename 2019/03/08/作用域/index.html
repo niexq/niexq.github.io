@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValu">
+<meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051// 1.与第二个情况对比const fn2 = () =&amp;gt; &amp;#123;    var a1 = 88;    const fn1 = () =&amp;gt; &amp;#123;    	console.log(&amp;a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="reduce方法">
-<meta property="og:url" content="http://yoursite.com/2019/03/08/reduce方法/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/03/08/作用域/index.html">
 <meta property="og:site_name" content="弄不死的小强">
-<meta property="og:description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValu">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051// 1.与第二个情况对比const fn2 = () =&amp;gt; &amp;#123;    var a1 = 88;    const fn1 = () =&amp;gt; &amp;#123;    	console.log(&amp;a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-08T07:56:42.169Z">
+<meta property="og:updated_time" content="2019-03-08T09:55:23.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="reduce方法">
-<meta name="twitter:description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValu">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051// 1.与第二个情况对比const fn2 = () =&amp;gt; &amp;#123;    var a1 = 88;    const fn1 = () =&amp;gt; &amp;#123;    	console.log(&amp;a">
 
 
 
@@ -119,7 +119,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/08/reduce方法/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/08/作用域/">
 
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/reduce方法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/作用域/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
@@ -261,7 +261,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T15:55:02+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T18:00:00+08:00">
                 2019-03-08
               </time>
             
@@ -300,13 +300,7 @@
 
       
         <hr>
-<h4 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h4><ul>
-<li>reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。</li>
-<li>reduce() 可以作为一个高阶函数，用于函数的 compose。</li>
-<li>注意: reduce() 对于空数组是不会执行回调函数的。</li>
-<li>语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValue)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">数字值求和，例子1：</span><br><span class="line">var numbers = [65, 44, 12, 4];</span><br><span class="line">const getSum = (total, num) =&gt; &#123;</span><br><span class="line">    return total + num;</span><br><span class="line">&#125;</span><br><span class="line">const myFunction = (item) =&gt; &#123;</span><br><span class="line">    document.getElementById(&quot;demo&quot;).innerHTML = numbers.reduce(getSum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">返回对象求和，例子2：</span><br><span class="line">const func1 = (arr) =&gt; &#123;</span><br><span class="line">  return arr.reduce((moneyObj, xsd) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      sumOfYZJE: moneyObj.sumOfYZJE + xsd.YZJE,</span><br><span class="line">      sumOfWLFY: moneyObj.sumOfWLFY + xsd.WLFY,</span><br><span class="line">      sumOfJJFY: moneyObj.sumOfJJFY + xsd.JJFY,</span><br><span class="line">      sumOfZKJE: moneyObj.sumOfZKJE + xsd.ZKJE,</span><br><span class="line">      sumOfZJE: moneyObj.sumOfZJE + xsd.ZJE,</span><br><span class="line">      sumOfWSZJE: moneyObj.sumOfWSZJE + xsd.WSZJE,</span><br><span class="line">      sumOfYSZJE: moneyObj.sumOfYSZJE + xsd.YSZJE,</span><br><span class="line">      sumOfWKPJE: moneyObj.sumOfWKPJE + xsd.WKPJE,</span><br><span class="line">      sumOfYKPJE: moneyObj.sumOfYKPJE + xsd.YKPJE,</span><br><span class="line">      sumOfHZJE: moneyObj.sumOfHZJE + xsd.HZJE</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, &#123;sumOfYZJE: 0,sumOfWLFY: 0,sumOfJJFY: 0,sumOfZKJE: 0,sumOfZJE: 0, sumOfWSZJE: 0, sumOfYSZJE: 0, sumOfWKPJE: 0, sumOfYKPJE: 0, sumOfHZJE: 0&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 1.与第二个情况对比</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">// VM270:4 Uncaught ReferenceError: a1 is not defined</span><br><span class="line">1总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找test时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错</span><br><span class="line"></span><br><span class="line">fn2();</span><br><span class="line"></span><br><span class="line">// 2.与第一个情况对比</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 1~~~~ 88</span><br><span class="line">// 2~~~~ 999</span><br><span class="line"></span><br><span class="line">// 3.执行let a1的时候不会报错（）</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 4.与1对比，执行let a1的时候报错</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     var a1 = 777;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// Uncaught SyntaxError: Identifier &apos;a1&apos; has already been</span><br></pre></td></tr></table></figure>
 <hr>
 
       
@@ -332,8 +326,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/08/ES6解构/" rel="next" title="ES6解构">
-                <i class="fa fa-chevron-left"></i> ES6解构
+              <a href="/2019/03/08/table合并单元格/" rel="next" title="table合并单元格">
+                <i class="fa fa-chevron-left"></i> table合并单元格
               </a>
             
           </div>
@@ -341,10 +335,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/08/运算符优先级/" rel="prev" title="运算符优先级">
-                运算符优先级 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -396,17 +386,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -448,22 +429,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义和用法"><span class="nav-number">1.</span> <span class="nav-text">定义和用法</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
