@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="对象解构1234567const a = &amp;#123;id: 1, name: &amp;apos;a1&amp;apos;, age: 30&amp;#125;;const &amp;#123;id, ccc&amp;#125; = a;const &amp;#123;name, ...ddd&amp;#125; = a;console.log(id);    // 1console.log(ccc);   // undefinedconsole.">
+<meta name="description" content="运算符优先级(row.FHSL || 0 - row.RKSL || 0) what?1234(null || 0 - 2 || -3)// -2(null || 2 - 2 || -3)// -3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES6解构">
-<meta property="og:url" content="http://yoursite.com/2019/03/08/ES6解构/index.html">
+<meta property="og:title" content="运算符优先级">
+<meta property="og:url" content="http://yoursite.com/2019/03/08/运算符优先级/index.html">
 <meta property="og:site_name" content="工作笔记">
-<meta property="og:description" content="对象解构1234567const a = &amp;#123;id: 1, name: &amp;apos;a1&amp;apos;, age: 30&amp;#125;;const &amp;#123;id, ccc&amp;#125; = a;const &amp;#123;name, ...ddd&amp;#125; = a;console.log(id);    // 1console.log(ccc);   // undefinedconsole.">
+<meta property="og:description" content="运算符优先级(row.FHSL || 0 - row.RKSL || 0) what?1234(null || 0 - 2 || -3)// -2(null || 2 - 2 || -3)// -3">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-08T07:54:16.299Z">
+<meta property="og:updated_time" content="2019-03-08T08:14:59.170Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES6解构">
-<meta name="twitter:description" content="对象解构1234567const a = &amp;#123;id: 1, name: &amp;apos;a1&amp;apos;, age: 30&amp;#125;;const &amp;#123;id, ccc&amp;#125; = a;const &amp;#123;name, ...ddd&amp;#125; = a;console.log(id);    // 1console.log(ccc);   // undefinedconsole.">
+<meta name="twitter:title" content="运算符优先级">
+<meta name="twitter:description" content="运算符优先级(row.FHSL || 0 - row.RKSL || 0) what?1234(null || 0 - 2 || -3)// -2(null || 2 - 2 || -3)// -3">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/08/ES6解构/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/08/运算符优先级/">
 
 
 
 
 
-  <title>ES6解构 | 工作笔记</title>
+  <title>运算符优先级 | 工作笔记</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/ES6解构/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/运算符优先级/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ES6解构</h1>
+          <h1 class="post-title" itemprop="name headline">运算符优先级</h1>
         
 
         <div class="post-meta">
@@ -300,9 +300,7 @@
 
       
         <hr>
-<h4 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const a = &#123;id: 1, name: &apos;a1&apos;, age: 30&#125;;</span><br><span class="line">const &#123;id, ccc&#125; = a;</span><br><span class="line">const &#123;name, ...ddd&#125; = a;</span><br><span class="line">console.log(id);    // 1</span><br><span class="line">console.log(ccc);   // undefined</span><br><span class="line">console.log(name);  // a1</span><br><span class="line">console.log(ddd);   // &#123;id: 1, age: 30&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h4 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const b = [1, 3, 5, 7, 9];</span><br><span class="line">const [, eee] = b;</span><br><span class="line">const [, ...fff] = b;</span><br><span class="line">const [, , ...ggg] = fff;</span><br><span class="line">console.log(eee);    // 3</span><br><span class="line">console.log(fff);    // [3, 5, 7, 9]</span><br><span class="line">console.log(ggg);    // [7, 9]</span><br></pre></td></tr></table></figure>
+<h4 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="noopener">运算符优先级</a></h4><h6 id="row-FHSL-0-row-RKSL-0-what"><a href="#row-FHSL-0-row-RKSL-0-what" class="headerlink" title="(row.FHSL || 0 - row.RKSL || 0) what?"></a>(row.FHSL || 0 - row.RKSL || 0) what?</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(null || 0 - 2 || -3)</span><br><span class="line">// -2</span><br><span class="line">(null || 2 - 2 || -3)</span><br><span class="line">// -3</span><br></pre></td></tr></table></figure>
 <hr>
 
       
@@ -328,18 +326,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/08/运算符优先级/" rel="next" title="运算符优先级">
-                <i class="fa fa-chevron-left"></i> 运算符优先级
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/08/bb/" rel="prev" title="bbb">
-                bbb <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/08/ES6解构/" rel="prev" title="ES6解构">
+                ES6解构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -454,7 +448,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象解构"><span class="nav-number">1.</span> <span class="nav-text">对象解构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组解构"><span class="nav-number">2.</span> <span class="nav-text">数组解构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#运算符优先级"><span class="nav-number">1.</span> <span class="nav-text">运算符优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#row-FHSL-0-row-RKSL-0-what"><span class="nav-number">1.0.1.</span> <span class="nav-text">(row.FHSL || 0 - row.RKSL || 0) what?</span></a></li></ol></li></ol></div>
             
 
           </div>
