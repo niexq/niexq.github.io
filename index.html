@@ -2,14 +2,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
-<html class="theme-next muse use-motion" lang>
+<html class="theme-next pisces use-motion" lang="zh-CN,zh-tw,zh-Hans,zh-hk,en,default">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +29,6 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -38,9 +45,22 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
 
 
 
@@ -48,61 +68,20 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT">
-
-
-
-
-
-
-
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="弄不死的小强">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="弄不死的小强">
-<meta property="og:locale" content="default">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="弄不死的小强">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -114,12 +93,33 @@
 </script>
 
 
+  
+
+
+
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="弄不死的小强">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="弄不死的小强">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="弄不死的小强">
+
+
+
+
+
 
   <link rel="canonical" href="http://yoursite.com/">
 
 
 
-
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>弄不死的小强</title>
   
@@ -131,9 +131,38 @@
 
 
 
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -146,7 +175,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta">
     
 
     <div class="custom-logo-site-title">
@@ -156,13 +185,16 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
       
-        <p class="site-subtitle">天将降大任于斯人也</p>
+        <p class="site-subtitle">天道酬勤 厚德载物</p>
       
+    
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -170,35 +202,113 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-主页">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            主页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-归档">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            归档
-          </a>
-        </li>
+        
+          
+          <li class="menu-item menu-item-home menu-item-active">
+
+    
+    
+    
       
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">9</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
 
       
+      
     </ul>
+  
+
   
 
   
@@ -206,12 +316,23 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
+          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
@@ -224,17 +345,19 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/作用域/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/操作update时报错不能更新from出来的数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -248,31 +371,60 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/08/作用域/" itemprop="url">reduce方法</a></h1>
+                
+                <a href="/2019/03/13/操作update时报错不能更新from出来的数据/" class="post-title-link" itemprop="url">操作update时报错不能更新from出来的数据</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T18:00:00+08:00">
-                2019-03-08
-              </time>
-            
 
+              
+                
+              
+
+              <time title="创建时间：2019-03-13 15:59:53" itemprop="dateCreated datePublished" datetime="2019-03-13T15:59:53+08:00">2019-03-13</time>
             
 
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MySql/" itemprop="url" rel="index"><span itemprop="name">MySql</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
+            
             
           
 
@@ -301,19 +453,29 @@
         
           
             <hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 1.与第二个情况对比</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">// VM270:4 Uncaught ReferenceError: a1 is not defined</span><br><span class="line">1总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找test时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错</span><br><span class="line"></span><br><span class="line">fn2();</span><br><span class="line"></span><br><span class="line">// 2.与第一个情况对比</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 1~~~~ 88</span><br><span class="line">// 2~~~~ 999</span><br><span class="line"></span><br><span class="line">// 3.执行let a1的时候不会报错（）</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 4.与1对比，执行let a1的时候报错</span><br><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     var a1 = 777;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// Uncaught SyntaxError: Identifier &apos;a1&apos; has already been</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>You can’t specify target table ‘xsdb’ for update in FROM clause<a href="https://blog.csdn.net/qq_29672495/article/details/72668008" target="_blank" rel="noopener">参考</a></p>
+</blockquote>
+<h4 id="错误写法总结：不能先select出同一表中的某些值，再update这个表-在同一语句中-，即不能依据某字段值做判断再来更新某字段的值"><a href="#错误写法总结：不能先select出同一表中的某些值，再update这个表-在同一语句中-，即不能依据某字段值做判断再来更新某字段的值" class="headerlink" title="错误写法总结：不能先select出同一表中的某些值，再update这个表(在同一语句中)，即不能依据某字段值做判断再来更新某字段的值"></a>错误写法总结：不能先select出同一表中的某些值，再update这个表(在同一语句中)，即不能依据某字段值做判断再来更新某字段的值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-- 根据条件批量更新逾期时间</span><br><span class="line">UPDATE XSDB set JSRQ = 1609430399999 where GUID in (</span><br><span class="line">  SELECT</span><br><span class="line">    -- FROM_UNIXTIME(xsd.JSRQ/1000, &apos;%Y-%m-%d %H:%i:%S&apos;) AS JSRQQ,</span><br><span class="line">    `xsd`.GUID</span><br><span class="line">    FROM</span><br><span class="line">    (</span><br><span class="line">      SELECT dqdd.CJJXSID, dqdd.SHJXSID FROM DDB dqdd WHERE dqdd.GUID = 906000029082</span><br><span class="line">    ) AS ydd,</span><br><span class="line">    `DDB` AS `dd`</span><br><span class="line">    INNER JOIN `XSDB` AS `xsd` ON `dd`.`GUID` = `xsd`.`DDID`</span><br><span class="line">    WHERE</span><br><span class="line">      `dd`.`CJJXSID` = ydd.CJJXSID</span><br><span class="line">      AND `dd`.`SHJXSID` = ydd.SHJXSID</span><br><span class="line">      AND `dd`.`DDZT` = &apos;1&apos;</span><br><span class="line">      AND `dd`.`DDLX` IN (1, 2, 9)</span><br><span class="line">      AND `dd`.`WSZJE` &gt;= 0</span><br><span class="line">      AND `dd`.`ZTBS` = &apos;E&apos;</span><br><span class="line">      AND `xsd`.`WSZJE` &gt;= 0</span><br><span class="line">      AND `xsd`.`JSRQ` &lt; UNIX_TIMESTAMP(NOW())*1000</span><br><span class="line">      AND `xsd`.`ZTBS` = &apos;E&apos;</span><br><span class="line">      AND `xsd`.`CWHXZT` = &apos;0&apos;</span><br><span class="line">      AND `xsd`.`ZJE` &gt; &apos;0&apos;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="正确写法总结：将SELECT出的结果再通过中间表SELECT一遍，这样就规避了错误；需要注意的是，这个问题只出现于MySQL，MSSQL和Oracle不会出现此问题。"><a href="#正确写法总结：将SELECT出的结果再通过中间表SELECT一遍，这样就规避了错误；需要注意的是，这个问题只出现于MySQL，MSSQL和Oracle不会出现此问题。" class="headerlink" title="正确写法总结：将SELECT出的结果再通过中间表SELECT一遍，这样就规避了错误；需要注意的是，这个问题只出现于MySQL，MSSQL和Oracle不会出现此问题。"></a>正确写法总结：将SELECT出的结果再通过中间表SELECT一遍，这样就规避了错误；需要注意的是，这个问题只出现于MySQL，MSSQL和Oracle不会出现此问题。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">-- 根据条件批量更新逾期时间</span><br><span class="line">UPDATE XSDB set JSRQ = 1609430399999 where GUID in (</span><br><span class="line">	select lsXSDB.GUID from (</span><br><span class="line">		SELECT</span><br><span class="line">			FROM_UNIXTIME(xsd.JSRQ/1000, &apos;%Y-%m-%d %H:%i:%S&apos;) AS JSRQQ,</span><br><span class="line">			`xsd`.*</span><br><span class="line">			FROM</span><br><span class="line">			(</span><br><span class="line">				SELECT dqdd.CJJXSID, dqdd.SHJXSID FROM DDB dqdd WHERE dqdd.GUID = 906000029082</span><br><span class="line">			) AS ydd,</span><br><span class="line">			`DDB` AS `dd`</span><br><span class="line">			INNER JOIN `XSDB` AS `xsd` ON `dd`.`GUID` = `xsd`.`DDID`</span><br><span class="line">			WHERE</span><br><span class="line">				`dd`.`CJJXSID` = ydd.CJJXSID</span><br><span class="line">				AND `dd`.`SHJXSID` = ydd.SHJXSID</span><br><span class="line">				AND `dd`.`DDZT` = &apos;1&apos;</span><br><span class="line">				AND `dd`.`DDLX` IN (1, 2, 9)</span><br><span class="line">				AND `dd`.`WSZJE` &gt;= 0</span><br><span class="line">				AND `dd`.`ZTBS` = &apos;E&apos;</span><br><span class="line">				AND `xsd`.`WSZJE` &gt;= 0</span><br><span class="line">				AND `xsd`.`JSRQ` &lt; UNIX_TIMESTAMP(NOW())*1000</span><br><span class="line">				AND `xsd`.`ZTBS` = &apos;E&apos;</span><br><span class="line">				AND `xsd`.`CWHXZT` = &apos;0&apos;</span><br><span class="line">				AND `xsd`.`ZJE` &gt; &apos;0&apos;</span><br><span class="line">	) lsXSDB</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <hr>
 
           
         
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -344,6 +506,647 @@
 
   
   
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/Sequelize踩的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/13/Sequelize踩的坑/" class="post-title-link" itemprop="url">Sequelize踩的坑</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-13 15:46:53" itemprop="dateCreated datePublished" datetime="2019-03-13T15:46:53+08:00">2019-03-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MySql/" itemprop="url" rel="index"><span itemprop="name">MySql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>save篇</p>
+</blockquote>
+<h4 id="contract-id设置了主键，save不支持赋值更改"><a href="#contract-id设置了主键，save不支持赋值更改" class="headerlink" title="contract_id设置了主键，save不支持赋值更改"></a>contract_id设置了主键，save不支持赋值更改</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let contractGood = yield models.ContractGood.findOne(&#123;</span><br><span class="line">  where: &#123;</span><br><span class="line">    GUID: 1333170</span><br><span class="line">  &#125;,</span><br><span class="line">  transaction: t</span><br><span class="line">&#125;);</span><br><span class="line">contractGood.contract_id = &apos;111111111111111111111111&apos;;</span><br><span class="line">yield contractGood.save(&#123; transaction: t &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="正确使用方式update或delete-contractGood-contract-id-再赋值，save操作"><a href="#正确使用方式update或delete-contractGood-contract-id-再赋值，save操作" class="headerlink" title="正确使用方式update或delete contractGood.contract_id 再赋值，save操作"></a>正确使用方式update或delete contractGood.contract_id 再赋值，save操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yield models.ContractGood.update(&#123; contract_id: &apos;22222&apos; &#125;, &#123;where: &#123;GUID: 1333170&#125;, transaction: t&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="涉及到更改主键，一定慎重"><a href="#涉及到更改主键，一定慎重" class="headerlink" title="涉及到更改主键，一定慎重"></a><font color="red">涉及到更改主键，一定慎重</font></h4>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/react组件事件绑定监听/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/13/react组件事件绑定监听/" class="post-title-link" itemprop="url">react组件事件绑定监听</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-13 15:09:54" itemprop="dateCreated datePublished" datetime="2019-03-13T15:09:54+08:00">2019-03-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Reactjs/" itemprop="url" rel="index"><span itemprop="name">Reactjs</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h4><blockquote>
+<p>addEventListener() 方法用于向指定元素添加事件句柄。</p>
+</blockquote>
+<h6 id="element-addEventListener-event-function-useCapture"><a href="#element-addEventListener-event-function-useCapture" class="headerlink" title="element.addEventListener(event, function, useCapture)"></a>element.addEventListener(event, function, useCapture)</h6><blockquote>
+<p>removeEventListener() 方法用于移除由 addEventListener() 方法添加的事件句柄。</p>
+</blockquote>
+<h6 id="element-removeEventListener-event-function-useCapture"><a href="#element-removeEventListener-event-function-useCapture" class="headerlink" title="element.removeEventListener(event, function, useCapture)"></a>element.removeEventListener(event, function, useCapture)</h6><h6 id="如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。"><a href="#如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。" class="headerlink" title="如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。"></a>如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。</h6><h4 id="场景：绑定回车事件"><a href="#场景：绑定回车事件" class="headerlink" title="场景：绑定回车事件"></a>场景：绑定回车事件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Demo extends Components&#123;</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        document.addEventListener(&apos;keydown&apos;,this.handleEnterKey);v</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillUmount()&#123;</span><br><span class="line">        document.removeEventListener(&apos;keydown&apos;,this.handleEenterKey);</span><br><span class="line">    &#125;</span><br><span class="line">    handleEnterKey = (e) =&gt; &#123;</span><br><span class="line">        if(e.keyCode === 13)&#123;</span><br><span class="line">          //do somethings</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        &lt;div&gt;hello,world!&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/序列化接口入参到query中/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/13/序列化接口入参到query中/" class="post-title-link" itemprop="url">序列化接口入参到query中</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-13 14:57:34" itemprop="dateCreated datePublished" datetime="2019-03-13T14:57:34+08:00">2019-03-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="请求接口时，序列化参数到query中，只支持2层数据-如果多层，需要使用递归-，如果参数中有undefined，会将其删除"><a href="#请求接口时，序列化参数到query中，只支持2层数据-如果多层，需要使用递归-，如果参数中有undefined，会将其删除" class="headerlink" title="请求接口时，序列化参数到query中，只支持2层数据(如果多层，需要使用递归)，如果参数中有undefined，会将其删除"></a>请求接口时，序列化参数到query中，只支持2层数据(如果多层，需要使用递归)，如果参数中有undefined，会将其删除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export const stringify = (params = &#123;&#125;) =&gt; &#123;</span><br><span class="line">  const copyParams = params;</span><br><span class="line">  Object.keys(copyParams).forEach((k) =&gt; &#123;</span><br><span class="line">    if ((_.isObject(copyParams[k]) || _.isArray(copyParams[k])) &amp;&amp; !_.isEmpty(copyParams[k])) &#123;</span><br><span class="line">      copyParams[k] = JSON.stringify(copyParams[k]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  const newParams = JSON.parse(JSON.stringify(copyParams));</span><br><span class="line">  return qs.stringify(newParams);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/作用域/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/08/作用域/" class="post-title-link" itemprop="url">var const let作用域</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-08 18:00:00" itemprop="dateCreated datePublished" datetime="2019-03-08T18:00:00+08:00">2019-03-08</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h6 id="1-与第二个情况对比"><a href="#1-与第二个情况对比" class="headerlink" title="1.与第二个情况对比"></a>1.与第二个情况对比</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 第4行 VM270:4 Uncaught ReferenceError: a1 is not defined</span><br></pre></td></tr></table></figure>
+<h4 id="总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错"><a href="#总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错" class="headerlink" title="总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错"></a><strong>总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错</strong></h4><h6 id="2-与第一个情况对比"><a href="#2-与第一个情况对比" class="headerlink" title="2.与第一个情况对比"></a>2.与第一个情况对比</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 1~~~~ 88</span><br><span class="line">// 2~~~~ 999</span><br></pre></td></tr></table></figure>
+<h6 id="3-执行let-a1的时候不会报错"><a href="#3-执行let-a1的时候不会报错" class="headerlink" title="3.执行let a1的时候不会报错"></a>3.执行let a1的时候不会报错</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 2~~~~ 88</span><br></pre></td></tr></table></figure>
+<h6 id="4-与1对比，执行let-a1的时候报错"><a href="#4-与1对比，执行let-a1的时候报错" class="headerlink" title="4.与1对比，执行let a1的时候报错"></a>4.与1对比，执行let a1的时候报错</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     var a1 = 777;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 第5行 Uncaught SyntaxError: Identifier &apos;a1&apos; has already been</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -356,7 +1159,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -370,31 +1173,60 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/08/table合并单元格/" itemprop="url">table合并单元格</a></h1>
+                
+                <a href="/2019/03/08/table合并单元格/" class="post-title-link" itemprop="url">table合并单元格</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T16:28:02+08:00">
-                2019-03-08
-              </time>
-            
 
+              
+                
+              
+
+              <time title="创建时间：2019-03-08 16:28:02" itemprop="dateCreated datePublished" datetime="2019-03-08T16:28:02+08:00">2019-03-08</time>
             
 
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
+            
             
           
 
@@ -422,26 +1254,29 @@
       
         
           
-            <hr>
-<h2 id="合并行"><a href="#合并行" class="headerlink" title="合并行"></a>合并行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;table border=&apos;1&apos; width=&apos;100%&apos;&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;id&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;name&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;age&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;other&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/thead&gt; </span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td rowspan=&apos;3&apos;&gt;2&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;2&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><html><br>    <table border="1" width="100%"><br>        <thead><br>            <tr><br>                <th>id</th><br>                <th>name</th><br>                <th>age</th><br>                <th>other</th><br>            </tr><br>        </thead><br>        <tbody><br>            <tr><br>              <td>1</td><br>              <td rowspan="3">2</td><br>              <td>3</td><br>              <td>4</td><br>            </tr><br>            <tr><br>              <td>1</td><br>              <td>3</td><br>              <td>4</td><br>            </tr><br>            <tr><br>              <td>1</td><br>              <td>3</td><br>              <td>4</td><br>            </tr><br>            <tr><br>              <td>1</td><br>              <td>2</td><br>              <td>3</td><br>              <td>4</td><br>            </tr><br>        </tbody><br>    </table><br></html>
+            <h2 id="合并行"><a href="#合并行" class="headerlink" title="合并行"></a>合并行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;id&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;name&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;age&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;other&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/thead&gt; </span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td rowspan=&apos;3&apos;&gt;2&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;2&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">          &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<table><br>    <thead><br>        <tr><br>            <th>id</th><br>            <th>name</th><br>            <th>age</th><br>            <th>other</th><br>        </tr><br>    </thead><br>    <tbody><br>        <tr><br>            <td>1</td><br>            <td rowspan="3">2</td><br>            <td>3</td><br>            <td>4</td><br>        </tr><br>        <tr><br>            <td>1</td><br>            <td>3</td><br>            <td>4</td><br>        </tr><br>        <tr><br>            <td>1</td><br>            <td>3</td><br>            <td>4</td><br>        </tr><br>        <tr><br>            <td>1</td><br>            <td>2</td><br>            <td>3</td><br>            <td>4</td><br>        </tr><br>    </tbody><br></table>
 
-<hr>
-<h2 id="合并列"><a href="#合并列" class="headerlink" title="合并列"></a>合并列</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;table border=&apos;1&apos; width=&apos;100%&apos;&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;id&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;name&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;age&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;other&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/thead&gt; </span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">      &lt;td colspan=&apos;2&apos;&gt;2&lt;/td&gt;</span><br><span class="line">      &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">      &lt;td colspan=&apos;2&apos;&gt;2&lt;/td&gt;</span><br><span class="line">      &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">      &lt;td colspan=&apos;2&apos;&gt;2&lt;/td&gt;</span><br><span class="line">      &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="效果图-1"><a href="#效果图-1" class="headerlink" title="效果图"></a>效果图</h4><html><br>    <table border="1" width="100%"><br>        <thead><br>            <tr><br>                <th>id</th><br>                <th>name</th><br>                <th>age</th><br>                <th>other</th><br>            </tr><br>        </thead><br>        <tr><br>          <td>1</td><br>          <td colspan="2">2</td><br>          <td>3</td><br>        </tr><br>        <tr><br>          <td>1</td><br>          <td colspan="2">2</td><br>          <td>3</td><br>        </tr><br>        <tr><br>          <td>1</td><br>          <td colspan="2">2</td><br>          <td>3</td><br>        </tr><br>    </table><br></html>
-
+<h2 id="合并列"><a href="#合并列" class="headerlink" title="合并列"></a>合并列</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;id&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;name&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;age&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;other&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">            &lt;td colspan=&apos;2&apos;&gt;2&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">            &lt;td colspan=&apos;2&apos;&gt;2&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">            &lt;td colspan=&apos;2&apos;&gt;2&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<table><br>    <thead><br>        <tr><br>            <th>id</th><br>            <th>name</th><br>            <th>age</th><br>            <th>other</th><br>        </tr><br>    </thead><br>    <tbody><br>        <tr><br>            <td>1</td><br>            <td colspan="2">2</td><br>            <td>3</td><br>        </tr><br>        <tr><br>            <td>1</td><br>            <td colspan="2">2</td><br>            <td>3</td><br>        </tr><br>        <tr><br>            <td>1</td><br>            <td colspan="2">2</td><br>            <td>3</td><br>        </tr><br>    </tbody><br></table>
 
 
           
         
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -472,6 +1307,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -484,7 +1321,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -498,31 +1335,60 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/08/运算符优先级/" itemprop="url">运算符优先级</a></h1>
+                
+                <a href="/2019/03/08/运算符优先级/" class="post-title-link" itemprop="url">运算符优先级</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T16:00:02+08:00">
-                2019-03-08
-              </time>
-            
 
+              
+                
+              
+
+              <time title="创建时间：2019-03-08 16:00:02" itemprop="dateCreated datePublished" datetime="2019-03-08T16:00:02+08:00">2019-03-08</time>
             
 
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
+            
             
           
 
@@ -551,19 +1417,25 @@
         
           
             <hr>
-<h4 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="noopener">运算符优先级</a></h4><h6 id="row-FHSL-0-row-RKSL-0-what"><a href="#row-FHSL-0-row-RKSL-0-what" class="headerlink" title="(row.FHSL || 0 - row.RKSL || 0) what?"></a>(row.FHSL || 0 - row.RKSL || 0) what?</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(null || 0 - 2 || -3)</span><br><span class="line">// -2</span><br><span class="line">(null || 2 - 2 || -3)</span><br><span class="line">// -3</span><br></pre></td></tr></table></figure>
+<h4 id="运算符优先级-运算符的优先级决定了表达式中运算执行的先后顺序，优先级高的运算符最先被执行。"><a href="#运算符优先级-运算符的优先级决定了表达式中运算执行的先后顺序，优先级高的运算符最先被执行。" class="headerlink" title="运算符优先级 运算符的优先级决定了表达式中运算执行的先后顺序，优先级高的运算符最先被执行。"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="noopener">运算符优先级</a> 运算符的优先级决定了表达式中运算执行的先后顺序，优先级高的运算符最先被执行。</h4><p>问题：(row.FHSL || 0 - row.RKSL || 0) what?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(null || 0 - 2 || -3)</span><br><span class="line">// -2</span><br><span class="line">(null || 2 - 2 || -3)</span><br><span class="line">// -3</span><br></pre></td></tr></table></figure></p>
 <hr>
 
           
         
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -596,6 +1468,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -606,7 +1480,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -620,31 +1494,60 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/08/reduce方法/" itemprop="url">reduce方法</a></h1>
+                
+                <a href="/2019/03/08/reduce方法/" class="post-title-link" itemprop="url">reduce方法</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T15:55:02+08:00">
-                2019-03-08
-              </time>
-            
 
+              
+                
+              
+
+              <time title="创建时间：2019-03-08 15:55:02" itemprop="dateCreated datePublished" datetime="2019-03-08T15:55:02+08:00">2019-03-08</time>
             
 
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
+            
             
           
 
@@ -686,12 +1589,18 @@
         
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -724,6 +1633,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -734,7 +1645,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -748,31 +1659,60 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/08/ES6解构/" itemprop="url">ES6解构</a></h1>
+                
+                <a href="/2019/03/08/ES6解构/" class="post-title-link" itemprop="url">ES6解构</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T15:52:02+08:00">
-                2019-03-08
-              </time>
-            
 
+              
+                
+              
+
+              <time title="创建时间：2019-03-08 15:52:02" itemprop="dateCreated datePublished" datetime="2019-03-08T15:52:02+08:00">2019-03-08</time>
             
 
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
+            
             
           
 
@@ -810,12 +1750,18 @@
         
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -848,9 +1794,6 @@
           </div>
           
 
-
-          
-
         </div>
         
           
@@ -864,54 +1807,148 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="niexq">
+            
               <p class="site-author-name" itemprop="name">niexq</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <div class="site-description motion-element" itemprop="description"></div>
           </div>
 
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
+          
+            <nav class="site-state motion-element">
               
-                <a href="/archives">
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">5</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/niexq" title="GitHub &rarr; https://github.com/niexq" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:niexq0319@gmail.com" title="E-Mail &rarr; mailto:niexq0319@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/xq-nie" title="StackOverflow &rarr; https://stackoverflow.com/xq-nie" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
             
-
-            
-
-            
-
-          </nav>
-
           
-
-          
-
-          
-          
-
-          
-          
-
           
 
         </div>
-      </section>
+      </div>
 
       
 
@@ -919,6 +1956,7 @@
 
     </div>
   </aside>
+  
 
 
         
@@ -928,10 +1966,12 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">niexq</span>
+
+  
 
   
 </div>
@@ -952,6 +1992,7 @@
 
 
 
+
         
       </div>
     </footer>
@@ -960,16 +2001,21 @@
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
     
 
+    
+
+    
   </div>
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -983,92 +2029,11 @@
 
 
 
-  
 
 
 
 
 
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 
@@ -1082,7 +2047,53 @@
 
 
   
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
 
 
 
@@ -1094,6 +2105,15 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
   
 
   
