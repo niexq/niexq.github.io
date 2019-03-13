@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="弄不死的小强">
 <meta property="og:description" content="定义和用法 addEventListener() 方法用于向指定元素添加事件句柄。  element.addEventListener(event, function, useCapture) removeEventListener() 方法用于移除由 addEventListener() 方法添加的事件句柄。  element.removeEventListener(event, functio">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-13T07:35:59.692Z">
+<meta property="og:updated_time" content="2019-03-13T10:22:01.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react组件事件绑定监听">
 <meta name="twitter:description" content="定义和用法 addEventListener() 方法用于向指定元素添加事件句柄。  element.addEventListener(event, function, useCapture) removeEventListener() 方法用于移除由 addEventListener() 方法添加的事件句柄。  element.removeEventListener(event, functio">
@@ -247,7 +247,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">8</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">10</span></a>
 
   </li>
         
@@ -285,7 +285,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">9</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">10</span></a>
 
   </li>
         
@@ -458,7 +458,7 @@
 <h6 id="element-addEventListener-event-function-useCapture"><a href="#element-addEventListener-event-function-useCapture" class="headerlink" title="element.addEventListener(event, function, useCapture)"></a>element.addEventListener(event, function, useCapture)</h6><blockquote>
 <p>removeEventListener() 方法用于移除由 addEventListener() 方法添加的事件句柄。</p>
 </blockquote>
-<h6 id="element-removeEventListener-event-function-useCapture"><a href="#element-removeEventListener-event-function-useCapture" class="headerlink" title="element.removeEventListener(event, function, useCapture)"></a>element.removeEventListener(event, function, useCapture)</h6><h6 id="如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。"><a href="#如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。" class="headerlink" title="如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。"></a>如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。</h6><h4 id="场景：绑定回车事件"><a href="#场景：绑定回车事件" class="headerlink" title="场景：绑定回车事件"></a>场景：绑定回车事件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Demo extends Components&#123;</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        document.addEventListener(&apos;keydown&apos;,this.handleEnterKey);v</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillUmount()&#123;</span><br><span class="line">        document.removeEventListener(&apos;keydown&apos;,this.handleEenterKey);</span><br><span class="line">    &#125;</span><br><span class="line">    handleEnterKey = (e) =&gt; &#123;</span><br><span class="line">        if(e.keyCode === 13)&#123;</span><br><span class="line">          //do somethings</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        &lt;div&gt;hello,world!&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="element-removeEventListener-event-function-useCapture"><a href="#element-removeEventListener-event-function-useCapture" class="headerlink" title="element.removeEventListener(event, function, useCapture)"></a>element.removeEventListener(event, function, useCapture)</h6><h6 id="如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。"><a href="#如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。" class="headerlink" title="如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。"></a>如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。</h6><h4 id="场景：绑定回车事件"><a href="#场景：绑定回车事件" class="headerlink" title="场景：绑定回车事件"></a>场景：绑定回车事件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Demo extends Components&#123;</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        document.addEventListener(&apos;keydown&apos;,this.handleEnterKey);</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillUmount()&#123;</span><br><span class="line">        document.removeEventListener(&apos;keydown&apos;,this.handleEenterKey);</span><br><span class="line">    &#125;</span><br><span class="line">    handleEnterKey = (e) =&gt; &#123;</span><br><span class="line">        if(e.keyCode === 13)&#123;</span><br><span class="line">          //do somethings</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        &lt;div&gt;hello,world!&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -612,7 +612,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -670,7 +670,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
