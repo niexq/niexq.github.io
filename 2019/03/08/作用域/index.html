@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="弄不死的小强">
 <meta property="og:description" content="1.与第二个情况对比1234567891011const fn2 = () =&amp;gt; &amp;#123;    var a1 = 88;    const fn1 = () =&amp;gt; &amp;#123;    	console.log(&amp;apos;1~~~~&amp;apos;, a1)        let a1 = 999;    &amp;#125;    fn1();    console.log(&amp;apos;2">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-12T07:11:04.953Z">
+<meta property="og:updated_time" content="2019-04-19T12:05:59.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="var const let作用域">
 <meta name="twitter:description" content="1.与第二个情况对比1234567891011const fn2 = () =&amp;gt; &amp;#123;    var a1 = 88;    const fn1 = () =&amp;gt; &amp;#123;    	console.log(&amp;apos;1~~~~&amp;apos;, a1)        let a1 = 999;    &amp;#125;    fn1();    console.log(&amp;apos;2">
@@ -247,7 +247,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">15</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
 
   </li>
         
@@ -266,7 +266,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">7</span></a>
 
   </li>
         
@@ -285,7 +285,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">15</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">19</span></a>
 
   </li>
         
@@ -488,10 +488,10 @@
       
 
       
-        <h6 id="1-与第二个情况对比"><a href="#1-与第二个情况对比" class="headerlink" title="1.与第二个情况对比"></a>1.与第二个情况对比</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 第4行 VM270:4 Uncaught ReferenceError: a1 is not defined</span><br></pre></td></tr></table></figure>
-<h4 id="总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错"><a href="#总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错" class="headerlink" title="总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错"></a><strong>总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错</strong></h4><h6 id="2-与第一个情况对比"><a href="#2-与第一个情况对比" class="headerlink" title="2.与第一个情况对比"></a>2.与第一个情况对比</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 1~~~~ 88</span><br><span class="line">// 2~~~~ 999</span><br></pre></td></tr></table></figure>
-<h6 id="3-执行let-a1的时候不会报错"><a href="#3-执行let-a1的时候不会报错" class="headerlink" title="3.执行let a1的时候不会报错"></a>3.执行let a1的时候不会报错</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 2~~~~ 88</span><br></pre></td></tr></table></figure>
-<h6 id="4-与1对比，执行let-a1的时候报错"><a href="#4-与1对比，执行let-a1的时候报错" class="headerlink" title="4.与1对比，执行let a1的时候报错"></a>4.与1对比，执行let a1的时候报错</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     var a1 = 777;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 第5行 Uncaught SyntaxError: Identifier &apos;a1&apos; has already been</span><br></pre></td></tr></table></figure>
+        <h4 id="1-与第二个情况对比"><a href="#1-与第二个情况对比" class="headerlink" title="1.与第二个情况对比"></a>1.与第二个情况对比</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 第4行 VM270:4 Uncaught ReferenceError: a1 is not defined</span><br></pre></td></tr></table></figure>
+<h4 id="总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错"><a href="#总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错" class="headerlink" title="总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错"></a><strong>总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错</strong></h4><h4 id="2-与第一个情况对比"><a href="#2-与第一个情况对比" class="headerlink" title="2.与第一个情况对比"></a>2.与第一个情况对比</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">    	console.log(&apos;1~~~~&apos;, a1)</span><br><span class="line">        a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 1~~~~ 88</span><br><span class="line">// 2~~~~ 999</span><br></pre></td></tr></table></figure>
+<h4 id="3-执行let-a1的时候不会报错"><a href="#3-执行let-a1的时候不会报错" class="headerlink" title="3.执行let a1的时候不会报错"></a>3.执行let a1的时候不会报错</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 2~~~~ 88</span><br></pre></td></tr></table></figure>
+<h4 id="4-与1对比，执行let-a1的时候报错"><a href="#4-与1对比，执行let-a1的时候报错" class="headerlink" title="4.与1对比，执行let a1的时候报错"></a>4.与1对比，执行let a1的时候报错</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fn2 = () =&gt; &#123;</span><br><span class="line">    var a1 = 88;</span><br><span class="line">    const fn1 = () =&gt; &#123;</span><br><span class="line">     var a1 = 777;</span><br><span class="line">     let a1 = 999;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1();</span><br><span class="line">    console.log(&apos;2~~~~&apos;,a1)</span><br><span class="line">&#125;</span><br><span class="line">fn2();</span><br><span class="line">// 第5行 Uncaught SyntaxError: Identifier &apos;a1&apos; has already been</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -644,7 +644,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -673,7 +673,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -720,7 +722,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -819,7 +829,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-与第二个情况对比"><span class="nav-number">1.</span> <span class="nav-text">1.与第二个情况对比</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错"><span class="nav-number"></span> <span class="nav-text">总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-与第一个情况对比"><span class="nav-number">1.</span> <span class="nav-text">2.与第一个情况对比</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-执行let-a1的时候不会报错"><span class="nav-number">2.</span> <span class="nav-text">3.执行let a1的时候不会报错</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-与1对比，执行let-a1的时候报错"><span class="nav-number">3.</span> <span class="nav-text">4.与1对比，执行let a1的时候报错</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-与第二个情况对比"><span class="nav-number">1.</span> <span class="nav-text">1.与第二个情况对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let-它就不会再往上找，而let在声明之前是不可用的，所以就会报错"><span class="nav-number">2.</span> <span class="nav-text">总结：函数会从自身的活动对象开始，一层层向上寻找自己所需的变量，该函数在寻找a1时发现，自己的作用域里声明了let,它就不会再往上找，而let在声明之前是不可用的，所以就会报错</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-与第一个情况对比"><span class="nav-number">3.</span> <span class="nav-text">2.与第一个情况对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-执行let-a1的时候不会报错"><span class="nav-number">4.</span> <span class="nav-text">3.执行let a1的时候不会报错</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-与1对比，执行let-a1的时候报错"><span class="nav-number">5.</span> <span class="nav-text">4.与1对比，执行let a1的时候报错</span></a></li></ol></div>
             
 
           </div>

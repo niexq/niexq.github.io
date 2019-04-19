@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="弄不死的小强">
 <meta property="og:description" content="You can’t specify target table ‘xsdb’ for update in FROM clause参考  错误写法总结：不能先select出同一表中的某些值，再update这个表(在同一语句中)，即不能依据某字段值做判断再来更新某字段的值123456789101112131415161718192021222324-- 根据条件批量更新逾期时间UPDATE XSDB">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-13T08:07:45.067Z">
+<meta property="og:updated_time" content="2019-04-19T12:02:49.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作update时报错不能更新from出来的数据">
 <meta name="twitter:description" content="You can’t specify target table ‘xsdb’ for update in FROM clause参考  错误写法总结：不能先select出同一表中的某些值，再update这个表(在同一语句中)，即不能依据某字段值做判断再来更新某字段的值123456789101112131415161718192021222324-- 根据条件批量更新逾期时间UPDATE XSDB">
@@ -247,7 +247,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">15</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
 
   </li>
         
@@ -266,7 +266,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">7</span></a>
 
   </li>
         
@@ -285,7 +285,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">15</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">19</span></a>
 
   </li>
         
@@ -488,8 +488,7 @@
       
 
       
-        <hr>
-<blockquote>
+        <blockquote>
 <p>You can’t specify target table ‘xsdb’ for update in FROM clause<a href="https://blog.csdn.net/qq_29672495/article/details/72668008" target="_blank" rel="noopener">参考</a></p>
 </blockquote>
 <h4 id="错误写法总结：不能先select出同一表中的某些值，再update这个表-在同一语句中-，即不能依据某字段值做判断再来更新某字段的值"><a href="#错误写法总结：不能先select出同一表中的某些值，再update这个表-在同一语句中-，即不能依据某字段值做判断再来更新某字段的值" class="headerlink" title="错误写法总结：不能先select出同一表中的某些值，再update这个表(在同一语句中)，即不能依据某字段值做判断再来更新某字段的值"></a>错误写法总结：不能先select出同一表中的某些值，再update这个表(在同一语句中)，即不能依据某字段值做判断再来更新某字段的值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-- 根据条件批量更新逾期时间</span><br><span class="line">UPDATE XSDB set JSRQ = 1609430399999 where GUID in (</span><br><span class="line">  SELECT</span><br><span class="line">    -- FROM_UNIXTIME(xsd.JSRQ/1000, &apos;%Y-%m-%d %H:%i:%S&apos;) AS JSRQQ,</span><br><span class="line">    `xsd`.GUID</span><br><span class="line">    FROM</span><br><span class="line">    (</span><br><span class="line">      SELECT dqdd.CJJXSID, dqdd.SHJXSID FROM DDB dqdd WHERE dqdd.GUID = 906000029082</span><br><span class="line">    ) AS ydd,</span><br><span class="line">    `DDB` AS `dd`</span><br><span class="line">    INNER JOIN `XSDB` AS `xsd` ON `dd`.`GUID` = `xsd`.`DDID`</span><br><span class="line">    WHERE</span><br><span class="line">      `dd`.`CJJXSID` = ydd.CJJXSID</span><br><span class="line">      AND `dd`.`SHJXSID` = ydd.SHJXSID</span><br><span class="line">      AND `dd`.`DDZT` = &apos;1&apos;</span><br><span class="line">      AND `dd`.`DDLX` IN (1, 2, 9)</span><br><span class="line">      AND `dd`.`WSZJE` &gt;= 0</span><br><span class="line">      AND `dd`.`ZTBS` = &apos;E&apos;</span><br><span class="line">      AND `xsd`.`WSZJE` &gt;= 0</span><br><span class="line">      AND `xsd`.`JSRQ` &lt; UNIX_TIMESTAMP(NOW())*1000</span><br><span class="line">      AND `xsd`.`ZTBS` = &apos;E&apos;</span><br><span class="line">      AND `xsd`.`CWHXZT` = &apos;0&apos;</span><br><span class="line">      AND `xsd`.`ZJE` &gt; &apos;0&apos;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
@@ -650,7 +649,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -679,7 +678,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -726,7 +727,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

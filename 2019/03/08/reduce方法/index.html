@@ -98,18 +98,18 @@
 
 
 
-  <meta name="description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValu">
+  <meta name="description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValue">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="reduce方法">
 <meta property="og:url" content="http://yoursite.com/2019/03/08/reduce方法/index.html">
 <meta property="og:site_name" content="弄不死的小强">
-<meta property="og:description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValu">
+<meta property="og:description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValue">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-12T07:11:15.651Z">
+<meta property="og:updated_time" content="2019-04-19T12:14:52.532Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="reduce方法">
-<meta name="twitter:description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValu">
+<meta name="twitter:description" content="定义和用法 reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。 reduce() 可以作为一个高阶函数，用于函数的 compose。 注意: reduce() 对于空数组是不会执行回调函数的。 语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValue">
 
 
 
@@ -247,7 +247,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">15</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">19</span></a>
 
   </li>
         
@@ -266,7 +266,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">7</span></a>
 
   </li>
         
@@ -285,7 +285,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">15</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">19</span></a>
 
   </li>
         
@@ -488,15 +488,13 @@
       
 
       
-        <hr>
-<h4 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h4><ul>
+        <h4 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h4><ul>
 <li>reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。</li>
 <li>reduce() 可以作为一个高阶函数，用于函数的 compose。</li>
 <li>注意: reduce() 对于空数组是不会执行回调函数的。</li>
 <li>语法：array.reduce(function(total, currentValue, currentIndex, arr), initialValue)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">数字值求和，例子1：</span><br><span class="line">var numbers = [65, 44, 12, 4];</span><br><span class="line">const getSum = (total, num) =&gt; &#123;</span><br><span class="line">    return total + num;</span><br><span class="line">&#125;</span><br><span class="line">const myFunction = (item) =&gt; &#123;</span><br><span class="line">    document.getElementById(&quot;demo&quot;).innerHTML = numbers.reduce(getSum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">返回对象求和，例子2：</span><br><span class="line">const func1 = (arr) =&gt; &#123;</span><br><span class="line">  return arr.reduce((moneyObj, xsd) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      sumOfYZJE: moneyObj.sumOfYZJE + xsd.YZJE,</span><br><span class="line">      sumOfWLFY: moneyObj.sumOfWLFY + xsd.WLFY,</span><br><span class="line">      sumOfJJFY: moneyObj.sumOfJJFY + xsd.JJFY,</span><br><span class="line">      sumOfZKJE: moneyObj.sumOfZKJE + xsd.ZKJE,</span><br><span class="line">      sumOfZJE: moneyObj.sumOfZJE + xsd.ZJE,</span><br><span class="line">      sumOfWSZJE: moneyObj.sumOfWSZJE + xsd.WSZJE,</span><br><span class="line">      sumOfYSZJE: moneyObj.sumOfYSZJE + xsd.YSZJE,</span><br><span class="line">      sumOfWKPJE: moneyObj.sumOfWKPJE + xsd.WKPJE,</span><br><span class="line">      sumOfYKPJE: moneyObj.sumOfYKPJE + xsd.YKPJE,</span><br><span class="line">      sumOfHZJE: moneyObj.sumOfHZJE + xsd.HZJE</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, &#123;sumOfYZJE: 0,sumOfWLFY: 0,sumOfJJFY: 0,sumOfZKJE: 0,sumOfZJE: 0, sumOfWSZJE: 0, sumOfYSZJE: 0, sumOfWKPJE: 0, sumOfYKPJE: 0, sumOfHZJE: 0&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 数字值求和，例子1：</span><br><span class="line">var numbers = [65, 44, 12, 4];</span><br><span class="line">const getSum = (total, num) =&gt; &#123;</span><br><span class="line">    return total + num;</span><br><span class="line">&#125;</span><br><span class="line">const myFunction = (item) =&gt; &#123;</span><br><span class="line">    document.getElementById(&quot;demo&quot;).innerHTML = numbers.reduce(getSum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 返回对象求和，例子2：</span><br><span class="line">const func1 = (arr) =&gt; &#123;</span><br><span class="line">  return arr.reduce((moneyObj, xsd) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      sumOfYZJE: moneyObj.sumOfYZJE + xsd.YZJE,</span><br><span class="line">      sumOfWLFY: moneyObj.sumOfWLFY + xsd.WLFY,</span><br><span class="line">      sumOfJJFY: moneyObj.sumOfJJFY + xsd.JJFY,</span><br><span class="line">      sumOfZKJE: moneyObj.sumOfZKJE + xsd.ZKJE,</span><br><span class="line">      sumOfZJE: moneyObj.sumOfZJE + xsd.ZJE,</span><br><span class="line">      sumOfWSZJE: moneyObj.sumOfWSZJE + xsd.WSZJE,</span><br><span class="line">      sumOfYSZJE: moneyObj.sumOfYSZJE + xsd.YSZJE,</span><br><span class="line">      sumOfWKPJE: moneyObj.sumOfWKPJE + xsd.WKPJE,</span><br><span class="line">      sumOfYKPJE: moneyObj.sumOfYKPJE + xsd.YKPJE,</span><br><span class="line">      sumOfHZJE: moneyObj.sumOfHZJE + xsd.HZJE</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, &#123;sumOfYZJE: 0,sumOfWLFY: 0,sumOfJJFY: 0,sumOfZKJE: 0,sumOfZJE: 0, sumOfWSZJE: 0, sumOfYSZJE: 0, sumOfWKPJE: 0, sumOfYKPJE: 0, sumOfHZJE: 0&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -650,7 +648,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -679,7 +677,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -726,7 +726,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
