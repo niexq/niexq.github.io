@@ -243,7 +243,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">20</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">21</span></a>
 
   </li>
         
@@ -281,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">20</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">21</span></a>
 
   </li>
         
@@ -365,6 +365,240 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/Facebook的JavaScript静态类型检查器Flow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/29/Facebook的JavaScript静态类型检查器Flow/" class="post-title-link" itemprop="url">Flow：Facebook 的 JavaScript 静态类型检查器</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-29 11:06:49" itemprop="dateCreated datePublished" datetime="2019-05-29T11:06:49+08:00">2019-05-29</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Flow：Facebook-的-JavaScript-静态类型检查器"><a href="#Flow：Facebook-的-JavaScript-静态类型检查器" class="headerlink" title="Flow：Facebook 的 JavaScript 静态类型检查器"></a>Flow：Facebook 的 JavaScript 静态类型检查器</h2><p>Flow是JavaScript代码的静态类型检查器。 它可以帮助您提高工作效率。 让您的代码更快，更智能，更自信，更大规模。</p>
+<p>Flow通过静态类型注释检查代码是否存在错误。 这些类型允许您告诉Flow您希望代码如何工作，Flow将确保它以这种方式工作。</p>
+<p>github地址：<a href="https://github.com/facebook/flow" target="_blank" rel="noopener">flow</a></p>
+<p>flow文档地址：<a href="https://flow.org" target="_blank" rel="noopener">flow</a></p>
+<hr>
+<h4 id="1-从demo开始认识flow"><a href="#1-从demo开始认识flow" class="headerlink" title="1.从demo开始认识flow"></a>1.从demo开始认识flow</h4><h4 id="2-安装，配置"><a href="#2-安装，配置" class="headerlink" title="2.安装，配置"></a>2.安装，配置</h4><h4 id="3-flow总结及使用"><a href="#3-flow总结及使用" class="headerlink" title="3.flow总结及使用"></a>3.flow总结及使用</h4><hr>
+<h4 id="1-从demo开始认识flow-1"><a href="#1-从demo开始认识flow-1" class="headerlink" title="1.从demo开始认识flow"></a>1.从demo开始认识flow</h4><h4 id="1-1-出入参静态类型注释"><a href="#1-1-出入参静态类型注释" class="headerlink" title="1.1 出入参静态类型注释"></a>1.1 出入参静态类型注释</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function square(n: number): number &#123;</span><br><span class="line">  return n * n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">square(&quot;2&quot;); // Error!</span><br></pre></td></tr></table></figure>
+<p>报错信息：</p>
+<font color="red">Error ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ common/globFile.js:26:8</font>
+
+<p>Cannot call square with ‘2’ bound to n because string [1] is incompatible with number [2].</p>
+<h4 id="1-2-运算结果类型检查"><a href="#1-2-运算结果类型检查" class="headerlink" title="1.2.运算结果类型检查"></a>1.2.运算结果类型检查</h4><p>因为Flow很好地理解JavaScript，所以它不需要很多这些类型。 你应该只需要做很少的工作来描述你的Flow代码，它将推断其余部分。 在很多时候，Flow可以完全理解您的代码而不需要任何类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function square(n) &#123;</span><br><span class="line">  return n * n; // Error!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">square(&quot;2&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>报错信息：<br>Cannot perform arithmetic operation because string [1] is not a number.</p>
+<h4 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h4><h4 id="2-1-安装编译器"><a href="#2-1-安装编译器" class="headerlink" title="2.1 安装编译器"></a>2.1 安装编译器</h4><p>官方推荐babel或flow-remove-types<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev @babel/cli @babel/preset-flow</span><br></pre></td></tr></table></figure></p>
+<p>项目增加babel.config.js文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module.exports = function() &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    presets: [</span><br><span class="line">      &quot;@babel/preset-flow&quot;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>package.json中添加scripts<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;@babel/cli&quot;: &quot;^7.4.4&quot;,</span><br><span class="line">    &quot;@babel/preset-flow&quot;: &quot;^7.0.0&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;build&quot;: &quot;babel src/ -d lib/&quot;,</span><br><span class="line">    &quot;prepublish&quot;: &quot;npm run build&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-安装flow"><a href="#2-2-安装flow" class="headerlink" title="2.2 安装flow"></a>2.2 安装flow</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev flow-bin</span><br></pre></td></tr></table></figure>
+<p>package.json中添加scripts<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;flow-bin&quot;: &quot;^0.99.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;flow&quot;: &quot;flow&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>生成flowconfig配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run flow init</span><br></pre></td></tr></table></figure>
+<p>运行flow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run flow</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-flow总结及使用-1"><a href="#3-flow总结及使用-1" class="headerlink" title="3.flow总结及使用"></a>3.flow总结及使用</h4><ul>
+<li>3.1 使用<a href="https://flow.org/en/docs/usage/#toc-initialize-your-project" target="_blank" rel="noopener">flow init初始化项目</a></li>
+<li>3.2 使用flow启动Flow后台进程<a href="https://flow.org/en/docs/usage/#toc-run-the-flow-background-process" target="_blank" rel="noopener">flow status</a></li>
+<li>3.3 使用<a href="https://flow.org/en/docs/usage/#toc-prepare-your-code-for-flow" target="_blank" rel="noopener">// @flow</a>确定Flow将监视哪些文件</li>
+<li>3.4 <a href="https://flow.org/en/docs/usage/#toc-write-flow-code" target="_blank" rel="noopener">编写flow代码</a></li>
+<li>3.5 <a href="https://flow.org/en/docs/usage/#toc-check-your-code" target="_blank" rel="noopener">检查代码</a>是否存在类型错误</li>
+<li>3.6 如何在代码中添加类型注释</li>
+</ul>
+<h4 id="3-1-使用flow-init-初始化项目"><a href="#3-1-使用flow-init-初始化项目" class="headerlink" title="3.1 使用flow init 初始化项目"></a>3.1 使用flow init 初始化项目</h4><p>生成类似INI格式，项目.flowconfig配置文件</p>
+<p>3.1.1 .flowconfig由6个部分组成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">; 忽略匹配文件</span><br><span class="line">[ignore]</span><br><span class="line">&lt;PROJECT_ROOT&gt;/__tests__/.*</span><br><span class="line">&lt;PROJECT_ROOT&gt;/lib/.*</span><br><span class="line"></span><br><span class="line">; 包含指定的文件或目录</span><br><span class="line">[include]</span><br><span class="line">&lt;PROJECT_ROOT&gt;/src/.*</span><br><span class="line"></span><br><span class="line">; 在类型检查代码时包含指定的库定义</span><br><span class="line">[libs]</span><br><span class="line"></span><br><span class="line">; lint</span><br><span class="line">[lints]</span><br><span class="line">all=warn</span><br><span class="line">untyped-type-import=error</span><br><span class="line">sketchy-null-bool=off</span><br><span class="line"></span><br><span class="line">; 选项</span><br><span class="line">[options]</span><br><span class="line">all=true</span><br><span class="line">esproposal.decorators=ignore</span><br><span class="line">experimental.const_params=true</span><br><span class="line">module.file_ext=.bar</span><br><span class="line">module.use_strict=true</span><br><span class="line"></span><br><span class="line">; 严格</span><br><span class="line">[strict]</span><br><span class="line">nonstrict-import</span><br><span class="line">unclear-type</span><br><span class="line">unsafe-getters-setters</span><br><span class="line">untyped-import</span><br><span class="line">untyped-type-import</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">; none</span><br><span class="line">; 在声明模式下，代码没有进行类型检查，会检查文件内容</span><br><span class="line">[declarations]</span><br><span class="line">&lt;PROJECT_ROOT&gt;/third_party/.*</span><br><span class="line"></span><br><span class="line">; 不检查文件内容，不匹配指定正则表达式的类型文件，丢弃类型并将模块视为任何模块</span><br><span class="line">[untyped]</span><br><span class="line">&lt;PROJECT_ROOT&gt;/third_party/.*</span><br><span class="line"></span><br><span class="line">; 指定flow使用的版本</span><br><span class="line">[version]</span><br><span class="line">0.98.1</span><br></pre></td></tr></table></figure></p>
+<p>3.1.2 # or ; or 💩 are ignored<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># This is a comment</span><br><span class="line">  # This is a comment</span><br><span class="line">; This is a comment</span><br><span class="line">  ; This is a comment</span><br><span class="line">💩 This is a comment</span><br><span class="line">  💩 This is a comment</span><br></pre></td></tr></table></figure></p>
+<p>3.1.3 .flowconfig放置位置</p>
+<p>.flowconfig的位置非常重要。Flow将包含.flowconfig的目录视为项目根目录。 默认情况下，Flow包含项目根目录下的所有源代码</p>
+<h4 id="3-2-使用flow启动flow后台进程"><a href="#3-2-使用flow启动flow后台进程" class="headerlink" title="3.2 使用flow启动flow后台进程"></a>3.2 使用flow启动flow后台进程</h4><p>vscode推荐安装Flow Language Support<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flow status // 启动flow后台进程</span><br><span class="line">flow stop   // 终止flow后台进程</span><br></pre></td></tr></table></figure></p>
+<p>webpack热加载，使用flow-webpack-plugin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);</span><br><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line">const FlowWebpackPlugin = require(&apos;flow-webpack-plugin&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  mode: &apos;development&apos;,</span><br><span class="line">  devtool: &apos;source-map&apos;,</span><br><span class="line">  entry:  &apos;./example/app.js&apos;,</span><br><span class="line">  output: &#123;</span><br><span class="line">      filename: &apos;bundle.js&apos;,</span><br><span class="line">      path: path.resolve(__dirname, &apos;./dist&apos;),</span><br><span class="line">  &#125;,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">      hot: true,</span><br><span class="line">      disableHostCheck: true,</span><br><span class="line">      historyApiFallback: true</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">      new HtmlWebpackPlugin(&#123; template: &apos;example/index.html&apos; &#125;),</span><br><span class="line">      new FlowWebpackPlugin(&#123;</span><br><span class="line">        flowArgs: [&apos;check&apos;]</span><br><span class="line">      &#125;)</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-3-使用-flow确定Flow将监视哪些文件"><a href="#3-3-使用-flow确定Flow将监视哪些文件" class="headerlink" title="3.3 使用// @flow确定Flow将监视哪些文件"></a>3.3 使用// @flow确定Flow将监视哪些文件</h4><p>Flow后台进程使用此标志收集所有文件，并使用所有这些文件中提供的类型信息来确保一致性和无错误编程</p>
+<p>使用JavaScript注释的形式，注释@flow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">/* @flow */</span><br></pre></td></tr></table></figure></p>
+<p>忽略//@flow，检查所有文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flow check --all</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-4-编写flow代码"><a href="#3-4-编写flow代码" class="headerlink" title="3.4 编写flow代码"></a>3.4 编写flow代码</h4><p>Flow后台进程将会捕获此错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line"></span><br><span class="line">function foo(x: ?number): string &#123;</span><br><span class="line">  if (x) &#123;</span><br><span class="line">    return x;</span><br><span class="line">  &#125;</span><br><span class="line">  return &quot;default string&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-5-检查代码是否存在类型错误"><a href="#3-5-检查代码是否存在类型错误" class="headerlink" title="3.5 检查代码是否存在类型错误"></a>3.5 检查代码是否存在类型错误</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># equivalent to `flow status`</span><br><span class="line">flow</span><br></pre></td></tr></table></figure>
+<p>运行flow检查<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line"></span><br><span class="line">function foo(x: ?number): string &#123;</span><br><span class="line">  if (x) &#123;</span><br><span class="line">    return x;  // Cannot return `x` because  number [1] is incompatible with  string [2].</span><br><span class="line">  &#125;</span><br><span class="line">  return &quot;default string&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-6-如何在代码中添加类型注释"><a href="#3-6-如何在代码中添加类型注释" class="headerlink" title="3.6 如何在代码中添加类型注释"></a>3.6 如何在代码中添加类型注释</h4><p>类型注释符号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">|       // 或</span><br><span class="line">&amp;       // 且 </span><br><span class="line">?       // 可选</span><br></pre></td></tr></table></figure></p>
+<p>类型注释中包括的类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">boolean                                 // true or new Boolean(false)</span><br><span class="line">string                                  // &quot;hello&quot; or new String(&quot;world&quot;)</span><br><span class="line">number                                  // 3.14 or new Number(42)</span><br><span class="line">null                                    // null</span><br><span class="line">undefined (void in Flow types)          // undefined</span><br><span class="line">Array (其中T用来描述数组中值的类型)     // Array&lt;T&gt;</span><br><span class="line">Object                                  // &#123;&#125;</span><br><span class="line">Function                                // function</span><br><span class="line">class                                   // class</span><br><span class="line">Symbols (not yet supported in Flow)     // Symbol(&quot;foo&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>小写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function method(x: number, y: string, z: boolean) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">method(3.14, &quot;hello&quot;, true);</span><br></pre></td></tr></table></figure></p>
+<p>大写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function method(x: Number, y: String, z: Boolean) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">method(new Number(42), new String(&quot;world&quot;), new Boolean(false));</span><br></pre></td></tr></table></figure></p>
+<p>boolean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsBoolean(value: boolean) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsBoolean(true);  // Works!</span><br><span class="line">acceptsBoolean(false); // Works!</span><br><span class="line">acceptsBoolean(&quot;foo&quot;); // Error!</span><br></pre></td></tr></table></figure>
+<p>JavaScript可以隐式地将其他类型的值转换为布尔值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (42) &#123;&#125; // 42 =&gt; true</span><br><span class="line">if (&quot;&quot;) &#123;&#125; // &quot;&quot; =&gt; false</span><br></pre></td></tr></table></figure></p>
+<p>非布尔值需要显式转换为布尔类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsBoolean(value: boolean) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsBoolean(0);          // Error!</span><br><span class="line">acceptsBoolean(Boolean(0)); // Works!</span><br><span class="line">acceptsBoolean(!!0);        // Works!</span><br></pre></td></tr></table></figure></p>
+<p>string<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsString(value: string) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsString(&quot;foo&quot;); // Works!</span><br><span class="line">acceptsString(false); // Error!</span><br></pre></td></tr></table></figure></p>
+<p>JavaScript可以隐式地将其他类型的值转换为字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;foo&quot; + 42; // &quot;foo42&quot;</span><br><span class="line">&quot;foo&quot; + &#123;&#125;; // &quot;foo[object Object]&quot;</span><br></pre></td></tr></table></figure></p>
+<p>Flow连接到字符串时只接受字符串和数字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">&quot;foo&quot; + &quot;foo&quot;; // Works!</span><br><span class="line">&quot;foo&quot; + 42;    // Works!</span><br><span class="line">&quot;foo&quot; + &#123;&#125;;    // Error!</span><br><span class="line">&quot;foo&quot; + [];    // Error!</span><br></pre></td></tr></table></figure></p>
+<p>必须明确并将其他类型转换为字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">&quot;foo&quot; + String(&#123;&#125;);     // Works!</span><br><span class="line">&quot;foo&quot; + [].toString();  // Works!</span><br><span class="line">&quot;&quot; + JSON.stringify(&#123;&#125;) // Works!</span><br></pre></td></tr></table></figure></p>
+<p>number</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsNumber(value: number) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsNumber(42);       // Works!</span><br><span class="line">acceptsNumber(3.14);     // Works!</span><br><span class="line">acceptsNumber(NaN);      // Works!</span><br><span class="line">acceptsNumber(Infinity); // Works!</span><br><span class="line">acceptsNumber(&quot;foo&quot;);    // Error!</span><br></pre></td></tr></table></figure>
+<p>null and void<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsNull(value: null) &#123;</span><br><span class="line">  /* ... */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function acceptsUndefined(value: void) &#123;</span><br><span class="line">  /* ... */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsNull(null);           // Works!</span><br><span class="line">acceptsNull(undefined);      // Error!</span><br><span class="line">acceptsUndefined(null);      // Error!</span><br><span class="line">acceptsUndefined(undefined); // Works!</span><br></pre></td></tr></table></figure></p>
+<p>Array<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr: Array&lt;number&gt; = [1, 2, 3];</span><br><span class="line">let arr1: Array&lt;boolean&gt; = [true, false, true];</span><br><span class="line">let arr2: Array&lt;string&gt; = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;];</span><br><span class="line">let arr3: Array&lt;mixed&gt; = [1, true, &quot;three&quot;]</span><br></pre></td></tr></table></figure></p>
+<p>Object<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">var obj1: &#123; foo: boolean &#125; = &#123; foo: true &#125;;</span><br><span class="line">var obj2: &#123;</span><br><span class="line">  foo: number,</span><br><span class="line">  bar: boolean,</span><br><span class="line">  baz: string,</span><br><span class="line">&#125; = &#123;</span><br><span class="line">  foo: 1,</span><br><span class="line">  bar: true,</span><br><span class="line">  baz: &apos;three&apos;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>Function<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function concat(a: string, b: string): string &#123;</span><br><span class="line">  return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">concat(&quot;foo&quot;, &quot;bar&quot;); // Works!</span><br><span class="line">// $ExpectError</span><br><span class="line">concat(true, false);  // Error!</span><br></pre></td></tr></table></figure></p>
+<p>箭头Function<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let method = (str, bool, ...nums) =&gt; &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">let method = (str: string, bool?: boolean, ...nums: Array&lt;number&gt;): void =&gt; &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>回调Function<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function method(callback: (error: Error | null, value: string | null) =&gt; void) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>class<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">class MyClass&lt;A, B, C&gt; &#123;</span><br><span class="line">  constructor(arg1: A, arg2: B, arg3: C) &#123;</span><br><span class="line">    // ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var val: MyClass&lt;number, boolean, string&gt; = new MyClass(1, true, &apos;three&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Foo &#123;</span><br><span class="line">  serialize() &#123; return &apos;[Foo]&apos;; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Bar &#123;</span><br><span class="line">  serialize() &#123; return &apos;[Bar]&apos;; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// $ExpectError</span><br><span class="line">const foo: Foo = new Bar(); // Error!</span><br></pre></td></tr></table></figure></p>
+<p>Maybe Types<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsMaybeString(value: ?string) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsMaybeString(&quot;bar&quot;);     // Works!</span><br><span class="line">acceptsMaybeString(undefined); // Works!</span><br><span class="line">acceptsMaybeString(null);      // Works!</span><br><span class="line">acceptsMaybeString();          // Works!</span><br><span class="line">acceptsMaybeString(12345);     // Error!</span><br><span class="line"></span><br><span class="line">// value: string null or undefined</span><br></pre></td></tr></table></figure></p>
+<p>对象属性可选<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsObject(value: &#123; foo?: string &#125;) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsObject(&#123; foo: &quot;bar&quot; &#125;);     // Works!</span><br><span class="line">acceptsObject(&#123; foo: undefined &#125;); // Works!</span><br><span class="line">acceptsObject(&#123; foo: null &#125;);      // Error!问号放在string前不报错</span><br><span class="line">acceptsObject(&#123;&#125;);                 // Works!</span><br></pre></td></tr></table></figure></p>
+<p>函数参数可选<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsOptionalString(value?: string) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsOptionalString(&quot;bar&quot;);     // Works!</span><br><span class="line">acceptsOptionalString(undefined); // Works!</span><br><span class="line">acceptsOptionalString(null);      // Error!问号放在string前不报错</span><br><span class="line">acceptsOptionalString();          // Works!</span><br></pre></td></tr></table></figure></p>
+<p>带默认值的函数参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsOptionalString(value: string = &quot;foo&quot;) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsOptionalString(&quot;bar&quot;);     // Works!</span><br><span class="line">acceptsOptionalString(undefined); // Works!</span><br><span class="line">acceptsOptionalString(null);      // Error!</span><br><span class="line">acceptsOptionalString();          // Works!</span><br></pre></td></tr></table></figure></p>
+<p>使用字面文字作为类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function acceptsTwo(value: 2) &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">acceptsTwo(2);   // Works!</span><br><span class="line">// $ExpectError</span><br><span class="line">acceptsTwo(3);   // Error!</span><br><span class="line">// $ExpectError</span><br><span class="line">acceptsTwo(&quot;2&quot;); // Error!</span><br></pre></td></tr></table></figure></p>
+<p>Union Types<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function getColor(name: &quot;success&quot; | &quot;warning&quot; | &quot;danger&quot;) &#123;</span><br><span class="line">  switch (name) &#123;</span><br><span class="line">    case &quot;success&quot; : return &quot;green&quot;;</span><br><span class="line">    case &quot;warning&quot; : return &quot;yellow&quot;;</span><br><span class="line">    case &quot;danger&quot;  : return &quot;red&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getColor(&quot;success&quot;); // Works!</span><br><span class="line">getColor(&quot;danger&quot;);  // Works!</span><br><span class="line">// $ExpectError</span><br><span class="line">getColor(&quot;error&quot;);   // Error!</span><br></pre></td></tr></table></figure></p>
+<p>Mixed Types<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function stringifyBasicValue(value: string | number) &#123;</span><br><span class="line">  return &apos;&apos; + value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>A type based on another type<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function identity&lt;T&gt;(value: T): T &#123;</span><br><span class="line">  return value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>An arbitrary type that could be anything<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function getTypeOf(value: mixed): string &#123;</span><br><span class="line">  return typeof value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Any Types<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function add(one: any, two: any): number &#123;</span><br><span class="line">  return one + two;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add(1, 2);     // Works.</span><br><span class="line">add(&quot;1&quot;, &quot;2&quot;); // Works.</span><br><span class="line">add(&#123;&#125;, []);   // Works.</span><br></pre></td></tr></table></figure></p>
+<p>变量类型<br>将类型添加到变量声明<br>const let var<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">const foo /* : number */ = 1;</span><br><span class="line">const bar: number = 2;</span><br><span class="line"></span><br><span class="line">var fooVar /* : number */ = 1;</span><br><span class="line">let fooLet /* : number */ = 1;</span><br><span class="line">var barVar: number = 2;</span><br><span class="line">let barLet: number = 2;</span><br></pre></td></tr></table></figure></p>
+<p>let<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let foo: number = 1;</span><br><span class="line">foo = 2;   // Works!</span><br><span class="line">// $ExpectError</span><br><span class="line">foo = &quot;3&quot;; // Error!</span><br></pre></td></tr></table></figure></p>
+<p>重新分配变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let foo = 42;</span><br><span class="line"></span><br><span class="line">if (Math.random()) foo = true;</span><br><span class="line">if (Math.random()) foo = &quot;hello&quot;;</span><br><span class="line"></span><br><span class="line">let isOneOf: number | boolean | string = foo; // Works!</span><br></pre></td></tr></table></figure></p>
+<p>重新分配变量确定变量类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">let foo = 42;</span><br><span class="line">let isNumber: number = foo; // Works!</span><br><span class="line"></span><br><span class="line">foo = true;</span><br><span class="line">let isBoolean: boolean = foo; // Works!</span><br><span class="line"></span><br><span class="line">foo = &quot;hello&quot;;</span><br><span class="line">let isString: string = foo; // Works!</span><br></pre></td></tr></table></figure></p>
+<p>react<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import * as React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">type Props = &#123;</span><br><span class="line">  foo: number,</span><br><span class="line">  bar?: string,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">type State = &#123;</span><br><span class="line">  count: number,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class MyComponent extends React.Component&lt;Props&gt; &#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    count: 0,</span><br><span class="line">  &#125;;</span><br><span class="line">  render() &#123;</span><br><span class="line">    this.props.doesNotExist; // Error! You did not define a `doesNotExist` prop.</span><br><span class="line"></span><br><span class="line">    return &lt;div&gt;&#123;this.props.bar&#125;&lt;/div&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;MyComponent foo=&#123;42&#125; /&gt;;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -2135,208 +2369,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/01/GitSSHKey生成添加/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="niexq">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/01/GitSSHKey生成添加/" class="post-title-link" itemprop="url">Git SSH Key生成添加</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-01 11:31:34" itemprop="dateCreated datePublished" datetime="2019-04-01T11:31:34+08:00">2019-04-01</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Git-SSH-Key生成添加-假设本地已安装Git"><a href="#Git-SSH-Key生成添加-假设本地已安装Git" class="headerlink" title="Git SSH Key生成添加(假设本地已安装Git)"></a>Git SSH Key生成添加(假设本地已安装Git)</h2><h4 id="执行命令步骤："><a href="#执行命令步骤：" class="headerlink" title="执行命令步骤："></a>执行命令步骤：</h4><blockquote>
-<p>1.跳转到.ssh目录；[如果没有对应的文件夹，则执行 mkdir ~/.ssh]</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh/</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>2.设置git用户名和邮箱</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;xq12345&quot;</span><br><span class="line">git config --global user.email &quot;xq12345@qq.com&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>3.生成SSH密钥过程;</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh-keygen -t rsa -C &quot;xq12345@qq.com&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>4.查看是否生成SSH密钥;[两个对应文件：id_rsa(私钥)、id_rsa.pub(公钥)]</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>5.登陆远程仓库，复制id_rsa.pub里面的内容添加到远程仓库SSH keys中。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim id_rsa.pub</span><br></pre></td></tr></table></figure>
-<h4 id="为什么设置SSH到远程仓库？"><a href="#为什么设置SSH到远程仓库？" class="headerlink" title="为什么设置SSH到远程仓库？"></a>为什么设置SSH到远程仓库？</h4><blockquote>
-<p>使用密码登录，每次都必须输入密码，非常麻烦。好在SSH还提供了公钥登录，可以省去输入密码的步骤。</p>
-</blockquote>
-<ul>
-<li>所谓”公钥登录”，原理很简单，就是用户将自己的公钥储存在远程主机上。登录的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码，这种方法要求用户必须提供自己的公钥。</li>
-</ul>
-<h4 id="篇外：啥是SSH？"><a href="#篇外：啥是SSH？" class="headerlink" title="篇外：啥是SSH？"></a>篇外：啥是SSH？</h4><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><blockquote>
-<p>SSH（安全外壳协议），SSH 为 Secure Shell 的缩写，SSH是一种网络协议，用于计算机之间的加密登录。</p>
-</blockquote>
-<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><blockquote>
-<p>SSH能够保证安全，原因在于它采用了公钥加密。</p>
-</blockquote>
-<ul>
-<li>传统的网络服务程序，如：ftp、pop和telnet在本质上都是不安全的，因为它们在网络上用明文传送口令和数据，别有用心的人非常容易就可以截获这些口令和数据。而且，这些服务程序的安全验证方式也是有其弱点的， 就是很容易受到“中间人”（man-in-the-middle）这种方式的攻击。所谓“中间人”的攻击方式， 就是“中间人”冒充真正的服务器接收你传给服务器的数据，然后再冒充你把数据传给真正的服务器。服务器和你之间的数据传送被“中间人”一转手做了手脚之后，就会出现很严重的问题。通过使用SSH，你可以把所有传输的数据进行加密，这样”中间人”这种攻击方式就不可能实现了，而且也能够防止DNS欺骗和IP欺骗。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、PoP、甚至为PPP提供一个安全的”通道”</li>
-</ul>
-<h4 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h4><blockquote>
-<p>SSH协议登录过程：远程主机收到用户的登录请求，把自己的公钥发给用户 –&gt; 用户使用这个公钥，将登录密码加密后，发送回来 –&gt; 远程主机用自己的私钥，解密登录密码，如果密码正确，就同意用户登录</p>
-</blockquote>
-<ul>
-<li>这个过程本身是安全的，但是实施的时候存在一个风险：如果有人截获了登录请求，然后冒充远程主机，将伪造的公钥发给用户，那么用户很难辨别真伪。因为不像https协议，SSH协议的公钥是没有证书中心（CA）公证的，也就是说，都是自己签发的。<br>可以设想，如果攻击者插在用户与远程主机之间（比如在公共的wifi区域），用伪造的公钥，获取用户的登录密码。再用这个密码登录远程主机，那么SSH的安全机制就荡然无存了。这种风险就是著名的”中间人攻击”（Man-in-the-middle attack）。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2380,7 +2417,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2468,7 +2505,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
