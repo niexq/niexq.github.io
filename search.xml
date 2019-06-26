@@ -50,8 +50,8 @@
       <tags>
         <tag>Nodejs</tag>
         <tag>Reactjs</tag>
-        <tag>koa</tag>
         <tag>socket.io</tag>
+        <tag>koa</tag>
       </tags>
   </entry>
   <entry>
@@ -155,10 +155,10 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+        <tag>ES6</tag>
         <tag>Nodejs</tag>
         <tag>AMD</tag>
         <tag>CMD</tag>
-        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
