@@ -108,7 +108,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/scrollIntoViewSupport.png">
 <meta property="og:image" content="http://yoursite.com/images/intoViewProtect.png">
-<meta property="og:updated_time" content="2019-07-29T14:31:19.448Z">
+<meta property="og:updated_time" content="2019-07-29T14:34:36.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Element.scrollIntoView()让当前的元素滚动到浏览器窗口的可视区域内">
 <meta name="twitter:description" content="Element.scrollIntoView()让当前的元素滚动到浏览器窗口的可视区域内 语法123element.scrollIntoView();                       // 等同于element.scrollIntoView(true) element.scrollIntoView(alignToTop);             // Boolean型参数 eleme">
@@ -509,11 +509,11 @@
 </ul>
 </li>
 <li>inline(可选)<ul>
-<li>“start”, “center”, “end”, 或 “nearest”之一。默认为 “nearest”。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    behavior: &quot;auto&quot;  | &quot;instant&quot; | &quot;smooth&quot;,</span><br><span class="line">    block:    &quot;start&quot; | &quot;end&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>“start”, “center”, “end”, 或 “nearest”之一。默认为 “nearest”。</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    behavior: &quot;auto&quot;  | &quot;instant&quot; | &quot;smooth&quot;,</span><br><span class="line">    block:    &quot;start&quot; | &quot;end&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>浏览器兼容性<br><img src="/images/scrollIntoViewSupport.png" alt="浏览器兼容性预览图"></p>
 <h4 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var element = document.getElementById(&quot;box&quot;);</span><br><span class="line"></span><br><span class="line">element.scrollIntoView();</span><br><span class="line">element.scrollIntoView(false);</span><br><span class="line">element.scrollIntoView(&#123;block: &quot;end&quot;&#125;);</span><br><span class="line">element.scrollIntoView(&#123;behavior: &quot;instant&quot;, block: &quot;end&quot;, inline: &quot;nearest&quot;&#125;);</span><br></pre></td></tr></table></figure>
 <h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>取决于其它元素的布局情况，此元素可能不会完全滚动到顶端或底端。</p>

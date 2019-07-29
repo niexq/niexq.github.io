@@ -106,13 +106,13 @@
 <meta property="og:site_name" content="弄不死的小强">
 <meta property="og:description" content="浅记koa的洋葱模型实现本篇相关github代码地址github地址：https://github.com/niexq/koaComposeTest 1.简介Koa 是一个新的 web 框架，由 Express 幕后的原班人马打造， 致力于成为 web 应用和 API 开发领域中的一个更小、更富有表现力、更健壮的基石。 通过利用 async 函数，Koa 帮你丢弃回调函数，并有力地增强错误处理。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://note.youdao.com/yws/res/3545/WEBRESOURCE54958a8b7a9ce07e8f90e13549b5563b">
-<meta property="og:image" content="https://note.youdao.com/yws/res/3745/WEBRESOURCE753bf914b57e317bc2d8a7ffd4557567">
-<meta property="og:updated_time" content="2019-04-25T10:07:43.178Z">
+<meta property="og:image" content="http://yoursite.com/images/koaCompose2.png">
+<meta property="og:image" content="http://yoursite.com/images/koaCompose.png">
+<meta property="og:updated_time" content="2019-07-29T14:54:41.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅记koa的洋葱模型实现">
 <meta name="twitter:description" content="浅记koa的洋葱模型实现本篇相关github代码地址github地址：https://github.com/niexq/koaComposeTest 1.简介Koa 是一个新的 web 框架，由 Express 幕后的原班人马打造， 致力于成为 web 应用和 API 开发领域中的一个更小、更富有表现力、更健壮的基石。 通过利用 async 函数，Koa 帮你丢弃回调函数，并有力地增强错误处理。">
-<meta name="twitter:image" content="https://note.youdao.com/yws/res/3545/WEBRESOURCE54958a8b7a9ce07e8f90e13549b5563b">
+<meta name="twitter:image" content="http://yoursite.com/images/koaCompose2.png">
 
 
 
@@ -496,7 +496,7 @@
 <h4 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h4><p>Koa 依赖 node v7.6.0 或 ES2015及更高版本和 async 方法支持.</p>
 <p>你可以使用自己喜欢的版本管理器快速安装支持的 node 版本：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvm install 7</span><br><span class="line">npm i koa</span><br><span class="line">node my-koa-app.js</span><br></pre></td></tr></table></figure>
-<h4 id="3-中间件执行的洋葱模型"><a href="#3-中间件执行的洋葱模型" class="headerlink" title="3.中间件执行的洋葱模型"></a>3.中间件执行的洋葱模型</h4><p><img src="https://note.youdao.com/yws/res/3545/WEBRESOURCE54958a8b7a9ce07e8f90e13549b5563b" alt="洋葱模型"></p>
+<h4 id="3-中间件执行的洋葱模型"><a href="#3-中间件执行的洋葱模型" class="headerlink" title="3.中间件执行的洋葱模型"></a>3.中间件执行的洋葱模型</h4><p><img src="/images/koaCompose2.png" alt="洋葱模型"></p>
 <h4 id="4-中间件级联"><a href="#4-中间件级联" class="headerlink" title="4.中间件级联"></a>4.中间件级联</h4><p>Koa 中间件以更传统的方式级联。对比 Connect 的实现，通过一系列功能直接传递控制，直到一个返回，Koa 调用“下游”，然后控制流回“上游”。</p>
 <h4 id="5-疑问点："><a href="#5-疑问点：" class="headerlink" title="5.疑问点："></a>5.疑问点：</h4><ul>
 <li>中间件如何加载</li>
@@ -540,7 +540,7 @@
 <li>next是啥（next是一个以下一个中间件为返回值的方法）</li>
 <li>context如何传递（context就在Promise.resolve(fn(context, dispatch.bind(null, i + 1)))一直传递）</li>
 </ul>
-<h4 id="9-结合洋葱模型，koa中间件执行效果"><a href="#9-结合洋葱模型，koa中间件执行效果" class="headerlink" title="9.结合洋葱模型，koa中间件执行效果"></a>9.结合洋葱模型，koa中间件执行效果</h4><p><img src="https://note.youdao.com/yws/res/3745/WEBRESOURCE753bf914b57e317bc2d8a7ffd4557567" alt="中间件执行效果图"></p>
+<h4 id="9-结合洋葱模型，koa中间件执行效果"><a href="#9-结合洋葱模型，koa中间件执行效果" class="headerlink" title="9.结合洋葱模型，koa中间件执行效果"></a>9.结合洋葱模型，koa中间件执行效果</h4><p><img src="/images/koaCompose.png" alt="中间件执行效果图"></p>
 
       
     </div>
