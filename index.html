@@ -281,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
 
   </li>
         
@@ -365,6 +365,203 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-02-08 13:30:37" itemprop="dateCreated datePublished" datetime="2021-02-08T13:30:37+08:00">2021-02-08</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="在CentOS7系统使用Docker构建Jenkins"><a href="#在CentOS7系统使用Docker构建Jenkins" class="headerlink" title="在CentOS7系统使用Docker构建Jenkins"></a>在CentOS7系统使用Docker构建Jenkins</h2><p>详情可参照<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">安装docker</a></p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>需要了解docker基本命令操作</li>
+<li>登录ecs服务器，创建jenkins挂载目录</li>
+<li><a href="https://hub.docker.com/r/jenkins/jenkins" target="_blank" rel="noopener">登录dockerhub</a>,选择官方版本及阅读说明文档；也可使用docker search -s 100 ‘jenkins’直接搜索jenkins镜像start大于100的</li>
+</ul>
+<h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
+<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>额外加个nginx环境变量，方便jenkins shell构建使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure></p>
+<p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的jenkins（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/jenkins/jenkins）</span></span><br><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker jenkins</span></span><br><span class="line">docker images | grep <span class="string">"jenkins"</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run \</span><br><span class="line">  -u root \</span><br><span class="line">  --rm \                                            <span class="comment">// 关闭时自动删除Docker容器</span></span><br><span class="line">  -d \                                              <span class="comment">// 在后台运行容器（即“分离”模式）并输出容器ID</span></span><br><span class="line">  -p <span class="number">7199</span>:<span class="number">8080</span> \                                    <span class="comment">// 容器的端口映射</span></span><br><span class="line">  -p <span class="number">50000</span>:<span class="number">50000</span> \                                  <span class="comment">// 主站进行通信，容器的端口映射</span></span><br><span class="line">  --name jenkins                                    <span class="comment">// 容器名称</span></span><br><span class="line">  -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home \              <span class="comment">// 磁盘挂载</span></span><br><span class="line">  -v $NGINX_WWW:<span class="regexp">/srv/</span>www \                          <span class="comment">// 磁盘挂载,重要，此挂载可以达到在容器内部cp数据到host</span></span><br><span class="line">  -v /<span class="keyword">var</span>/run/docker.sock:<span class="regexp">/var/</span>run/docker.sock \    <span class="comment">// jenkins容器与Docker守护进程通信</span></span><br><span class="line">  docker.io/jenkins/jenkins:lts                     <span class="comment">// 安装的镜像包名 REPOSITORY:TAG</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:7199</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许7199入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:7199</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他，安装jenkins后设置向导"><a href="#其他，安装jenkins后设置向导" class="headerlink" title="其他，安装jenkins后设置向导"></a>其他，安装jenkins后设置向导</h3><ul>
+<li>自动跳转输入管理员密码，解锁Jenkins<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首屏提示</span></span><br><span class="line">Please wait <span class="keyword">while</span> Jenkins is getting ready to work ...</span><br><span class="line">Your browser will reload automatically when Jenkins is ready.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动跳转设置管理员密码页面</span></span><br><span class="line">解锁 Jenkins</span><br><span class="line">为了确保管理员安全地安装 Jenkins，密码已写入到日志中（不知道在哪里？）该文件在服务器上：</span><br><span class="line">/<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br><span class="line">请从本地复制密码并粘贴到下面。</span><br><span class="line">管理员密码</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://www.jenkins.io/zh/doc/book/resources/tutorials/setup-jenkins-01-unlock-jenkins-page.jpg" alt="管理员密码页面"></p>
+<ul>
+<li><p>查看登录密码</p>
+<ul>
+<li><p>如果您以分离模式在Docker中运行Jenkins，则可以从Docker日志（above） 访问Jenkins控制台日志</p>
+</li>
+<li><p>Jenkins控制台日志显示可以获取密码的位置（在Jenkins主目录中）。 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在挂载的目录下查看，返回密码</span></span><br><span class="line">cat  /jenkins/secrets/initialAdminPassword</span><br><span class="line"><span class="comment">// 进入容器内部获取密码</span></span><br><span class="line">docker exec -it <span class="string">"容器ID"</span> bash</span><br><span class="line">cat /<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接粘贴到管理员密码输入框中即可（一般为一串加密的hash值）</li>
+<li>新手入门-可选择安装推荐的插件（也可选择自定义插件）</li>
+<li>创建第一个管理员用户</li>
+<li><p>实例配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jenkins URL: http:<span class="comment">//服务器ip:7199</span></span><br><span class="line">Jenkins URL 用于给各种Jenkins资源提供绝对路径链接的根地址。 这意味着对于很多Jenkins特色是需要正确设置的，例如：邮件通知、PR状态更新以及提供给构建步骤的BUILD_URL环境变量。</span><br><span class="line">推荐的默认值显示在尚未保存，如果可能的话这是根据当前请求生成的。 最佳实践是要设置这个值，用户可能会需要用到。这将会避免在分享或者查看链接时的困惑。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Jenkins已就绪-开始使用Jenkins</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -481,10 +678,7 @@
       
         
           
-            <blockquote>
-<p>重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中</p>
-</blockquote>
-<h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
+            <h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
 <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>在容器和本地文件系统之间复制文件/文件夹</p>
 <h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</span><br><span class="line">$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH</span><br></pre></td></tr></table></figure>
 <p>例如，docker正在运行了一个jenkins，CONTAINER ID为3a3d34f3a3c0，接下来以此容器做展示：</p>
@@ -530,6 +724,217 @@
 <h3 id="主机到容器"><a href="#主机到容器" class="headerlink" title="主机到容器"></a>主机到容器</h3><p>将文件或文件夹从本地文件系统复制到Docker容器，其工作原理相同</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将主机的 /srv/jenkins 拷贝到jenkins容器中 /var/jenkins_home/project1 目录</span><br><span class="line">$ docker cp /srv/jenkins  <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins 目录中 README.md 拷贝到jenkins容器中 /var/jenkins_home/project1文件</span><br><span class="line">$ docker cp /srv/jenkins/README.md <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins/www 中所有文件拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录</span><br><span class="line">$ docker cp /srv/jenkins/www/. <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br><span class="line"></span><br><span class="line"># 将当前本地工作目录拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录中</span><br><span class="line">$ docker cp . <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建gitlab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/02/08/在CentOS7系统使用Docker构建gitlab/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-02-08 13:30:37" itemprop="dateCreated datePublished" datetime="2021-02-08T13:30:37+08:00">2021-02-08</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="在CentOS7系统使用Docker构建gitlab"><a href="#在CentOS7系统使用Docker构建gitlab" class="headerlink" title="在CentOS7系统使用Docker构建gitlab"></a>在CentOS7系统使用Docker构建gitlab</h2><p>详情可参照<a href="https://docs.gitlab.com/omnibus/docker/#troubleshooting" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">阿里ECS安装docker</a>或<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">docker官方安装</a></p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>需要了解docker基本命令操作</li>
+<li>登录ecs服务器，创建jenkins挂载目录</li>
+<li><a href="https://hub.docker.com/r/gitlab/gitlab-ce" target="_blank" rel="noopener">登录dockerhub</a>,选择官方社区版本及阅读说明文档；也可使用docker search -s 100 ‘gitlab’直接搜索gitlab镜像start大于100的</li>
+</ul>
+<h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
+<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> GITLAB_HOME=<span class="regexp">/srv/gi</span>tlab</span><br></pre></td></tr></table></figure></p>
+<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> GITLAB_HOME=$HOME/gitlab</span><br></pre></td></tr></table></figure></p>
+<p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
+<p>GitLab容器使用主机安装的卷来存储持久数据：</p>
+<table>
+<thead>
+<tr>
+<th>当前位置</th>
+<th>容器位置</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$GITLAB_HOME/data</td>
+<td>/var/opt/gitlab</td>
+<td>用于存储应用程序数据。</td>
+</tr>
+<tr>
+<td>$GITLAB_HOME/logs</td>
+<td>/var/log/gitlab</td>
+<td>用于存储日志。</td>
+</tr>
+<tr>
+<td>$GITLAB_HOME/config</td>
+<td>/etc/gitlab</td>
+<td>用于存储GitLab配置文件。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>GitLab Docker镜像可以多种方式运行：</p>
+<ul>
+<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-engine" target="_blank" rel="noopener">使用Docker引擎</a></li>
+<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-compose" target="_blank" rel="noopener">使用Docker Compose</a></li>
+<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-swarm-mode" target="_blank" rel="noopener">使用Docker群模式</a></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的gitlab（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/gitlab/gitlab-ce）</span></span><br><span class="line">docker pull gitlab/gitlab-ce</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker gitlab</span></span><br><span class="line">docker images | grep <span class="string">"gitlab"</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run --detach \</span><br><span class="line">  --hostname gitlab.example.com \                       <span class="comment">// 域名</span></span><br><span class="line">  --publish <span class="number">443</span>:<span class="number">443</span> \                                   <span class="comment">// 将容器内443端口映射至宿主机6003端口，这是访问gitlab的端口</span></span><br><span class="line">  --publish <span class="number">80</span>:<span class="number">80</span> \                                     <span class="comment">// 将容器内80端口映射至宿主机80端口，这是访问gitlab的端口</span></span><br><span class="line">  --publish <span class="number">22</span>:<span class="number">22</span> \                                     <span class="comment">// 将容器内22端口映射至宿主机22端口，这是访问ssh的端口</span></span><br><span class="line">  --name gitlab \                                       <span class="comment">// 容器名称</span></span><br><span class="line">  --restart always \                                    <span class="comment">// 容器自启动</span></span><br><span class="line">  --volume $GITLAB_HOME/config:<span class="regexp">/etc/gi</span>tlab \            <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  --volume $GITLAB_HOME/logs:<span class="regexp">/var/</span>log/gitlab \          <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  --volume $GITLAB_HOME/data:<span class="regexp">/var/</span>opt/gitlab \          <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  gitlab/gitlab-ce:latest                               <span class="comment">// 安装的镜像包名 REPOSITORY:TAG（也可写镜像ID）</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --detach --hostname bot.xiaoqiang.tech --publish <span class="number">7143</span>:<span class="number">443</span> --publish <span class="number">7280</span>:<span class="number">80</span> --publish <span class="number">7322</span>:<span class="number">22</span> --name gitlab --restart always --volume $GITLAB_HOME/config:<span class="regexp">/etc/gi</span>tlab --volume $GITLAB_HOME/logs:<span class="regexp">/var/</span>log/gitlab --volume $GITLAB_HOME/data:<span class="regexp">/var/</span>opt/gitlab gitlab/gitlab-ce:latest</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<h3 id="修改gitlab配置"><a href="#修改gitlab配置" class="headerlink" title="修改gitlab配置"></a>修改gitlab配置</h3><p>输入正在运行的容器：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>打开gitlab.rb配置文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开文件</span></span><br><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 此文件是全注释的，所以直接在首行添加如下配置</span></span><br><span class="line">  </span><br><span class="line"># gitlab访问地址，可以写域名（默认端口为80）</span><br><span class="line">external_url <span class="string">'http://192.168.52.128:9980'</span></span><br><span class="line"># ssh主机ip</span><br><span class="line">gitlab_rails[<span class="string">'gitlab_ssh_host'</span>] = <span class="string">'192.168.52.128'</span></span><br><span class="line"># ssh连接端口</span><br><span class="line">gitlab_rails[<span class="string">'gitlab_shell_ssh_port'</span>] = <span class="number">7322</span></span><br></pre></td></tr></table></figure></p>
+<p>/etc/gitlab/gitlab.rb用您的编辑器打开并设置external_url：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># For HTTP</span><br><span class="line">external_url <span class="string">"http://gitlab.example.com:8929"</span></span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line"># For HTTPS (notice the https)</span><br><span class="line">external_url <span class="string">"https://gitlab.example.com:8929"</span></span><br></pre></td></tr></table></figure></p>
+<p>此URL中指定的端口必须与Docker发布到主机的端口匹配。此外，如果未显式设置NGINX侦听端口 nginx[‘listen_port’]，它将从中拉出external_url。有关更多信息，请参见<a href="https://docs.gitlab.com/omnibus/settings/nginx.html" target="_blank" rel="noopener">NGINX文档</a>。</p>
+<p>设置gitlab_shell_ssh_port：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[<span class="string">'gitlab_shell_ssh_port'</span>] = <span class="number">7322</span></span><br></pre></td></tr></table></figure>
+<p>重启修改后的配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure></p>
+<p>最后，重启gitlab<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure></p>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>按照上面的示例，您将能够从Web浏览器下访问GitLab，<hostip>:8929并在port下使用SSH进行推送2289。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:8929</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许8929入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:8929</span></span><br></pre></td></tr></table></figure></hostip></p>
+<h3 id="其他，安装gitlab后设置后期补充"><a href="#其他，安装gitlab后设置后期补充" class="headerlink" title="其他，安装gitlab后设置后期补充"></a>其他，安装gitlab后设置后期补充</h3>
           
         
       
@@ -1945,373 +2350,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/vscode折叠策略显示展开收起效果/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="niexq">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/19/vscode折叠策略显示展开收起效果/" class="post-title-link" itemprop="url">vscode，根据元素标签，显示展开收起</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-19 19:41:42" itemprop="dateCreated datePublished" datetime="2019-04-19T19:41:42+08:00">2019-04-19</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vscode/" itemprop="url" rel="index"><span itemprop="name">vscode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="vscode，根据元素标签，显示展开收起"><a href="#vscode，根据元素标签，显示展开收起" class="headerlink" title="vscode，根据元素标签，显示展开收起"></a>vscode，根据元素标签，显示展开收起</h2><h4 id="首选项-设置（可用图形化直接搜索，或用JSON格式显示）"><a href="#首选项-设置（可用图形化直接搜索，或用JSON格式显示）" class="headerlink" title="首选项-设置（可用图形化直接搜索，或用JSON格式显示）"></a>首选项-设置（可用图形化直接搜索，或用JSON格式显示）</h4><p>用户设置(User Settings)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;[javascript]&quot;: &#123;</span><br><span class="line">        &quot;editor.foldingStrategy&quot;: &quot;indentation&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;[javascriptreact]&quot;: &#123;</span><br><span class="line">        &quot;editor.foldingStrategy&quot;: &quot;indentation&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;[typescript]&quot;: &#123;</span><br><span class="line">        &quot;editor.foldingStrategy&quot;: &quot;indentation&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;[typescriptreact]&quot;: &#123;</span><br><span class="line">        &quot;editor.foldingStrategy&quot;: &quot;indentation&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>foldingStrategy：控制计算折叠范围的策略。<code>auto</code> 将使用语言特定的折叠策略 (若可用)。<code>indentation</code> 将使用基于缩进的折叠策略。</p>
-<h4 id="配置效果图"><a href="#配置效果图" class="headerlink" title="配置效果图"></a>配置效果图</h4><p><img src="https://note.youdao.com/yws/res/871/WEBRESOURCEf1eb048f7fe84fff5a3cc0edad8ab618" alt="配置效果图"></p>
-<h4 id="配置后，编码区效果图"><a href="#配置后，编码区效果图" class="headerlink" title="配置后，编码区效果图"></a>配置后，编码区效果图</h4><p><img src="https://note.youdao.com/yws/res/875/WEBRESOURCE1debfd52515fc0f876edc63532fffdd7" alt="https://note.youdao.com/yws/res/871/WEBRESOURCEf1eb048f7fe84fff5a3cc0edad8ab618"></p>
-<h5 id="有关更多详细信息，请参阅："><a href="#有关更多详细信息，请参阅：" class="headerlink" title="有关更多详细信息，请参阅："></a>有关更多详细信息，请参阅：</h5><p><a href="https://code.visualstudio.com/docs/getstarted/settings" target="_blank" rel="noopener">settings</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/12/使用nodemailer发送邮件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="niexq">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/12/使用nodemailer发送邮件/" class="post-title-link" itemprop="url">使用nodemailer发送邮件</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-12 23:55:55" itemprop="dateCreated datePublished" datetime="2019-04-12T23:55:55+08:00">2019-04-12</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Nodejs/" itemprop="url" rel="index"><span itemprop="name">Nodejs</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="使用nodemailer发送邮件"><a href="#使用nodemailer发送邮件" class="headerlink" title="使用nodemailer发送邮件"></a>使用nodemailer发送邮件</h2><h4 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h4><p>nodemailer是一个nodejs应用的邮件服务模块</p>
-<p><img src="https://nodemailer.com/nm_logo_200x136.png" alt="logo"></p>
-<ul>
-<li>官网地址：<a href="https://nodemailer.com" target="_blank" rel="noopener">https://nodemailer.com</a></li>
-<li>GitHub地址：<a href="https://github.com/nodemailer/nodemailer" target="_blank" rel="noopener">https://github.com/nodemailer/nodemailer</a></li>
-<li>本篇文档GitHub地址： <a href="https://github.com/niexq/nodemailerTest" target="_blank" rel="noopener">https://github.com/niexq/nodemailerTest</a></li>
-</ul>
-<h4 id="2-nodemailer功能特性"><a href="#2-nodemailer功能特性" class="headerlink" title="2.nodemailer功能特性"></a>2.nodemailer功能特性</h4><ul>
-<li>支持Unicode编码,包括emoji</li>
-<li>支持Window系统环境</li>
-<li>支持HTML内容和纯文本内容</li>
-<li>支持附件</li>
-<li>支持HTML内容中嵌入图片附件</li>
-<li>支持TLS/STARTTLS安全的邮件发送</li>
-<li>除了支持内置的transport方法，还支持其他插件实现的transport方法</li>
-<li>支持DKIM签署消息</li>
-<li>支持自定义插件处理消息</li>
-<li>支持XOAUTH2登录验证</li>
-<li>支持SMTP连接代理</li>
-<li>支持ES6</li>
-<li>支持从ethereal.email自动生成的电子邮件测试帐户</li>
-</ul>
-<h4 id="3-要求"><a href="#3-要求" class="headerlink" title="3.要求"></a>3.要求</h4><ul>
-<li>node.js v6.0.0或更高版本</li>
-</ul>
-<h4 id="4-安装"><a href="#4-安装" class="headerlink" title="4.安装"></a>4.安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install nodemailer --save</span><br></pre></td></tr></table></figure>
-<h4 id="5-官方示例"><a href="#5-官方示例" class="headerlink" title="5.官方示例"></a>5.官方示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line">const nodemailer = require(&quot;nodemailer&quot;);</span><br><span class="line"></span><br><span class="line">// async..await is not allowed in global scope, must use a wrapper</span><br><span class="line">async function main()&#123;</span><br><span class="line"></span><br><span class="line">  // Generate test SMTP service account from ethereal.email</span><br><span class="line">  // Only needed if you don&apos;t have a real mail account for testing</span><br><span class="line">  let testAccount = await nodemailer.createTestAccount();</span><br><span class="line"></span><br><span class="line">  // create reusable transporter object using the default SMTP transport</span><br><span class="line">  let transporter = nodemailer.createTransport(&#123;</span><br><span class="line">    host: &quot;smtp.ethereal.email&quot;,</span><br><span class="line">    port: 587,</span><br><span class="line">    secure: false, // true for 465, false for other ports</span><br><span class="line">    auth: &#123;</span><br><span class="line">      user: testAccount.user, // generated ethereal user</span><br><span class="line">      pass: testAccount.pass // generated ethereal password</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  // send mail with defined transport object</span><br><span class="line">  let info = await transporter.sendMail(&#123;</span><br><span class="line">    from: &apos;&quot;Fred Foo 👻&quot; &lt;foo@example.com&gt;&apos;, // sender address</span><br><span class="line">    to: &quot;bar@example.com, baz@example.com&quot;, // list of receivers</span><br><span class="line">    subject: &quot;Hello ✔&quot;, // Subject line</span><br><span class="line">    text: &quot;Hello world?&quot;, // plain text body</span><br><span class="line">    html: &quot;&lt;b&gt;Hello world?&lt;/b&gt;&quot; // html body</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  console.log(&quot;Message sent: %s&quot;, info.messageId);</span><br><span class="line">  // Message sent: &lt;b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com&gt;</span><br><span class="line"></span><br><span class="line">  // Preview only available when sending through an Ethereal account</span><br><span class="line">  console.log(&quot;Preview URL: %s&quot;, nodemailer.getTestMessageUrl(info));</span><br><span class="line">  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main().catch(console.error);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这是一个生成了Ethereal的账户，发送纯文本和HTML正文电子邮件的完整示例。</li>
-</ul>
-<h4 id="6-使用自己qq邮箱或163邮箱发送邮件，发送多人邮箱"><a href="#6-使用自己qq邮箱或163邮箱发送邮件，发送多人邮箱" class="headerlink" title="6.使用自己qq邮箱或163邮箱发送邮件，发送多人邮箱"></a>6.使用自己qq邮箱或163邮箱发送邮件，发送多人邮箱</h4><ul>
-<li>备注：使用qq邮箱发送需要<a href="https://jingyan.baidu.com/article/425e69e61e9178be15fc168a.html" target="_blank" rel="noopener">开启POP3/SMTP服务</a>，复制授权码配置在pass中。163邮箱默认已开通。</li>
-<li><p>6.1 <a href="https://niexq.github.io/2019/04/01/nodejs%E9%A1%B9%E7%9B%AE%EF%BC%8C%E4%BB%8E-env%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" target="_blank" rel="noopener">.env文件配置</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">RUN_LEVEL           = production</span><br><span class="line"></span><br><span class="line">MAIL_HOST           = smtp.exmail.qq.com</span><br><span class="line">MAIL_SERVICE        = QQ</span><br><span class="line">MAIL_PORT           = 465</span><br><span class="line">MAIL_SECURE         = true</span><br><span class="line">MAIL_SECURE_CONNECTION         = true</span><br><span class="line">MAIL_USER           = ******@qq.com</span><br><span class="line">MAIL_PASS           = ******</span><br><span class="line">MAIL_NICKNAME       = 👻测试nodemailer发邮件👻</span><br><span class="line">MAIL_TO             = ******@gmail.com,******@163.com,******@qq.com</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>6.2 config.js文件配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">const argv = require(&apos;yargs&apos;).argv;</span><br><span class="line">require(&apos;dotenv&apos;).config(&#123;</span><br><span class="line">  path: argv.env,</span><br><span class="line">&#125;);</span><br><span class="line">const env = process.env;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  mail: &#123;</span><br><span class="line">    // host: env.MAIL_HOST,     // 官方demo方式，暂时注释</span><br><span class="line">    service: env.MAIL_SERVICE,  // 使用内置传输发送邮件 查看支持列表：https://nodemailer.com/smtp/well-known</span><br><span class="line">    port: env.MAIL_PORT,</span><br><span class="line">    // secure: env.MAIL_SECURE, // 官方demo方式，暂时注释</span><br><span class="line">    secureConnection: env.MAIL_SECURE_CONNECTION,</span><br><span class="line">    auth: &#123;</span><br><span class="line">      user: env.MAIL_USER,</span><br><span class="line">      pass: env.MAIL_PASS, // 如果是使用QQ邮箱发送，此密码不是邮箱账户的密码而是授权码。</span><br><span class="line">    &#125;,</span><br><span class="line">    from: `$&#123;env.MAIL_NICKNAME&#125;&lt;$&#123;env.MAIL_USER&#125;&gt;`,</span><br><span class="line">    to: env.MAIL_TO,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>6.3 lib/sendMail.js文件配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">const nodemailer = require(&apos;nodemailer&apos;);</span><br><span class="line">const mailconf = require(&apos;../config&apos;).mail;</span><br><span class="line"></span><br><span class="line">// create reusable transporter object using the default SMTP transport</span><br><span class="line">const transporter = nodemailer.createTransport(mailconf);</span><br><span class="line"></span><br><span class="line">// setup email data with unicode symbols</span><br><span class="line">const mailOptions = &#123;</span><br><span class="line">  from: mailconf.from,                          // sender address</span><br><span class="line">  to: mailconf.to,                              // list of receivers</span><br><span class="line">  subject: &apos;测试标题&apos;,                          // Subject line</span><br><span class="line">  text: &apos;Hello world?&apos;,                         // plain text body</span><br><span class="line">  html: &apos;&lt;b&gt;Hello world?&lt;/b&gt;&apos;,                  // html body</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// send mail with defined transport object</span><br><span class="line">const sendMail = (&#123; message = &apos;来自测试nodemailer发邮件&apos;, subject = &apos;这个一个默认的测试标题&apos; &#125;) =&gt; &#123;</span><br><span class="line">  if (process.env.RUN_LEVEL !== &apos;production&apos;) &#123;    // 测试环境可跳过</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  mailOptions.subject = subject;</span><br><span class="line">  mailOptions.html = `&lt;b&gt;$&#123;message&#125;&lt;/b&gt;`;</span><br><span class="line">  mailOptions.text = `$&#123;message&#125;`;</span><br><span class="line">  transporter.sendMail(mailOptions, (error, info) =&gt; &#123;</span><br><span class="line">    if (error) &#123;</span><br><span class="line">      return console.log(error);</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(`发送成功，messageId为：$&#123;info.messageId&#125;`.green);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>6.4 index.js文件代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">require(&apos;colors&apos;);</span><br><span class="line"></span><br><span class="line">const sendMail = require(&apos;./lib/sendMail&apos;);</span><br><span class="line"></span><br><span class="line">// 使用封装好的发送邮件方法（可按项目需求，需要的地方调用此方法）</span><br><span class="line">sendMail(&#123;</span><br><span class="line">  message: &apos;这是邮件测试内容&apos;,</span><br><span class="line">  subject: &apos;邮件标题hello world&apos;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(&apos;send mail start&apos;.blue);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用163邮箱发送雷同，运行程序node index.js，成功将返回发送成功，messageId为<strong>**</strong>。</p>
-</li>
-</ul>
-<h5 id="有关更多详细信息，请参阅："><a href="#有关更多详细信息，请参阅：" class="headerlink" title="有关更多详细信息，请参阅："></a>有关更多详细信息，请参阅：</h5><p><a href="https://nodemailer.com/smtp/" target="_blank" rel="noopener">SMTP transport</a></p>
-<p><a href="https://nodemailer.com/message/configuration" target="_blank" rel="noopener">Message configuration</a></p>
-<p><a href="http://www.ruanyifeng.com/blog/2013/06/html_email.html" target="_blank" rel="noopener">HTML Email 编写指南</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2360,7 +2398,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

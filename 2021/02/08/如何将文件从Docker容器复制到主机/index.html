@@ -98,18 +98,18 @@
 
 
 
-  <meta name="description" content="重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中  如何将文件从Docker容器复制到主机？详细说明及使用可参考官方docker  cp文档 说明在容器和本地文件系统之间复制文件/文件夹 用法12$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-$ docker cp [OPTIONS] SR">
+  <meta name="description" content="如何将文件从Docker容器复制到主机？详细说明及使用可参考官方docker  cp文档 说明在容器和本地文件系统之间复制文件/文件夹 用法12$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH 例如，docker正在运行了一个jenkins">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何将文件从Docker容器复制到主机？">
 <meta property="og:url" content="http://yoursite.com/2021/02/08/如何将文件从Docker容器复制到主机/index.html">
 <meta property="og:site_name" content="弄不死的小强">
-<meta property="og:description" content="重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中  如何将文件从Docker容器复制到主机？详细说明及使用可参考官方docker  cp文档 说明在容器和本地文件系统之间复制文件/文件夹 用法12$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-$ docker cp [OPTIONS] SR">
+<meta property="og:description" content="如何将文件从Docker容器复制到主机？详细说明及使用可参考官方docker  cp文档 说明在容器和本地文件系统之间复制文件/文件夹 用法12$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH 例如，docker正在运行了一个jenkins">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-02-08T06:52:00.371Z">
+<meta property="og:updated_time" content="2021-02-08T06:54:55.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何将文件从Docker容器复制到主机？">
-<meta name="twitter:description" content="重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中  如何将文件从Docker容器复制到主机？详细说明及使用可参考官方docker  cp文档 说明在容器和本地文件系统之间复制文件/文件夹 用法12$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-$ docker cp [OPTIONS] SR">
+<meta name="twitter:description" content="如何将文件从Docker容器复制到主机？详细说明及使用可参考官方docker  cp文档 说明在容器和本地文件系统之间复制文件/文件夹 用法12$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH 例如，docker正在运行了一个jenkins">
 
 
 
@@ -285,7 +285,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
 
   </li>
         
@@ -488,10 +488,7 @@
       
 
       
-        <blockquote>
-<p>重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中</p>
-</blockquote>
-<h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
+        <h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
 <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>在容器和本地文件系统之间复制文件/文件夹</p>
 <h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</span><br><span class="line">$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH</span><br></pre></td></tr></table></figure>
 <p>例如，docker正在运行了一个jenkins，CONTAINER ID为3a3d34f3a3c0，接下来以此容器做展示：</p>
@@ -601,8 +598,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/29/scrollIntoView滚动到可视区域内/" rel="next" title="Element.scrollIntoView()让当前的元素滚动到浏览器窗口的可视区域内">
-                <i class="fa fa-chevron-left"></i> Element.scrollIntoView()让当前的元素滚动到浏览器窗口的可视区域内
+              <a href="/2021/02/08/在CentOS7系统使用Docker构建gitlab/" rel="next" title="在CentOS7系统使用Docker构建Jenkins">
+                <i class="fa fa-chevron-left"></i> 在CentOS7系统使用Docker构建Jenkins
               </a>
             
           </div>
@@ -610,6 +607,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" rel="prev" title="在CentOS7系统使用Docker构建Jenkins">
+                在CentOS7系统使用Docker构建Jenkins <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -685,7 +686,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
