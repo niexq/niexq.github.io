@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[如何将文件从Docker容器复制到主机？]]></title>
+    <url>%2F2021%2F02%2F08%2F%E5%A6%82%E4%BD%95%E5%B0%86%E6%96%87%E4%BB%B6%E4%BB%8EDocker%E5%AE%B9%E5%99%A8%E5%A4%8D%E5%88%B6%E5%88%B0%E4%B8%BB%E6%9C%BA%2F</url>
+    <content type="text"><![CDATA[重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中 如何将文件从Docker容器复制到主机？详细说明及使用可参考官方docker cp文档 说明在容器和本地文件系统之间复制文件/文件夹 用法12$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH 例如，docker正在运行了一个jenkins，CONTAINER ID为3a3d34f3a3c0，接下来以此容器做展示： CONTAINER ID IMAGE 其他略 NAMES 3a3d34f3a3c0 docker.io/jenkins/jenkins:lts 其他略 jenkins 注：以下命令中使用 CONTAINER ID 的地方也可用 NAMES 代替 容器到主机将文件或文件夹从Docker容器复制到本地文件系统。 重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中 第一种：在主机1234567891011# 将jenkins容器中 /var/jenkins_home/project1 目录拷贝到主机的 /srv/jenkins$ docker cp 3a3d34f3a3c0:/var/jenkins_home/project1 /srv/jenkins# 将jenkins容器中 /var/jenkins_home/project1 目录中 README.md 文件拷贝到主机的 /srv/jenkins$ docker cp 3a3d34f3a3c0:/var/jenkins_home/project1/README.md /srv/jenkins# 将jenkins容器中 /var/jenkins_home/project1/build 目录中所有文件拷贝到主机的 /srv/jenkins/www$ docker cp 3a3d34f3a3c0:/var/jenkins_home/project1/build/. /srv/jenkins/www# 将jenkins容器中 /var/jenkins_home/project1/build 目录中 README.md 文件拷贝到当前本地工作目录$ docker cp 3a3d34f3a3c0:/var/jenkins_home/project1/build/README.md . 如果容器中不存在复制的目录或文件，则报错 第二种：已经进入了docker jenkins容器中（docker exec -it “3a3d34f3a3c0” bash） 将jenkins容器中/var/jenkins_home/workspace/project2/build中所有文件拷贝到主机的/srv/www中 前置环境变量： 12$ export JENKINS_HOME=/srv/jenkins$ export NGINX_WWW=/srv/www 需要借助docker run –volume，docker jenkins启动命令需要改成： 1$ docker run --name jenkins -u root -d -p 7199:8080 -p 50000:50000 -v $JENKINS_HOME:/var/jenkins_home -v $NGINX_WWW:/srv/www docker.io/jenkins/jenkins:lts 重要：额外增加了一个参数 $NGINX_WWW:/srv/www``` 挂载目录1234最后，直接执行即可```js$ cp -rf /var/jenkins_home/workspace/project2/build/. /srv/www/ 主机到容器将文件或文件夹从本地文件系统复制到Docker容器，其工作原理相同 1234567891011# 将主机的 /srv/jenkins 拷贝到jenkins容器中 /var/jenkins_home/project1 目录$ docker cp /srv/jenkins 3a3d34f3a3c0:/var/jenkins_home/project1# 将主机的 /srv/jenkins 目录中 README.md 拷贝到jenkins容器中 /var/jenkins_home/project1文件$ docker cp /srv/jenkins/README.md 3a3d34f3a3c0:/var/jenkins_home/project1# 将主机的 /srv/jenkins/www 中所有文件拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录$ docker cp /srv/jenkins/www/. 3a3d34f3a3c0:/var/jenkins_home/project1/build# 将当前本地工作目录拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录中$ docker cp . 3a3d34f3a3c0:/var/jenkins_home/project1/build]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Element.scrollIntoView()让当前的元素滚动到浏览器窗口的可视区域内]]></title>
     <url>%2F2019%2F07%2F29%2FscrollIntoView%E6%BB%9A%E5%8A%A8%E5%88%B0%E5%8F%AF%E8%A7%86%E5%8C%BA%E5%9F%9F%E5%86%85%2F</url>
     <content type="text"><![CDATA[Element.scrollIntoView()让当前的元素滚动到浏览器窗口的可视区域内 语法123element.scrollIntoView(); // 等同于element.scrollIntoView(true) element.scrollIntoView(alignToTop); // Boolean型参数 element.scrollIntoView(scrollIntoViewOptions); // Object型参数 参数alignToTop(一个Boolean值) 如果为true，元素的顶端将和其所在滚动区的可视区域的顶端对齐。相应的 scrollIntoViewOptions: {block: “start”, inline: “nearest”}。这是这个参数的默认值。 如果为false，元素的底端将和其所在滚动区的可视区域的底端对齐。相应的scrollIntoViewOptions: {block: “end”, inline: “nearest”}。 scrollIntoViewOptions(可选)(一个带有选项的object) behavior(可选) 定义缓动动画， “auto”, “instant”, 或 “smooth” 之一。默认为 “auto”。 block(可选) “start”, “center”, “end”, 或 “nearest”之一。默认为 “start”。 inline(可选) “start”, “center”, “end”, 或 “nearest”之一。默认为 “nearest”。 1234&#123; behavior: &quot;auto&quot; | &quot;instant&quot; | &quot;smooth&quot;, block: &quot;start&quot; | &quot;end&quot;,&#125; 浏览器兼容性 demo123456var element = document.getElementById(&quot;box&quot;);element.scrollIntoView();element.scrollIntoView(false);element.scrollIntoView(&#123;block: &quot;end&quot;&#125;);element.scrollIntoView(&#123;behavior: &quot;instant&quot;, block: &quot;end&quot;, inline: &quot;nearest&quot;&#125;); 注意取决于其它元素的布局情况，此元素可能不会完全滚动到顶端或底端。 公司真实项目实践表格编辑功能，当用户选择左固定（或右固定）时，表格字段自动布局左边（或右边），滚动条滚动到对应位置。12345678910111213141516171819202122// 部分代码实现// 左固定Checkbox点击事件handleLeftCheckbox = (row, checked) =&gt; &#123; row.fixed = checked ? &apos;left&apos; : &apos;&apos;; this.setState(&#123; tableConfigs: this.state.tableConfigs, &#125;, () =&gt; &#123; this.scrollIntoViewData(row); &#125;)&#125;// 当前设置元素滚动到浏览器窗口可视区域（getElementById可换成ref方式）scrollIntoViewData = (rowData) =&gt; &#123; if (rowData.fixed) &#123; // 此属性代表当前字段已设置左固定（或右固定）[左固定&apos;left&apos;\右固定&apos;right&apos;] document.getElementById(`$&#123;rowData.key&#125;_$&#123;rowData.keyName&#125;`).scrollIntoView(&#123; block: &apos;end&apos;, inline: &apos;end&apos;, behavior: &apos;smooth&apos; &#125;); &#125;&#125; 实现效果截图 有关更多详细信息，请参阅：本篇参阅]]></content>
@@ -36,8 +47,8 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>Flow</tag>
         <tag>Nodejs</tag>
+        <tag>Flow</tag>
       </tags>
   </entry>
   <entry>
