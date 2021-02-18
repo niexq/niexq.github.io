@@ -68,8 +68,8 @@
         <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>Flow</tag>
         <tag>JavaScript</tag>
+        <tag>Flow</tag>
         <tag>Nodejs</tag>
       </tags>
   </entry>
@@ -201,8 +201,8 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>Nodejs</tag>
         <tag>ES6</tag>
+        <tag>Nodejs</tag>
         <tag>AMD</tag>
         <tag>CMD</tag>
       </tags>
