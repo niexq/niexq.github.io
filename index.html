@@ -381,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/如何将文件从Docker容器复制到主机/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
@@ -401,7 +401,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
+                <a href="/2021/02/08/如何将文件从Docker容器复制到主机/" class="post-title-link" itemprop="url">如何将文件从Docker容器复制到主机？</a>
               
             
           </h1>
@@ -481,47 +481,51 @@
       
         
           
-            <h2 id="在CentOS7系统使用Docker构建Jenkins"><a href="#在CentOS7系统使用Docker构建Jenkins" class="headerlink" title="在CentOS7系统使用Docker构建Jenkins"></a>在CentOS7系统使用Docker构建Jenkins</h2><p>详情可参照<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">安装docker</a></p>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
-<li>需要了解docker基本命令操作</li>
-<li>登录ecs服务器，创建jenkins挂载目录</li>
-<li><a href="https://hub.docker.com/r/jenkins/jenkins" target="_blank" rel="noopener">登录dockerhub</a>,选择官方版本及阅读说明文档；也可使用docker search -s 100 ‘jenkins’直接搜索jenkins镜像start大于100的</li>
-</ul>
-<h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
-<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
-<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
-<p>额外加个nginx环境变量，方便jenkins shell构建使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure></p>
-<p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的jenkins（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/jenkins/jenkins）</span></span><br><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker jenkins</span></span><br><span class="line">docker images | grep <span class="string">"jenkins"</span></span><br></pre></td></tr></table></figure>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run \</span><br><span class="line">  -u root \</span><br><span class="line">  --rm \                                            <span class="comment">// 关闭时自动删除Docker容器</span></span><br><span class="line">  -d \                                              <span class="comment">// 在后台运行容器（即“分离”模式）并输出容器ID</span></span><br><span class="line">  -p <span class="number">7199</span>:<span class="number">8080</span> \                                    <span class="comment">// 容器的端口映射</span></span><br><span class="line">  -p <span class="number">50000</span>:<span class="number">50000</span> \                                  <span class="comment">// 主站进行通信，容器的端口映射</span></span><br><span class="line">  --name jenkins                                    <span class="comment">// 容器名称</span></span><br><span class="line">  -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home \              <span class="comment">// 磁盘挂载</span></span><br><span class="line">  -v $NGINX_WWW:<span class="regexp">/srv/</span>www \                          <span class="comment">// 磁盘挂载,重要，此挂载可以达到在容器内部cp数据到host</span></span><br><span class="line">  -v /<span class="keyword">var</span>/run/docker.sock:<span class="regexp">/var/</span>run/docker.sock \    <span class="comment">// jenkins容器与Docker守护进程通信</span></span><br><span class="line">  docker.io/jenkins/jenkins:lts                     <span class="comment">// 安装的镜像包名 REPOSITORY:TAG</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:7199</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许7199入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:7199</span></span><br></pre></td></tr></table></figure>
-<h3 id="其他，安装jenkins后设置向导"><a href="#其他，安装jenkins后设置向导" class="headerlink" title="其他，安装jenkins后设置向导"></a>其他，安装jenkins后设置向导</h3><ul>
-<li>自动跳转输入管理员密码，解锁Jenkins<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首屏提示</span></span><br><span class="line">Please wait <span class="keyword">while</span> Jenkins is getting ready to work ...</span><br><span class="line">Your browser will reload automatically when Jenkins is ready.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动跳转设置管理员密码页面</span></span><br><span class="line">解锁 Jenkins</span><br><span class="line">为了确保管理员安全地安装 Jenkins，密码已写入到日志中（不知道在哪里？）该文件在服务器上：</span><br><span class="line">/<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br><span class="line">请从本地复制密码并粘贴到下面。</span><br><span class="line">管理员密码</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="https://www.jenkins.io/zh/doc/book/resources/tutorials/setup-jenkins-01-unlock-jenkins-page.jpg" alt="管理员密码页面"></p>
+            <h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>在容器和本地文件系统之间复制文件/文件夹</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</span><br><span class="line">$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH</span><br></pre></td></tr></table></figure>
+<p>例如，docker正在运行了一个jenkins，CONTAINER ID为3a3d34f3a3c0，接下来以此容器做展示：</p>
+<table>
+<thead>
+<tr>
+<th>CONTAINER ID</th>
+<th>IMAGE</th>
+<th>其他略</th>
+<th>NAMES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3a3d34f3a3c0</td>
+<td>docker.io/jenkins/jenkins:lts</td>
+<td>其他略</td>
+<td>jenkins</td>
+</tr>
+</tbody>
+</table>
+<p>注：以下命令中使用 CONTAINER ID 的地方也可用 NAMES 代替</p>
+<h3 id="容器到主机"><a href="#容器到主机" class="headerlink" title="容器到主机"></a>容器到主机</h3><p>将文件或文件夹从Docker容器复制到本地文件系统。</p>
+<blockquote>
+<p>重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中</p>
+</blockquote>
 <ul>
-<li><p>查看登录密码</p>
+<li>第一种：在主机<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1 /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录中 README.md 文件拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/README.md /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中所有文件拷贝到主机的 /srv/jenkins/www</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/. /srv/jenkins/www</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中 README.md 文件拷贝到当前本地工作目录</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/README.md .</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果容器中不存在复制的目录或文件，则报错</p>
 <ul>
-<li><p>如果您以分离模式在Docker中运行Jenkins，则可以从Docker日志（above） 访问Jenkins控制台日志</p>
-</li>
-<li><p>Jenkins控制台日志显示可以获取密码的位置（在Jenkins主目录中）。 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）</p>
-</li>
+<li>第二种：已经进入了docker jenkins容器中（docker exec -it “3a3d34f3a3c0” bash）</li>
 </ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在挂载的目录下查看，返回密码</span></span><br><span class="line">cat  /jenkins/secrets/initialAdminPassword</span><br><span class="line"><span class="comment">// 进入容器内部获取密码</span></span><br><span class="line">docker exec -it <span class="string">"容器ID"</span> bash</span><br><span class="line">cat /<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
-<ul>
-<li>直接粘贴到管理员密码输入框中即可（一般为一串加密的hash值）</li>
-<li>新手入门-可选择安装推荐的插件（也可选择自定义插件）</li>
-<li>创建第一个管理员用户</li>
-<li><p>实例配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jenkins URL: http:<span class="comment">//服务器ip:7199</span></span><br><span class="line">Jenkins URL 用于给各种Jenkins资源提供绝对路径链接的根地址。 这意味着对于很多Jenkins特色是需要正确设置的，例如：邮件通知、PR状态更新以及提供给构建步骤的BUILD_URL环境变量。</span><br><span class="line">推荐的默认值显示在尚未保存，如果可能的话这是根据当前请求生成的。 最佳实践是要设置这个值，用户可能会需要用到。这将会避免在分享或者查看链接时的困惑。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Jenkins已就绪-开始使用Jenkins</p>
-</li>
-</ul>
+<blockquote>
+<p>将jenkins容器中/var/jenkins_home/workspace/project2/build中所有文件拷贝到主机的/srv/www中</p>
+</blockquote>
+<p>前置环境变量：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br><span class="line">$ <span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure>
+<p>需要借助<a href="https://docs.docker.com/engine/reference/commandline/run/" target="_blank" rel="noopener">docker run –volume</a>，docker jenkins启动命令需要改成：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+<p>重要：额外增加了一个参数 <figure class="highlight plain"><figcaption><span>$NGINX_WWW:/srv/www``` 挂载目录</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后，直接执行即可</span><br><span class="line">```js</span><br><span class="line">$ cp -rf /var/jenkins_home/workspace/project2/build/. /srv/www/</span><br></pre></td></tr></table></figure></p>
+<h3 id="主机到容器"><a href="#主机到容器" class="headerlink" title="主机到容器"></a>主机到容器</h3><p>将文件或文件夹从本地文件系统复制到Docker容器，其工作原理相同</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将主机的 /srv/jenkins 拷贝到jenkins容器中 /var/jenkins_home/project1 目录</span><br><span class="line">$ docker cp /srv/jenkins  <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins 目录中 README.md 拷贝到jenkins容器中 /var/jenkins_home/project1文件</span><br><span class="line">$ docker cp /srv/jenkins/README.md <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins/www 中所有文件拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录</span><br><span class="line">$ docker cp /srv/jenkins/www/. <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br><span class="line"></span><br><span class="line"># 将当前本地工作目录拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录中</span><br><span class="line">$ docker cp . <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br></pre></td></tr></table></figure>
 
           
         
@@ -789,7 +793,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/如何将文件从Docker容器复制到主机/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
@@ -809,7 +813,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2021/02/08/如何将文件从Docker容器复制到主机/" class="post-title-link" itemprop="url">如何将文件从Docker容器复制到主机？</a>
+                <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
               
             
           </h1>
@@ -889,51 +893,47 @@
       
         
           
-            <h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>在容器和本地文件系统之间复制文件/文件夹</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</span><br><span class="line">$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH</span><br></pre></td></tr></table></figure>
-<p>例如，docker正在运行了一个jenkins，CONTAINER ID为3a3d34f3a3c0，接下来以此容器做展示：</p>
-<table>
-<thead>
-<tr>
-<th>CONTAINER ID</th>
-<th>IMAGE</th>
-<th>其他略</th>
-<th>NAMES</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3a3d34f3a3c0</td>
-<td>docker.io/jenkins/jenkins:lts</td>
-<td>其他略</td>
-<td>jenkins</td>
-</tr>
-</tbody>
-</table>
-<p>注：以下命令中使用 CONTAINER ID 的地方也可用 NAMES 代替</p>
-<h3 id="容器到主机"><a href="#容器到主机" class="headerlink" title="容器到主机"></a>容器到主机</h3><p>将文件或文件夹从Docker容器复制到本地文件系统。</p>
-<blockquote>
-<p>重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中</p>
-</blockquote>
-<ul>
-<li>第一种：在主机<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1 /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录中 README.md 文件拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/README.md /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中所有文件拷贝到主机的 /srv/jenkins/www</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/. /srv/jenkins/www</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中 README.md 文件拷贝到当前本地工作目录</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/README.md .</span><br></pre></td></tr></table></figure>
+            <h2 id="在CentOS7系统使用Docker构建Jenkins"><a href="#在CentOS7系统使用Docker构建Jenkins" class="headerlink" title="在CentOS7系统使用Docker构建Jenkins"></a>在CentOS7系统使用Docker构建Jenkins</h2><p>详情可参照<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">安装docker</a></p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>需要了解docker基本命令操作</li>
+<li>登录ecs服务器，创建jenkins挂载目录</li>
+<li><a href="https://hub.docker.com/r/jenkins/jenkins" target="_blank" rel="noopener">登录dockerhub</a>,选择官方版本及阅读说明文档；也可使用docker search -s 100 ‘jenkins’直接搜索jenkins镜像start大于100的</li>
+</ul>
+<h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
+<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>额外加个nginx环境变量，方便jenkins shell构建使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure></p>
+<p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的jenkins（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/jenkins/jenkins）</span></span><br><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker jenkins</span></span><br><span class="line">docker images | grep <span class="string">"jenkins"</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run \</span><br><span class="line">  -u root \</span><br><span class="line">  --rm \                                            <span class="comment">// 关闭时自动删除Docker容器</span></span><br><span class="line">  -d \                                              <span class="comment">// 在后台运行容器（即“分离”模式）并输出容器ID</span></span><br><span class="line">  -p <span class="number">7199</span>:<span class="number">8080</span> \                                    <span class="comment">// 容器的端口映射</span></span><br><span class="line">  -p <span class="number">50000</span>:<span class="number">50000</span> \                                  <span class="comment">// 主站进行通信，容器的端口映射</span></span><br><span class="line">  --name jenkins                                    <span class="comment">// 容器名称</span></span><br><span class="line">  -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home \              <span class="comment">// 磁盘挂载</span></span><br><span class="line">  -v $NGINX_WWW:<span class="regexp">/srv/</span>www \                          <span class="comment">// 磁盘挂载,重要，此挂载可以达到在容器内部cp数据到host</span></span><br><span class="line">  -v /<span class="keyword">var</span>/run/docker.sock:<span class="regexp">/var/</span>run/docker.sock \    <span class="comment">// jenkins容器与Docker守护进程通信</span></span><br><span class="line">  docker.io/jenkins/jenkins:lts                     <span class="comment">// 安装的镜像包名 REPOSITORY:TAG</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:7199</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许7199入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:7199</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他，安装jenkins后设置向导"><a href="#其他，安装jenkins后设置向导" class="headerlink" title="其他，安装jenkins后设置向导"></a>其他，安装jenkins后设置向导</h3><ul>
+<li>自动跳转输入管理员密码，解锁Jenkins<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首屏提示</span></span><br><span class="line">Please wait <span class="keyword">while</span> Jenkins is getting ready to work ...</span><br><span class="line">Your browser will reload automatically when Jenkins is ready.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动跳转设置管理员密码页面</span></span><br><span class="line">解锁 Jenkins</span><br><span class="line">为了确保管理员安全地安装 Jenkins，密码已写入到日志中（不知道在哪里？）该文件在服务器上：</span><br><span class="line">/<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br><span class="line">请从本地复制密码并粘贴到下面。</span><br><span class="line">管理员密码</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>如果容器中不存在复制的目录或文件，则报错</p>
+<p><img src="https://www.jenkins.io/zh/doc/book/resources/tutorials/setup-jenkins-01-unlock-jenkins-page.jpg" alt="管理员密码页面"></p>
 <ul>
-<li>第二种：已经进入了docker jenkins容器中（docker exec -it “3a3d34f3a3c0” bash）</li>
+<li><p>查看登录密码</p>
+<ul>
+<li><p>如果您以分离模式在Docker中运行Jenkins，则可以从Docker日志（above） 访问Jenkins控制台日志</p>
+</li>
+<li><p>Jenkins控制台日志显示可以获取密码的位置（在Jenkins主目录中）。 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）</p>
+</li>
 </ul>
-<blockquote>
-<p>将jenkins容器中/var/jenkins_home/workspace/project2/build中所有文件拷贝到主机的/srv/www中</p>
-</blockquote>
-<p>前置环境变量：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br><span class="line">$ <span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure>
-<p>需要借助<a href="https://docs.docker.com/engine/reference/commandline/run/" target="_blank" rel="noopener">docker run –volume</a>，docker jenkins启动命令需要改成：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
-<p>重要：额外增加了一个参数 <figure class="highlight plain"><figcaption><span>$NGINX_WWW:/srv/www``` 挂载目录</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后，直接执行即可</span><br><span class="line">```js</span><br><span class="line">$ cp -rf /var/jenkins_home/workspace/project2/build/. /srv/www/</span><br></pre></td></tr></table></figure></p>
-<h3 id="主机到容器"><a href="#主机到容器" class="headerlink" title="主机到容器"></a>主机到容器</h3><p>将文件或文件夹从本地文件系统复制到Docker容器，其工作原理相同</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将主机的 /srv/jenkins 拷贝到jenkins容器中 /var/jenkins_home/project1 目录</span><br><span class="line">$ docker cp /srv/jenkins  <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins 目录中 README.md 拷贝到jenkins容器中 /var/jenkins_home/project1文件</span><br><span class="line">$ docker cp /srv/jenkins/README.md <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins/www 中所有文件拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录</span><br><span class="line">$ docker cp /srv/jenkins/www/. <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br><span class="line"></span><br><span class="line"># 将当前本地工作目录拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录中</span><br><span class="line">$ docker cp . <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在挂载的目录下查看，返回密码</span></span><br><span class="line">cat  /jenkins/secrets/initialAdminPassword</span><br><span class="line"><span class="comment">// 进入容器内部获取密码</span></span><br><span class="line">docker exec -it <span class="string">"容器ID"</span> bash</span><br><span class="line">cat /<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接粘贴到管理员密码输入框中即可（一般为一串加密的hash值）</li>
+<li>新手入门-可选择安装推荐的插件（也可选择自定义插件）</li>
+<li>创建第一个管理员用户</li>
+<li><p>实例配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jenkins URL: http:<span class="comment">//服务器ip:7199</span></span><br><span class="line">Jenkins URL 用于给各种Jenkins资源提供绝对路径链接的根地址。 这意味着对于很多Jenkins特色是需要正确设置的，例如：邮件通知、PR状态更新以及提供给构建步骤的BUILD_URL环境变量。</span><br><span class="line">推荐的默认值显示在尚未保存，如果可能的话这是根据当前请求生成的。 最佳实践是要设置这个值，用户可能会需要用到。这将会避免在分享或者查看链接时的困惑。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Jenkins已就绪-开始使用Jenkins</p>
+</li>
+</ul>
 
           
         
