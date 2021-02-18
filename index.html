@@ -381,207 +381,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/如何将文件从Docker容器复制到主机/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="niexq">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/02/08/如何将文件从Docker容器复制到主机/" class="post-title-link" itemprop="url">如何将文件从Docker容器复制到主机？</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-02-08 13:30:37" itemprop="dateCreated datePublished" datetime="2021-02-08T13:30:37+08:00">2021-02-08</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>在容器和本地文件系统之间复制文件/文件夹</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</span><br><span class="line">$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH</span><br></pre></td></tr></table></figure>
-<p>例如，docker正在运行了一个jenkins，CONTAINER ID为3a3d34f3a3c0，接下来以此容器做展示：</p>
-<table>
-<thead>
-<tr>
-<th>CONTAINER ID</th>
-<th>IMAGE</th>
-<th>其他略</th>
-<th>NAMES</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3a3d34f3a3c0</td>
-<td>docker.io/jenkins/jenkins:lts</td>
-<td>其他略</td>
-<td>jenkins</td>
-</tr>
-</tbody>
-</table>
-<p>注：以下命令中使用 CONTAINER ID 的地方也可用 NAMES 代替</p>
-<h3 id="容器到主机"><a href="#容器到主机" class="headerlink" title="容器到主机"></a>容器到主机</h3><p>将文件或文件夹从Docker容器复制到本地文件系统。</p>
-<blockquote>
-<p>重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中</p>
-</blockquote>
-<ul>
-<li>第一种：在主机<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1 /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录中 README.md 文件拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/README.md /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中所有文件拷贝到主机的 /srv/jenkins/www</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/. /srv/jenkins/www</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中 README.md 文件拷贝到当前本地工作目录</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/README.md .</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果容器中不存在复制的目录或文件，则报错</p>
-<ul>
-<li>第二种：已经进入了docker jenkins容器中（docker exec -it “3a3d34f3a3c0” bash）</li>
-</ul>
-<blockquote>
-<p>将jenkins容器中/var/jenkins_home/workspace/project2/build中所有文件拷贝到主机的/srv/www中</p>
-</blockquote>
-<p>前置环境变量：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br><span class="line">$ <span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure>
-<p>需要借助<a href="https://docs.docker.com/engine/reference/commandline/run/" target="_blank" rel="noopener">docker run –volume</a>，docker jenkins启动命令需要改成：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
-<p>重要：额外增加了一个参数 <figure class="highlight plain"><figcaption><span>$NGINX_WWW:/srv/www``` 挂载目录</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后，直接执行即可</span><br><span class="line">```js</span><br><span class="line">$ cp -rf /var/jenkins_home/workspace/project2/build/. /srv/www/</span><br></pre></td></tr></table></figure></p>
-<h3 id="主机到容器"><a href="#主机到容器" class="headerlink" title="主机到容器"></a>主机到容器</h3><p>将文件或文件夹从本地文件系统复制到Docker容器，其工作原理相同</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将主机的 /srv/jenkins 拷贝到jenkins容器中 /var/jenkins_home/project1 目录</span><br><span class="line">$ docker cp /srv/jenkins  <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins 目录中 README.md 拷贝到jenkins容器中 /var/jenkins_home/project1文件</span><br><span class="line">$ docker cp /srv/jenkins/README.md <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins/www 中所有文件拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录</span><br><span class="line">$ docker cp /srv/jenkins/www/. <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br><span class="line"></span><br><span class="line"># 将当前本地工作目录拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录中</span><br><span class="line">$ docker cp . <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -935,6 +734,207 @@
 <p>最后，重启gitlab<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure></p>
 <h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>按照上面的示例，您将能够从Web浏览器下访问GitLab，<hostip>:8929并在port下使用SSH进行推送2289。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:8929</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许8929入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:8929</span></span><br></pre></td></tr></table></figure></hostip></p>
 <h3 id="其他，安装gitlab后设置后期补充"><a href="#其他，安装gitlab后设置后期补充" class="headerlink" title="其他，安装gitlab后设置后期补充"></a>其他，安装gitlab后设置后期补充</h3>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/如何将文件从Docker容器复制到主机/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="弄不死的小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/02/08/如何将文件从Docker容器复制到主机/" class="post-title-link" itemprop="url">如何将文件从Docker容器复制到主机？</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-02-08 13:30:37" itemprop="dateCreated datePublished" datetime="2021-02-08T13:30:37+08:00">2021-02-08</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="如何将文件从Docker容器复制到主机？"><a href="#如何将文件从Docker容器复制到主机？" class="headerlink" title="如何将文件从Docker容器复制到主机？"></a>如何将文件从Docker容器复制到主机？</h2><p>详细说明及使用可参考<a href="https://docs.docker.com/engine/reference/commandline/cp/" target="_blank" rel="noopener">官方docker  cp文档</a></p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>在容器和本地文件系统之间复制文件/文件夹</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</span><br><span class="line">$ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH</span><br></pre></td></tr></table></figure>
+<p>例如，docker正在运行了一个jenkins，CONTAINER ID为3a3d34f3a3c0，接下来以此容器做展示：</p>
+<table>
+<thead>
+<tr>
+<th>CONTAINER ID</th>
+<th>IMAGE</th>
+<th>其他略</th>
+<th>NAMES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3a3d34f3a3c0</td>
+<td>docker.io/jenkins/jenkins:lts</td>
+<td>其他略</td>
+<td>jenkins</td>
+</tr>
+</tbody>
+</table>
+<p>注：以下命令中使用 CONTAINER ID 的地方也可用 NAMES 代替</p>
+<h3 id="容器到主机"><a href="#容器到主机" class="headerlink" title="容器到主机"></a>容器到主机</h3><p>将文件或文件夹从Docker容器复制到本地文件系统。</p>
+<blockquote>
+<p>重要：此种有两种情况需要区分，第一种你在主机，第二种你已经进入了docker jenkins容器中</p>
+</blockquote>
+<ul>
+<li>第一种：在主机<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1 /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1 目录中 README.md 文件拷贝到主机的 /srv/jenkins</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/README.md /srv/jenkins</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中所有文件拷贝到主机的 /srv/jenkins/www</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/. /srv/jenkins/www</span><br><span class="line"></span><br><span class="line"># 将jenkins容器中 /var/jenkins_home/project1/build 目录中 README.md 文件拷贝到当前本地工作目录</span><br><span class="line">$ docker cp <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build/README.md .</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果容器中不存在复制的目录或文件，则报错</p>
+<ul>
+<li>第二种：已经进入了docker jenkins容器中（docker exec -it “3a3d34f3a3c0” bash）</li>
+</ul>
+<blockquote>
+<p>将jenkins容器中/var/jenkins_home/workspace/project2/build中所有文件拷贝到主机的/srv/www中</p>
+</blockquote>
+<p>前置环境变量：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br><span class="line">$ <span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure>
+<p>需要借助<a href="https://docs.docker.com/engine/reference/commandline/run/" target="_blank" rel="noopener">docker run –volume</a>，docker jenkins启动命令需要改成：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+<p>重要：额外增加了一个参数 <figure class="highlight plain"><figcaption><span>$NGINX_WWW:/srv/www``` 挂载目录</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后，直接执行即可</span><br><span class="line">```js</span><br><span class="line">$ cp -rf /var/jenkins_home/workspace/project2/build/. /srv/www/</span><br></pre></td></tr></table></figure></p>
+<h3 id="主机到容器"><a href="#主机到容器" class="headerlink" title="主机到容器"></a>主机到容器</h3><p>将文件或文件夹从本地文件系统复制到Docker容器，其工作原理相同</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 将主机的 /srv/jenkins 拷贝到jenkins容器中 /var/jenkins_home/project1 目录</span><br><span class="line">$ docker cp /srv/jenkins  <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins 目录中 README.md 拷贝到jenkins容器中 /var/jenkins_home/project1文件</span><br><span class="line">$ docker cp /srv/jenkins/README.md <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1</span><br><span class="line"></span><br><span class="line"># 将主机的 /srv/jenkins/www 中所有文件拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录</span><br><span class="line">$ docker cp /srv/jenkins/www/. <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br><span class="line"></span><br><span class="line"># 将当前本地工作目录拷贝到jenkins容器中 /var/jenkins_home/project1/build 目录中</span><br><span class="line">$ docker cp . <span class="number">3</span>a3d34f3a3c0:<span class="regexp">/var/</span>jenkins_home/project1/build</span><br></pre></td></tr></table></figure>
+
           
         
       
