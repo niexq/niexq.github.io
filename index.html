@@ -381,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建gitlab/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
@@ -401,7 +401,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2021/02/08/在CentOS7系统使用Docker构建gitlab/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
+                <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
               
             
           </h1>
@@ -481,62 +481,48 @@
       
         
           
-            <h2 id="在CentOS7系统使用Docker构建gitlab"><a href="#在CentOS7系统使用Docker构建gitlab" class="headerlink" title="在CentOS7系统使用Docker构建gitlab"></a>在CentOS7系统使用Docker构建gitlab</h2><p>详情可参照<a href="https://docs.gitlab.com/omnibus/docker/#troubleshooting" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">阿里ECS安装docker</a>或<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">docker官方安装</a></p>
+            <h2 id="在CentOS7系统使用Docker构建Jenkins"><a href="#在CentOS7系统使用Docker构建Jenkins" class="headerlink" title="在CentOS7系统使用Docker构建Jenkins"></a>在CentOS7系统使用Docker构建Jenkins</h2><p>详情可参照<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">安装docker</a></p>
 <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
 <li>需要了解docker基本命令操作</li>
 <li>登录ecs服务器，创建jenkins挂载目录</li>
-<li><a href="https://hub.docker.com/r/gitlab/gitlab-ce" target="_blank" rel="noopener">登录dockerhub</a>,选择官方社区版本及阅读说明文档；也可使用docker search -s 100 ‘gitlab’直接搜索gitlab镜像start大于100的</li>
+<li><a href="https://hub.docker.com/r/jenkins/jenkins" target="_blank" rel="noopener">登录dockerhub</a>,选择官方版本及阅读说明文档；也可使用docker search -s 100 ‘jenkins’直接搜索jenkins镜像start大于100的</li>
 </ul>
 <h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
-<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> GITLAB_HOME=<span class="regexp">/srv/gi</span>tlab</span><br></pre></td></tr></table></figure></p>
-<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> GITLAB_HOME=$HOME/gitlab</span><br></pre></td></tr></table></figure></p>
+<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>额外加个nginx环境变量，方便jenkins shell构建使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure></p>
 <p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
-<p>GitLab容器使用主机安装的卷来存储持久数据：</p>
-<table>
-<thead>
-<tr>
-<th>当前位置</th>
-<th>容器位置</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$GITLAB_HOME/data</td>
-<td>/var/opt/gitlab</td>
-<td>用于存储应用程序数据。</td>
-</tr>
-<tr>
-<td>$GITLAB_HOME/logs</td>
-<td>/var/log/gitlab</td>
-<td>用于存储日志。</td>
-</tr>
-<tr>
-<td>$GITLAB_HOME/config</td>
-<td>/etc/gitlab</td>
-<td>用于存储GitLab配置文件。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>GitLab Docker镜像可以多种方式运行：</p>
-<ul>
-<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-engine" target="_blank" rel="noopener">使用Docker引擎</a></li>
-<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-compose" target="_blank" rel="noopener">使用Docker Compose</a></li>
-<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-swarm-mode" target="_blank" rel="noopener">使用Docker群模式</a></li>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的jenkins（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/jenkins/jenkins）</span></span><br><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker jenkins</span></span><br><span class="line">docker images | grep <span class="string">"jenkins"</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run \</span><br><span class="line">  -u root \</span><br><span class="line">  --rm \                                            <span class="comment">// 关闭时自动删除Docker容器</span></span><br><span class="line">  -d \                                              <span class="comment">// 在后台运行容器（即“分离”模式）并输出容器ID</span></span><br><span class="line">  -p <span class="number">7199</span>:<span class="number">8080</span> \                                    <span class="comment">// 容器的端口映射</span></span><br><span class="line">  -p <span class="number">50000</span>:<span class="number">50000</span> \                                  <span class="comment">// 主站进行通信，容器的端口映射</span></span><br><span class="line">  --name jenkins                                    <span class="comment">// 容器名称</span></span><br><span class="line">  -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home \              <span class="comment">// 磁盘挂载</span></span><br><span class="line">  -v $NGINX_WWW:<span class="regexp">/srv/</span>www \                          <span class="comment">// 磁盘挂载,重要，此挂载可以达到在容器内部cp数据到host</span></span><br><span class="line">  -v /<span class="keyword">var</span>/run/docker.sock:<span class="regexp">/var/</span>run/docker.sock \    <span class="comment">// jenkins容器与Docker守护进程通信</span></span><br><span class="line">  docker.io/jenkins/jenkins:lts                     <span class="comment">// 安装的镜像包名 REPOSITORY:TAG</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:7199</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许7199入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:7199</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他，安装jenkins后设置向导"><a href="#其他，安装jenkins后设置向导" class="headerlink" title="其他，安装jenkins后设置向导"></a>其他，安装jenkins后设置向导</h3><ul>
+<li>自动跳转输入管理员密码，解锁Jenkins<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首屏提示</span></span><br><span class="line">Please wait <span class="keyword">while</span> Jenkins is getting ready to work ...</span><br><span class="line">Your browser will reload automatically when Jenkins is ready.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动跳转设置管理员密码页面</span></span><br><span class="line">解锁 Jenkins</span><br><span class="line">为了确保管理员安全地安装 Jenkins，密码已写入到日志中（不知道在哪里？）该文件在服务器上：</span><br><span class="line">/<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br><span class="line">请从本地复制密码并粘贴到下面。</span><br><span class="line">管理员密码</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的gitlab（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/gitlab/gitlab-ce）</span></span><br><span class="line">docker pull gitlab/gitlab-ce</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker gitlab</span></span><br><span class="line">docker images | grep <span class="string">"gitlab"</span></span><br></pre></td></tr></table></figure>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run --detach \</span><br><span class="line">  --hostname gitlab.example.com \                       <span class="comment">// 域名</span></span><br><span class="line">  --publish <span class="number">443</span>:<span class="number">443</span> \                                   <span class="comment">// 将容器内443端口映射至宿主机6003端口，这是访问gitlab的端口</span></span><br><span class="line">  --publish <span class="number">80</span>:<span class="number">80</span> \                                     <span class="comment">// 将容器内80端口映射至宿主机80端口，这是访问gitlab的端口</span></span><br><span class="line">  --publish <span class="number">22</span>:<span class="number">22</span> \                                     <span class="comment">// 将容器内22端口映射至宿主机22端口，这是访问ssh的端口</span></span><br><span class="line">  --name gitlab \                                       <span class="comment">// 容器名称</span></span><br><span class="line">  --restart always \                                    <span class="comment">// 容器自启动</span></span><br><span class="line">  --volume $GITLAB_HOME/config:<span class="regexp">/etc/gi</span>tlab \            <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  --volume $GITLAB_HOME/logs:<span class="regexp">/var/</span>log/gitlab \          <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  --volume $GITLAB_HOME/data:<span class="regexp">/var/</span>opt/gitlab \          <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  gitlab/gitlab-ce:latest                               <span class="comment">// 安装的镜像包名 REPOSITORY:TAG（也可写镜像ID）</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --detach --hostname bot.xiaoqiang.tech --publish <span class="number">7143</span>:<span class="number">443</span> --publish <span class="number">7280</span>:<span class="number">80</span> --publish <span class="number">7322</span>:<span class="number">22</span> --name gitlab --restart always --volume $GITLAB_HOME/config:<span class="regexp">/etc/gi</span>tlab --volume $GITLAB_HOME/logs:<span class="regexp">/var/</span>log/gitlab --volume $GITLAB_HOME/data:<span class="regexp">/var/</span>opt/gitlab gitlab/gitlab-ce:latest</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<h3 id="修改gitlab配置"><a href="#修改gitlab配置" class="headerlink" title="修改gitlab配置"></a>修改gitlab配置</h3><p>输入正在运行的容器：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab /bin/bash</span><br></pre></td></tr></table></figure></p>
-<p>打开gitlab.rb配置文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开文件</span></span><br><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 此文件是全注释的，所以直接在首行添加如下配置</span></span><br><span class="line">  </span><br><span class="line"># gitlab访问地址，可以写域名（默认端口为80）</span><br><span class="line">external_url <span class="string">'http://192.168.52.128:9980'</span></span><br><span class="line"># ssh主机ip</span><br><span class="line">gitlab_rails[<span class="string">'gitlab_ssh_host'</span>] = <span class="string">'192.168.52.128'</span></span><br><span class="line"># ssh连接端口</span><br><span class="line">gitlab_rails[<span class="string">'gitlab_shell_ssh_port'</span>] = <span class="number">7322</span></span><br></pre></td></tr></table></figure></p>
-<p>/etc/gitlab/gitlab.rb用您的编辑器打开并设置external_url：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># For HTTP</span><br><span class="line">external_url <span class="string">"http://gitlab.example.com:8929"</span></span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line"># For HTTPS (notice the https)</span><br><span class="line">external_url <span class="string">"https://gitlab.example.com:8929"</span></span><br></pre></td></tr></table></figure></p>
-<p>此URL中指定的端口必须与Docker发布到主机的端口匹配。此外，如果未显式设置NGINX侦听端口 nginx[‘listen_port’]，它将从中拉出external_url。有关更多信息，请参见<a href="https://docs.gitlab.com/omnibus/settings/nginx.html" target="_blank" rel="noopener">NGINX文档</a>。</p>
-<p>设置gitlab_shell_ssh_port：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[<span class="string">'gitlab_shell_ssh_port'</span>] = <span class="number">7322</span></span><br></pre></td></tr></table></figure>
-<p>重启修改后的配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure></p>
-<p>最后，重启gitlab<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure></p>
-<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>按照上面的示例，您将能够从Web浏览器下访问GitLab，<hostip>:8929并在port下使用SSH进行推送2289。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:8929</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许8929入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:8929</span></span><br></pre></td></tr></table></figure></hostip></p>
-<h3 id="其他，安装gitlab后设置后期补充"><a href="#其他，安装gitlab后设置后期补充" class="headerlink" title="其他，安装gitlab后设置后期补充"></a>其他，安装gitlab后设置后期补充</h3>
+<p><img src="https://www.jenkins.io/zh/doc/book/resources/tutorials/setup-jenkins-01-unlock-jenkins-page.jpg" alt="管理员密码页面"></p>
+<ul>
+<li><p>查看登录密码</p>
+<ul>
+<li><p>如果您以分离模式在Docker中运行Jenkins，则可以从Docker日志（above） 访问Jenkins控制台日志</p>
+</li>
+<li><p>Jenkins控制台日志显示可以获取密码的位置（在Jenkins主目录中）。 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在挂载的目录下查看，返回密码</span></span><br><span class="line">cat  /jenkins/secrets/initialAdminPassword</span><br><span class="line"><span class="comment">// 进入容器内部获取密码</span></span><br><span class="line">docker exec -it <span class="string">"容器ID"</span> bash</span><br><span class="line">cat /<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接粘贴到管理员密码输入框中即可（一般为一串加密的hash值）</li>
+<li>新手入门-可选择安装推荐的插件（也可选择自定义插件）</li>
+<li>创建第一个管理员用户</li>
+<li><p>实例配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jenkins URL: http:<span class="comment">//服务器ip:7199</span></span><br><span class="line">Jenkins URL 用于给各种Jenkins资源提供绝对路径链接的根地址。 这意味着对于很多Jenkins特色是需要正确设置的，例如：邮件通知、PR状态更新以及提供给构建步骤的BUILD_URL环境变量。</span><br><span class="line">推荐的默认值显示在尚未保存，如果可能的话这是根据当前请求生成的。 最佳实践是要设置这个值，用户可能会需要用到。这将会避免在分享或者查看链接时的困惑。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Jenkins已就绪-开始使用Jenkins</p>
+</li>
+</ul>
+
           
         
       
@@ -793,7 +779,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建gitlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
@@ -813,7 +799,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
+                <a href="/2021/02/08/在CentOS7系统使用Docker构建gitlab/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
               
             
           </h1>
@@ -893,48 +879,62 @@
       
         
           
-            <h2 id="在CentOS7系统使用Docker构建Jenkins"><a href="#在CentOS7系统使用Docker构建Jenkins" class="headerlink" title="在CentOS7系统使用Docker构建Jenkins"></a>在CentOS7系统使用Docker构建Jenkins</h2><p>详情可参照<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">安装docker</a></p>
+            <h2 id="在CentOS7系统使用Docker构建gitlab"><a href="#在CentOS7系统使用Docker构建gitlab" class="headerlink" title="在CentOS7系统使用Docker构建gitlab"></a>在CentOS7系统使用Docker构建gitlab</h2><p>详情可参照<a href="https://docs.gitlab.com/omnibus/docker/#troubleshooting" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">阿里ECS安装docker</a>或<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">docker官方安装</a></p>
 <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
 <li>需要了解docker基本命令操作</li>
 <li>登录ecs服务器，创建jenkins挂载目录</li>
-<li><a href="https://hub.docker.com/r/jenkins/jenkins" target="_blank" rel="noopener">登录dockerhub</a>,选择官方版本及阅读说明文档；也可使用docker search -s 100 ‘jenkins’直接搜索jenkins镜像start大于100的</li>
+<li><a href="https://hub.docker.com/r/gitlab/gitlab-ce" target="_blank" rel="noopener">登录dockerhub</a>,选择官方社区版本及阅读说明文档；也可使用docker search -s 100 ‘gitlab’直接搜索gitlab镜像start大于100的</li>
 </ul>
 <h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
-<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
-<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
-<p>额外加个nginx环境变量，方便jenkins shell构建使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure></p>
+<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> GITLAB_HOME=<span class="regexp">/srv/gi</span>tlab</span><br></pre></td></tr></table></figure></p>
+<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> GITLAB_HOME=$HOME/gitlab</span><br></pre></td></tr></table></figure></p>
 <p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的jenkins（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/jenkins/jenkins）</span></span><br><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker jenkins</span></span><br><span class="line">docker images | grep <span class="string">"jenkins"</span></span><br></pre></td></tr></table></figure>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run \</span><br><span class="line">  -u root \</span><br><span class="line">  --rm \                                            <span class="comment">// 关闭时自动删除Docker容器</span></span><br><span class="line">  -d \                                              <span class="comment">// 在后台运行容器（即“分离”模式）并输出容器ID</span></span><br><span class="line">  -p <span class="number">7199</span>:<span class="number">8080</span> \                                    <span class="comment">// 容器的端口映射</span></span><br><span class="line">  -p <span class="number">50000</span>:<span class="number">50000</span> \                                  <span class="comment">// 主站进行通信，容器的端口映射</span></span><br><span class="line">  --name jenkins                                    <span class="comment">// 容器名称</span></span><br><span class="line">  -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home \              <span class="comment">// 磁盘挂载</span></span><br><span class="line">  -v $NGINX_WWW:<span class="regexp">/srv/</span>www \                          <span class="comment">// 磁盘挂载,重要，此挂载可以达到在容器内部cp数据到host</span></span><br><span class="line">  -v /<span class="keyword">var</span>/run/docker.sock:<span class="regexp">/var/</span>run/docker.sock \    <span class="comment">// jenkins容器与Docker守护进程通信</span></span><br><span class="line">  docker.io/jenkins/jenkins:lts                     <span class="comment">// 安装的镜像包名 REPOSITORY:TAG</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:7199</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许7199入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:7199</span></span><br></pre></td></tr></table></figure>
-<h3 id="其他，安装jenkins后设置向导"><a href="#其他，安装jenkins后设置向导" class="headerlink" title="其他，安装jenkins后设置向导"></a>其他，安装jenkins后设置向导</h3><ul>
-<li>自动跳转输入管理员密码，解锁Jenkins<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首屏提示</span></span><br><span class="line">Please wait <span class="keyword">while</span> Jenkins is getting ready to work ...</span><br><span class="line">Your browser will reload automatically when Jenkins is ready.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动跳转设置管理员密码页面</span></span><br><span class="line">解锁 Jenkins</span><br><span class="line">为了确保管理员安全地安装 Jenkins，密码已写入到日志中（不知道在哪里？）该文件在服务器上：</span><br><span class="line">/<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br><span class="line">请从本地复制密码并粘贴到下面。</span><br><span class="line">管理员密码</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="https://www.jenkins.io/zh/doc/book/resources/tutorials/setup-jenkins-01-unlock-jenkins-page.jpg" alt="管理员密码页面"></p>
+<p>GitLab容器使用主机安装的卷来存储持久数据：</p>
+<table>
+<thead>
+<tr>
+<th>当前位置</th>
+<th>容器位置</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$GITLAB_HOME/data</td>
+<td>/var/opt/gitlab</td>
+<td>用于存储应用程序数据。</td>
+</tr>
+<tr>
+<td>$GITLAB_HOME/logs</td>
+<td>/var/log/gitlab</td>
+<td>用于存储日志。</td>
+</tr>
+<tr>
+<td>$GITLAB_HOME/config</td>
+<td>/etc/gitlab</td>
+<td>用于存储GitLab配置文件。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>GitLab Docker镜像可以多种方式运行：</p>
 <ul>
-<li><p>查看登录密码</p>
-<ul>
-<li><p>如果您以分离模式在Docker中运行Jenkins，则可以从Docker日志（above） 访问Jenkins控制台日志</p>
-</li>
-<li><p>Jenkins控制台日志显示可以获取密码的位置（在Jenkins主目录中）。 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）</p>
-</li>
+<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-engine" target="_blank" rel="noopener">使用Docker引擎</a></li>
+<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-compose" target="_blank" rel="noopener">使用Docker Compose</a></li>
+<li><a href="https://docs.gitlab.com/omnibus/docker/#install-gitlab-using-docker-swarm-mode" target="_blank" rel="noopener">使用Docker群模式</a></li>
 </ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在挂载的目录下查看，返回密码</span></span><br><span class="line">cat  /jenkins/secrets/initialAdminPassword</span><br><span class="line"><span class="comment">// 进入容器内部获取密码</span></span><br><span class="line">docker exec -it <span class="string">"容器ID"</span> bash</span><br><span class="line">cat /<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
-<ul>
-<li>直接粘贴到管理员密码输入框中即可（一般为一串加密的hash值）</li>
-<li>新手入门-可选择安装推荐的插件（也可选择自定义插件）</li>
-<li>创建第一个管理员用户</li>
-<li><p>实例配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jenkins URL: http:<span class="comment">//服务器ip:7199</span></span><br><span class="line">Jenkins URL 用于给各种Jenkins资源提供绝对路径链接的根地址。 这意味着对于很多Jenkins特色是需要正确设置的，例如：邮件通知、PR状态更新以及提供给构建步骤的BUILD_URL环境变量。</span><br><span class="line">推荐的默认值显示在尚未保存，如果可能的话这是根据当前请求生成的。 最佳实践是要设置这个值，用户可能会需要用到。这将会避免在分享或者查看链接时的困惑。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Jenkins已就绪-开始使用Jenkins</p>
-</li>
-</ul>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的gitlab（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/gitlab/gitlab-ce）</span></span><br><span class="line">docker pull gitlab/gitlab-ce</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker gitlab</span></span><br><span class="line">docker images | grep <span class="string">"gitlab"</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run --detach \</span><br><span class="line">  --hostname gitlab.example.com \                       <span class="comment">// 域名</span></span><br><span class="line">  --publish <span class="number">443</span>:<span class="number">443</span> \                                   <span class="comment">// 将容器内443端口映射至宿主机6003端口，这是访问gitlab的端口</span></span><br><span class="line">  --publish <span class="number">80</span>:<span class="number">80</span> \                                     <span class="comment">// 将容器内80端口映射至宿主机80端口，这是访问gitlab的端口</span></span><br><span class="line">  --publish <span class="number">22</span>:<span class="number">22</span> \                                     <span class="comment">// 将容器内22端口映射至宿主机22端口，这是访问ssh的端口</span></span><br><span class="line">  --name gitlab \                                       <span class="comment">// 容器名称</span></span><br><span class="line">  --restart always \                                    <span class="comment">// 容器自启动</span></span><br><span class="line">  --volume $GITLAB_HOME/config:<span class="regexp">/etc/gi</span>tlab \            <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  --volume $GITLAB_HOME/logs:<span class="regexp">/var/</span>log/gitlab \          <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  --volume $GITLAB_HOME/data:<span class="regexp">/var/</span>opt/gitlab \          <span class="comment">// 见上"设置卷位置录"</span></span><br><span class="line">  gitlab/gitlab-ce:latest                               <span class="comment">// 安装的镜像包名 REPOSITORY:TAG（也可写镜像ID）</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --detach --hostname bot.xiaoqiang.tech --publish <span class="number">7143</span>:<span class="number">443</span> --publish <span class="number">7280</span>:<span class="number">80</span> --publish <span class="number">7322</span>:<span class="number">22</span> --name gitlab --restart always --volume $GITLAB_HOME/config:<span class="regexp">/etc/gi</span>tlab --volume $GITLAB_HOME/logs:<span class="regexp">/var/</span>log/gitlab --volume $GITLAB_HOME/data:<span class="regexp">/var/</span>opt/gitlab gitlab/gitlab-ce:latest</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<h3 id="修改gitlab配置"><a href="#修改gitlab配置" class="headerlink" title="修改gitlab配置"></a>修改gitlab配置</h3><p>输入正在运行的容器：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>打开gitlab.rb配置文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开文件</span></span><br><span class="line">vim /etc/gitlab/gitlab.rb</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 此文件是全注释的，所以直接在首行添加如下配置</span></span><br><span class="line">  </span><br><span class="line"># gitlab访问地址，可以写域名（默认端口为80）</span><br><span class="line">external_url <span class="string">'http://192.168.52.128:9980'</span></span><br><span class="line"># ssh主机ip</span><br><span class="line">gitlab_rails[<span class="string">'gitlab_ssh_host'</span>] = <span class="string">'192.168.52.128'</span></span><br><span class="line"># ssh连接端口</span><br><span class="line">gitlab_rails[<span class="string">'gitlab_shell_ssh_port'</span>] = <span class="number">7322</span></span><br></pre></td></tr></table></figure></p>
+<p>/etc/gitlab/gitlab.rb用您的编辑器打开并设置external_url：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># For HTTP</span><br><span class="line">external_url <span class="string">"http://gitlab.example.com:8929"</span></span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line"># For HTTPS (notice the https)</span><br><span class="line">external_url <span class="string">"https://gitlab.example.com:8929"</span></span><br></pre></td></tr></table></figure></p>
+<p>此URL中指定的端口必须与Docker发布到主机的端口匹配。此外，如果未显式设置NGINX侦听端口 nginx[‘listen_port’]，它将从中拉出external_url。有关更多信息，请参见<a href="https://docs.gitlab.com/omnibus/settings/nginx.html" target="_blank" rel="noopener">NGINX文档</a>。</p>
+<p>设置gitlab_shell_ssh_port：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[<span class="string">'gitlab_shell_ssh_port'</span>] = <span class="number">7322</span></span><br></pre></td></tr></table></figure>
+<p>重启修改后的配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl reconfigure</span><br></pre></td></tr></table></figure></p>
+<p>最后，重启gitlab<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure></p>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>按照上面的示例，您将能够从Web浏览器下访问GitLab，<hostip>:8929并在port下使用SSH进行推送2289。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:8929</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许8929入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:8929</span></span><br></pre></td></tr></table></figure></hostip></p>
+<h3 id="其他，安装gitlab后设置后期补充"><a href="#其他，安装gitlab后设置后期补充" class="headerlink" title="其他，安装gitlab后设置后期补充"></a>其他，安装gitlab后设置后期补充</h3>
           
         
       
