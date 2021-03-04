@@ -99,12 +99,12 @@
 
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="弄不死的小强">
+<meta property="og:title" content="一只小强">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="弄不死的小强">
+<meta property="og:site_name" content="一只小强">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="弄不死的小强">
+<meta name="twitter:title" content="一只小强">
 
 
 
@@ -121,7 +121,7 @@
   };
 </script>
 
-  <title>弄不死的小强</title>
+  <title>一只小强</title>
   
 
 
@@ -181,7 +181,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">弄不死的小强</span>
+        <span class="site-title">一只小强</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -243,7 +243,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">23</span></a>
 
   </li>
         
@@ -281,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">27</span></a>
 
   </li>
         
@@ -381,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/03/将React APP部署到GitHub Pages/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="niexq">
@@ -390,7 +390,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -401,7 +401,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
+                <a href="/2021/03/03/将React APP部署到GitHub Pages/" class="post-title-link" itemprop="url">将React APP部署到GitHub Pages</a>
               
             
           </h1>
@@ -426,7 +426,7 @@
                 
               
 
-              <time title="创建时间：2021-02-08 13:30:37" itemprop="dateCreated datePublished" datetime="2021-02-08T13:30:37+08:00">2021-02-08</time>
+              <time title="创建时间：2021-03-03 09:00:00" itemprop="dateCreated datePublished" datetime="2021-03-03T09:00:00+08:00">2021-03-03</time>
             
 
             
@@ -444,7 +444,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Reactjs/" itemprop="url" rel="index"><span itemprop="name">Reactjs</span></a></span>
 
                 
                 
@@ -481,47 +481,60 @@
       
         
           
-            <h2 id="在CentOS7系统使用Docker构建Jenkins"><a href="#在CentOS7系统使用Docker构建Jenkins" class="headerlink" title="在CentOS7系统使用Docker构建Jenkins"></a>在CentOS7系统使用Docker构建Jenkins</h2><p>详情可参照<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">安装docker</a></p>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
-<li>需要了解docker基本命令操作</li>
-<li>登录ecs服务器，创建jenkins挂载目录</li>
-<li><a href="https://hub.docker.com/r/jenkins/jenkins" target="_blank" rel="noopener">登录dockerhub</a>,选择官方版本及阅读说明文档；也可使用docker search -s 100 ‘jenkins’直接搜索jenkins镜像start大于100的</li>
-</ul>
-<h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
-<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
-<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
-<p>额外加个nginx环境变量，方便jenkins shell构建使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure></p>
-<p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的jenkins（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/jenkins/jenkins）</span></span><br><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker jenkins</span></span><br><span class="line">docker images | grep <span class="string">"jenkins"</span></span><br></pre></td></tr></table></figure>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run \</span><br><span class="line">  -u root \</span><br><span class="line">  --rm \                                            <span class="comment">// 关闭时自动删除Docker容器</span></span><br><span class="line">  -d \                                              <span class="comment">// 在后台运行容器（即“分离”模式）并输出容器ID</span></span><br><span class="line">  -p <span class="number">7199</span>:<span class="number">8080</span> \                                    <span class="comment">// 容器的端口映射</span></span><br><span class="line">  -p <span class="number">50000</span>:<span class="number">50000</span> \                                  <span class="comment">// 主站进行通信，容器的端口映射</span></span><br><span class="line">  --name jenkins                                    <span class="comment">// 容器名称</span></span><br><span class="line">  -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home \              <span class="comment">// 磁盘挂载</span></span><br><span class="line">  -v $NGINX_WWW:<span class="regexp">/srv/</span>www \                          <span class="comment">// 磁盘挂载,重要，此挂载可以达到在容器内部cp数据到host</span></span><br><span class="line">  -v /<span class="keyword">var</span>/run/docker.sock:<span class="regexp">/var/</span>run/docker.sock \    <span class="comment">// jenkins容器与Docker守护进程通信</span></span><br><span class="line">  docker.io/jenkins/jenkins:lts                     <span class="comment">// 安装的镜像包名 REPOSITORY:TAG</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:7199</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许7199入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:7199</span></span><br></pre></td></tr></table></figure>
-<h3 id="其他，安装jenkins后设置向导"><a href="#其他，安装jenkins后设置向导" class="headerlink" title="其他，安装jenkins后设置向导"></a>其他，安装jenkins后设置向导</h3><ul>
-<li>自动跳转输入管理员密码，解锁Jenkins<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首屏提示</span></span><br><span class="line">Please wait <span class="keyword">while</span> Jenkins is getting ready to work ...</span><br><span class="line">Your browser will reload automatically when Jenkins is ready.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动跳转设置管理员密码页面</span></span><br><span class="line">解锁 Jenkins</span><br><span class="line">为了确保管理员安全地安装 Jenkins，密码已写入到日志中（不知道在哪里？）该文件在服务器上：</span><br><span class="line">/<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br><span class="line">请从本地复制密码并粘贴到下面。</span><br><span class="line">管理员密码</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="https://www.jenkins.io/zh/doc/book/resources/tutorials/setup-jenkins-01-unlock-jenkins-page.jpg" alt="管理员密码页面"></p>
+            <h2 id="将React-APP部署到GitHub-Pages"><a href="#将React-APP部署到GitHub-Pages" class="headerlink" title="将React APP部署到GitHub Pages"></a>将React APP部署到GitHub Pages</h2><p>参考<a href="https://github.com/gitname/react-gh-pages" target="_blank" rel="noopener">react-gh-pages</a>以及<a href="https://create-react-app.dev/docs/deployment/#github-pages" target="_blank" rel="noopener">create-react-app-Deployment-GitHub Pages</a></p>
+<p><img src="/images/react-gh-pages.png" alt="react-gh-pages"><br><!-- # <img src="/logo.png" title="react-gh-pages" alt="react-gh-pages logo" width="530"> --></p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>前提：本地已安装nodejs，已有github账户</p>
 <ul>
-<li><p>查看登录密码</p>
+<li><a href="#step1">1.在GitHub上创建一个空的repository</a></li>
+<li><a href="#step2">2.使用create-react-app创建新的React应用</a></li>
+<li><a href="#step3">3.重要，添加homepage到package.json</a></li>
+<li><a href="#step4">4.重要，安装gh-pages并添加deploy到package.json的scripts中</a></li>
+<li><a href="#step5">5.重要，将GitHub存储库添加为本地git存储库中的remote</a></li>
+<li><a href="#step6">6.重要，通过运行<strong>npm run deploy</strong>部署到GitHub Pages</a></li>
+<li><a href="#step7">7.对于项目页面，请确保项目设置使用<strong>gh-pages</strong></a></li>
+<li><a href="#step8">8.可选，配置域</a></li>
+<li><a href="#step9">9.可选，将本地源代码提交推送到GitHub的<strong>master</strong>分支</a></li>
+<li><a href="#step10">10.可选，故障排除</a></li>
+</ul>
+<h3 id="1-在GitHub上创建一个空的repository"><a href="#1-在GitHub上创建一个空的repository" class="headerlink" title="1.在GitHub上创建一个空的repository"></a><span id="step1">1.在GitHub上<a href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-new-repository" target="_blank" rel="noopener">创建一个空的repository</a></span></h3><ul>
+<li>输入自定义的Repository name</li>
+<li>其他为空，不用初始化README.md，.gitignore，license，保持repository干净无文件</li>
+</ul>
+<h3 id="2-使用create-react-app创建新的React应用"><a href="#2-使用create-react-app创建新的React应用" class="headerlink" title="2.使用create-react-app创建新的React应用"></a><span id="step2">2.使用<a href="https://github.com/facebook/create-react-app" target="_blank" rel="noopener">create-react-app创建新的React应用</a></span></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// npx</span></span><br><span class="line">npx create-react-app react-gh-pages</span><br><span class="line"></span><br><span class="line"><span class="comment">// or npm</span></span><br><span class="line">npm init react-app react-gh-pages</span><br><span class="line"></span><br><span class="line"><span class="comment">// or yarn</span></span><br><span class="line">yarn create react-app react-gh-pages</span><br></pre></td></tr></table></figure>
+<h3 id="3-重要，添加homepage到package-json"><a href="#3-重要，添加homepage到package-json" class="headerlink" title="3.重要，添加homepage到package.json"></a><span id="step3">3.<strong>重要</strong>，添加homepage到package.json</span></h3><p>打开项目，然后为项目package.json添加一个homepage字段：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">"homepage"</span>: <span class="string">"https://myusername.github.io/react-gh-pages"</span>,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或GitHub用户页面</span></span><br><span class="line"><span class="string">"homepage"</span>: <span class="string">"https://myusername.github.io"</span>,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或自定义域页面：</span></span><br><span class="line"><span class="string">"homepage"</span>: <span class="string">"https://mywebsite.com"</span>,</span><br></pre></td></tr></table></figure></p>
+<p>Create React App使用该homepage字段来确定所构建的HTML文件中的根URL。</p>
+<h3 id="4-重要，安装gh-pages并添加deploy到package-json的scripts中"><a href="#4-重要，安装gh-pages并添加deploy到package-json的scripts中" class="headerlink" title="4.重要，安装gh-pages并添加deploy到package.json的scripts中"></a><span id="step4">4.<strong>重要</strong>，安装gh-pages并添加deploy到package.json的scripts中</span></h3><p>进入项目，安装gh-pages<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd react-gh-pages</span><br><span class="line">npm install gh-pages --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>添加以下deploy脚本到项目的package.json中：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">+   <span class="string">"predeploy"</span>: <span class="string">"npm run build"</span>,</span><br><span class="line">+   <span class="string">"deploy"</span>: <span class="string">"gh-pages -d build"</span>,</span><br><span class="line">    <span class="string">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br></pre></td></tr></table></figure></p>
+<p>该predeploy脚本将自动运行在deploy运行之前。</p>
+<p>（可忽略）如果要部署到GitHub用户页面而不是项目页面，则需要进行其他修改：</p>
+<p>调整package.json脚本以将部署推送到master：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"predeploy"</span>: <span class="string">"npm run build"</span>,</span><br><span class="line">-   <span class="string">"deploy"</span>: <span class="string">"gh-pages -d build"</span>,</span><br><span class="line">+   <span class="string">"deploy"</span>: <span class="string">"gh-pages -b master -d build"</span>,</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-重要，将GitHub存储库添加为本地git存储库中的remote"><a href="#5-重要，将GitHub存储库添加为本地git存储库中的remote" class="headerlink" title="5.重要，将GitHub存储库添加为本地git存储库中的remote"></a><span id="step5">5.<strong>重要</strong>，将GitHub存储库添加为本地git存储库中的remote</span></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https:<span class="comment">//github.com/myusername/react-gh-pages.git</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-重要，通过运行npm-run-deploy部署到GitHub-Pages"><a href="#6-重要，通过运行npm-run-deploy部署到GitHub-Pages" class="headerlink" title="6.重要，通过运行npm run deploy部署到GitHub Pages"></a><span id="step6">6.<strong>重要</strong>，通过运行<strong>npm run deploy</strong>部署到GitHub Pages</span></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run deploy</span><br></pre></td></tr></table></figure>
+<h3 id="7-对于项目页面，请确保项目设置使用gh-pages"><a href="#7-对于项目页面，请确保项目设置使用gh-pages" class="headerlink" title="7.对于项目页面，请确保项目设置使用gh-pages"></a><span id="step7">7.对于项目页面，请确保项目设置使用<strong>gh-pages</strong></span></h3><p>确保将GitHub项目设置中的<strong>GitHub Pages</strong>选项设置为使用<strong>gh-pages</strong>分支：</p>
+<p><img src="/images/gh-pages-settings.gif" alt="gh-pages-settings"><br><img src="/images/gh-pages-settings.png" alt="gh-pages-settings"></p>
+<h3 id="8-可选，配置域"><a href="#8-可选，配置域" class="headerlink" title="8.可选，配置域"></a><span id="step8">8.<strong>可选</strong>，<a href="https://docs.github.com/en/github/working-with-github-pages/about-custom-domains-and-github-pages#supported-custom-domains" target="_blank" rel="noopener">配置域</a></span></h3><p>可以通过新增<strong>CNAME</strong>文件到<strong>public/</strong>目录来使用GitHub Pages配置自定义域。</p>
+<p>CNAME文件应如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mywebsite.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="9-可选，将本地源代码提交推送到GitHub的master分支"><a href="#9-可选，将本地源代码提交推送到GitHub的master分支" class="headerlink" title="9.可选，将本地源代码提交推送到GitHub的master分支"></a><span id="step9">9.<strong>可选</strong>，将本地源代码提交推送到GitHub的<strong>master</strong>分支</span></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"feat: Create a React app and publish it to GitHub Pages"</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<h3 id="10-可选，故障排除"><a href="#10-可选，故障排除" class="headerlink" title="10.可选，故障排除"></a><span id="step10">10.<strong>可选</strong>，故障排除</span></h3><ul>
+<li><p>如果在部署时遇到<strong>/dev/tty: No such a device or address</strong>错误或类似错误，请尝试以下操作：</p>
 <ul>
-<li><p>如果您以分离模式在Docker中运行Jenkins，则可以从Docker日志（above） 访问Jenkins控制台日志</p>
-</li>
-<li><p>Jenkins控制台日志显示可以获取密码的位置（在Jenkins主目录中）。 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）</p>
-</li>
+<li>创建一个新的<a href="https://github.com/settings/tokens" target="_blank" rel="noopener">个人访问令牌</a></li>
+<li><strong>git remote set-url origin https://<user>:<token>@github.com/<user>/<repo></repo></user></token></user></strong></li>
+<li>再运行<strong>npm run deploy</strong></li>
 </ul>
 </li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在挂载的目录下查看，返回密码</span></span><br><span class="line">cat  /jenkins/secrets/initialAdminPassword</span><br><span class="line"><span class="comment">// 进入容器内部获取密码</span></span><br><span class="line">docker exec -it <span class="string">"容器ID"</span> bash</span><br><span class="line">cat /<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<li><p>如果在部署时获得<strong>Cannot read property ‘email’ of null</strong>，请尝试以下操作：</p>
 <ul>
-<li>直接粘贴到管理员密码输入框中即可（一般为一串加密的hash值）</li>
-<li>新手入门-可选择安装推荐的插件（也可选择自定义插件）</li>
-<li>创建第一个管理员用户</li>
-<li><p>实例配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jenkins URL: http:<span class="comment">//服务器ip:7199</span></span><br><span class="line">Jenkins URL 用于给各种Jenkins资源提供绝对路径链接的根地址。 这意味着对于很多Jenkins特色是需要正确设置的，例如：邮件通知、PR状态更新以及提供给构建步骤的BUILD_URL环境变量。</span><br><span class="line">推荐的默认值显示在尚未保存，如果可能的话这是根据当前请求生成的。 最佳实践是要设置这个值，用户可能会需要用到。这将会避免在分享或者查看链接时的困惑。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Jenkins已就绪-开始使用Jenkins</p>
+<li><strong>git config –global user.name ‘&lt;your_name&gt;’</strong></li>
+<li><strong>git config –global user.email ‘&lt;your_email&gt;’</strong></li>
+<li>再运行<strong>npm run deploy</strong></li>
+</ul>
 </li>
 </ul>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a><span>最后</span></h3><p>如果操作了第7步配置了自定义域名域名，可访问：<a href="https://mywebsite.com/react-gh-pages" target="_blank" rel="noopener">https://mywebsite.com/react-gh-pages</a></p>
+<p>如未配置域名，访问：<a href="https://myusername.github.io/react-gh-pages" target="_blank" rel="noopener">https://myusername.github.io/react-gh-pages</a></p>
+<p>也可通过GitHub-settings-GitHub Pages查看：</p>
+<p><img src="/images/website.png" alt="website"></p>
 
           
         
@@ -587,7 +600,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -779,6 +792,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/02/08/在CentOS7系统使用Docker构建Jenkins容器/" class="post-title-link" itemprop="url">在CentOS7系统使用Docker构建Jenkins</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-02-08 13:30:37" itemprop="dateCreated datePublished" datetime="2021-02-08T13:30:37+08:00">2021-02-08</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="在CentOS7系统使用Docker构建Jenkins"><a href="#在CentOS7系统使用Docker构建Jenkins" class="headerlink" title="在CentOS7系统使用Docker构建Jenkins"></a>在CentOS7系统使用Docker构建Jenkins</h2><p>详情可参照<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">官方安装连接</a>，以下只记录一些关键步骤</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>假设docker已安装的前提下,如需了解CentOS7系统安装Docker，可参照笔记ecs操作部分步骤-<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">安装docker</a></p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>需要了解docker基本命令操作</li>
+<li>登录ecs服务器，创建jenkins挂载目录</li>
+<li><a href="https://hub.docker.com/r/jenkins/jenkins" target="_blank" rel="noopener">登录dockerhub</a>,选择官方版本及阅读说明文档；也可使用docker search -s 100 ‘jenkins’直接搜索jenkins镜像start大于100的</li>
+</ul>
+<h3 id="设置卷位置"><a href="#设置卷位置" class="headerlink" title="设置卷位置"></a>设置卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量$GITLAB_HOME ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
+<p>对于Linux用户，将路径设置为/srv/gitlab：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>对于macOS用户，请使用用户$HOME/gitlab目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> JENKINS_HOME=<span class="regexp">/srv/</span>jenkins</span><br></pre></td></tr></table></figure></p>
+<p>额外加个nginx环境变量，方便jenkins shell构建使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> NGINX_WWW=<span class="regexp">/srv/</span>www</span><br></pre></td></tr></table></figure></p>
+<p>Linux，macOS查看环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.从docker镜像仓库拉取最新的jenkins（一般选择lts，长期支持的版本，会定时发布系统更新）（https://hub.docker.com/r/jenkins/jenkins）</span></span><br><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.查看已安装的docker jenkins</span></span><br><span class="line">docker images | grep <span class="string">"jenkins"</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方配置</span></span><br><span class="line">docker run \</span><br><span class="line">  -u root \</span><br><span class="line">  --rm \                                            <span class="comment">// 关闭时自动删除Docker容器</span></span><br><span class="line">  -d \                                              <span class="comment">// 在后台运行容器（即“分离”模式）并输出容器ID</span></span><br><span class="line">  -p <span class="number">7199</span>:<span class="number">8080</span> \                                    <span class="comment">// 容器的端口映射</span></span><br><span class="line">  -p <span class="number">50000</span>:<span class="number">50000</span> \                                  <span class="comment">// 主站进行通信，容器的端口映射</span></span><br><span class="line">  --name jenkins                                    <span class="comment">// 容器名称</span></span><br><span class="line">  -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home \              <span class="comment">// 磁盘挂载</span></span><br><span class="line">  -v $NGINX_WWW:<span class="regexp">/srv/</span>www \                          <span class="comment">// 磁盘挂载,重要，此挂载可以达到在容器内部cp数据到host</span></span><br><span class="line">  -v /<span class="keyword">var</span>/run/docker.sock:<span class="regexp">/var/</span>run/docker.sock \    <span class="comment">// jenkins容器与Docker守护进程通信</span></span><br><span class="line">  docker.io/jenkins/jenkins:lts                     <span class="comment">// 安装的镜像包名 REPOSITORY:TAG</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简化版</span></span><br><span class="line">docker run --name jenkins -u root -d -p <span class="number">7199</span>:<span class="number">8080</span> -p <span class="number">50000</span>:<span class="number">50000</span> -v $JENKINS_HOME:<span class="regexp">/var/</span>jenkins_home -v $NGINX_WWW:<span class="regexp">/srv/</span>www docker.io/jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看运行的容器</span></span><br><span class="line">docker container ls </span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本地访问（忽略）</span></span><br><span class="line">http:<span class="comment">//loalhost:7199</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 局域网访问（注意：可查看域名配置-设置白名单笔记，配置安全组规则，允许7199入方向）</span></span><br><span class="line">http:<span class="comment">//服务器ip:7199</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他，安装jenkins后设置向导"><a href="#其他，安装jenkins后设置向导" class="headerlink" title="其他，安装jenkins后设置向导"></a>其他，安装jenkins后设置向导</h3><ul>
+<li>自动跳转输入管理员密码，解锁Jenkins<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首屏提示</span></span><br><span class="line">Please wait <span class="keyword">while</span> Jenkins is getting ready to work ...</span><br><span class="line">Your browser will reload automatically when Jenkins is ready.</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动跳转设置管理员密码页面</span></span><br><span class="line">解锁 Jenkins</span><br><span class="line">为了确保管理员安全地安装 Jenkins，密码已写入到日志中（不知道在哪里？）该文件在服务器上：</span><br><span class="line">/<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br><span class="line">请从本地复制密码并粘贴到下面。</span><br><span class="line">管理员密码</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://www.jenkins.io/zh/doc/book/resources/tutorials/setup-jenkins-01-unlock-jenkins-page.jpg" alt="管理员密码页面"></p>
+<ul>
+<li><p>查看登录密码</p>
+<ul>
+<li><p>如果您以分离模式在Docker中运行Jenkins，则可以从Docker日志（above） 访问Jenkins控制台日志</p>
+</li>
+<li><p>Jenkins控制台日志显示可以获取密码的位置（在Jenkins主目录中）。 必须在新Jenkins安装中的安装向导中输入此密码才能访问Jenkins的主UI。 如果您在设置向导中跳过了后续的用户创建步骤， 则此密码还可用作默认admininstrator帐户的密码（使用用户名“admin”）</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接在挂载的目录下查看，返回密码</span></span><br><span class="line">cat  /jenkins/secrets/initialAdminPassword</span><br><span class="line"><span class="comment">// 进入容器内部获取密码</span></span><br><span class="line">docker exec -it <span class="string">"容器ID"</span> bash</span><br><span class="line">cat /<span class="keyword">var</span>/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接粘贴到管理员密码输入框中即可（一般为一串加密的hash值）</li>
+<li>新手入门-可选择安装推荐的插件（也可选择自定义插件）</li>
+<li>创建第一个管理员用户</li>
+<li><p>实例配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Jenkins URL: http:<span class="comment">//服务器ip:7199</span></span><br><span class="line">Jenkins URL 用于给各种Jenkins资源提供绝对路径链接的根地址。 这意味着对于很多Jenkins特色是需要正确设置的，例如：邮件通知、PR状态更新以及提供给构建步骤的BUILD_URL环境变量。</span><br><span class="line">推荐的默认值显示在尚未保存，如果可能的话这是根据当前请求生成的。 最佳实践是要设置这个值，用户可能会需要用到。这将会避免在分享或者查看链接时的困惑。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Jenkins已就绪-开始使用Jenkins</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/08/在CentOS7系统使用Docker构建gitlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -788,7 +998,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -999,7 +1209,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1185,7 +1395,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1346,7 +1556,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1580,7 +1790,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1786,7 +1996,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1962,7 +2172,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -2190,166 +2400,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/vscodeCtrl加鼠标左键实现文件跳转/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="niexq">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/19/vscodeCtrl加鼠标左键实现文件跳转/" class="post-title-link" itemprop="url">vscode, Ctrl + 鼠标左键实现文件跳转</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-19 19:46:44" itemprop="dateCreated datePublished" datetime="2019-04-19T19:46:44+08:00">2019-04-19</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vscode/" itemprop="url" rel="index"><span itemprop="name">vscode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="vscode-Ctrl-鼠标左键实现文件跳转"><a href="#vscode-Ctrl-鼠标左键实现文件跳转" class="headerlink" title="vscode, Ctrl + 鼠标左键实现文件跳转"></a>vscode, Ctrl + 鼠标左键实现文件跳转</h2><h4 id="在项目根目录增加jsconfig-json文件"><a href="#在项目根目录增加jsconfig-json文件" class="headerlink" title="在项目根目录增加jsconfig.json文件"></a>在项目根目录增加jsconfig.json文件</h4><p>jsconfig.json文件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    &quot;experimentalDecorators&quot;: true,</span><br><span class="line">    &quot;baseUrl&quot;: &quot;.&quot;,</span><br><span class="line">    &quot;paths&quot;: &#123;</span><br><span class="line">      &quot;api/*&quot;: [&quot;src/api/*&quot;],</span><br><span class="line">      &quot;components/*&quot;: [&quot;src/components/*&quot;],</span><br><span class="line">      &quot;language/*&quot;: [&quot;src/language/*&quot;],</span><br><span class="line">      &quot;lib/*&quot;: [&quot;src/lib/*&quot;],</span><br><span class="line">      &quot;mock/*&quot;: [&quot;src/mock/*&quot;],</span><br><span class="line">      &quot;routes/*&quot;: [&quot;src/routes/*&quot;],</span><br><span class="line">      &quot;static/*&quot;: [&quot;src/static/*&quot;],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;exclude&quot;: [</span><br><span class="line">    &quot;node_modules&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="配置效果图"><a href="#配置效果图" class="headerlink" title="配置效果图"></a>配置效果图</h4><p><img src="https://note.youdao.com/yws/res/865/WEBRESOURCE717d9bb6eb577a7956f5ace1d8f3f516" alt="配置效果图"></p>
-<h4 id="篇外"><a href="#篇外" class="headerlink" title="篇外"></a>篇外</h4><p>注：Alt + ←（方向左键）来返回到原来的位置</p>
-<h5 id="有关更多详细信息，请参阅："><a href="#有关更多详细信息，请参阅：" class="headerlink" title="有关更多详细信息，请参阅："></a>有关更多详细信息，请参阅：</h5><p><a href="https://code.visualstudio.com/docs/languages/jsconfig" target="_blank" rel="noopener">jsconfig</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2398,7 +2448,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2494,9 +2544,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

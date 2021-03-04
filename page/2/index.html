@@ -99,12 +99,12 @@
 
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="弄不死的小强">
+<meta property="og:title" content="一只小强">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
-<meta property="og:site_name" content="弄不死的小强">
+<meta property="og:site_name" content="一只小强">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="弄不死的小强">
+<meta name="twitter:title" content="一只小强">
 
 
 
@@ -121,7 +121,7 @@
   };
 </script>
 
-  <title>弄不死的小强</title>
+  <title>一只小强</title>
   
 
 
@@ -181,7 +181,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">弄不死的小强</span>
+        <span class="site-title">一只小强</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -243,7 +243,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">23</span></a>
 
   </li>
         
@@ -281,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">26</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">27</span></a>
 
   </li>
         
@@ -381,6 +381,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/vscodeCtrl加鼠标左键实现文件跳转/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/19/vscodeCtrl加鼠标左键实现文件跳转/" class="post-title-link" itemprop="url">vscode, Ctrl + 鼠标左键实现文件跳转</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-19 19:46:44" itemprop="dateCreated datePublished" datetime="2019-04-19T19:46:44+08:00">2019-04-19</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vscode/" itemprop="url" rel="index"><span itemprop="name">vscode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="vscode-Ctrl-鼠标左键实现文件跳转"><a href="#vscode-Ctrl-鼠标左键实现文件跳转" class="headerlink" title="vscode, Ctrl + 鼠标左键实现文件跳转"></a>vscode, Ctrl + 鼠标左键实现文件跳转</h2><h4 id="在项目根目录增加jsconfig-json文件"><a href="#在项目根目录增加jsconfig-json文件" class="headerlink" title="在项目根目录增加jsconfig.json文件"></a>在项目根目录增加jsconfig.json文件</h4><p>jsconfig.json文件配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    &quot;experimentalDecorators&quot;: true,</span><br><span class="line">    &quot;baseUrl&quot;: &quot;.&quot;,</span><br><span class="line">    &quot;paths&quot;: &#123;</span><br><span class="line">      &quot;api/*&quot;: [&quot;src/api/*&quot;],</span><br><span class="line">      &quot;components/*&quot;: [&quot;src/components/*&quot;],</span><br><span class="line">      &quot;language/*&quot;: [&quot;src/language/*&quot;],</span><br><span class="line">      &quot;lib/*&quot;: [&quot;src/lib/*&quot;],</span><br><span class="line">      &quot;mock/*&quot;: [&quot;src/mock/*&quot;],</span><br><span class="line">      &quot;routes/*&quot;: [&quot;src/routes/*&quot;],</span><br><span class="line">      &quot;static/*&quot;: [&quot;src/static/*&quot;],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;exclude&quot;: [</span><br><span class="line">    &quot;node_modules&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="配置效果图"><a href="#配置效果图" class="headerlink" title="配置效果图"></a>配置效果图</h4><p><img src="https://note.youdao.com/yws/res/865/WEBRESOURCE717d9bb6eb577a7956f5ace1d8f3f516" alt="配置效果图"></p>
+<h4 id="篇外"><a href="#篇外" class="headerlink" title="篇外"></a>篇外</h4><p>注：Alt + ←（方向左键）来返回到原来的位置</p>
+<h5 id="有关更多详细信息，请参阅："><a href="#有关更多详细信息，请参阅：" class="headerlink" title="有关更多详细信息，请参阅："></a>有关更多详细信息，请参阅：</h5><p><a href="https://code.visualstudio.com/docs/languages/jsconfig" target="_blank" rel="noopener">jsconfig</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/vscode折叠策略显示展开收起效果/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -390,7 +550,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -551,7 +711,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -757,7 +917,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1013,7 +1173,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1188,7 +1348,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1365,7 +1525,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1562,7 +1722,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1720,7 +1880,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -1882,7 +2042,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
+      <meta itemprop="name" content="一只小强">
     </span>
 
     
@@ -2019,169 +2179,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/react组件事件绑定监听/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="niexq">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="弄不死的小强">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/13/react组件事件绑定监听/" class="post-title-link" itemprop="url">react组件事件绑定监听</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-13 15:09:54" itemprop="dateCreated datePublished" datetime="2019-03-13T15:09:54+08:00">2019-03-13</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Reactjs/" itemprop="url" rel="index"><span itemprop="name">Reactjs</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h4><blockquote>
-<p>addEventListener() 方法用于向指定元素添加事件句柄。</p>
-</blockquote>
-<h4 id="element-addEventListener-event-function-useCapture"><a href="#element-addEventListener-event-function-useCapture" class="headerlink" title="element.addEventListener(event, function, useCapture)"></a>element.addEventListener(event, function, useCapture)</h4><blockquote>
-<p>removeEventListener() 方法用于移除由 addEventListener() 方法添加的事件句柄。</p>
-</blockquote>
-<h4 id="element-removeEventListener-event-function-useCapture"><a href="#element-removeEventListener-event-function-useCapture" class="headerlink" title="element.removeEventListener(event, function, useCapture)"></a>element.removeEventListener(event, function, useCapture)</h4><h4 id="如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。"><a href="#如果要移除事件句柄，addEventListener-的执行函数必须使用外部函数，如myFun，匿名函数，类似-“document-removeEventListener-“event”-function-myScript-”-该事件是无法移除的。" class="headerlink" title="如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。"></a>如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数，如myFun，匿名函数，类似 “document.removeEventListener(“event”, function(){ myScript });” 该事件是无法移除的。</h4><h4 id="场景：绑定回车事件"><a href="#场景：绑定回车事件" class="headerlink" title="场景：绑定回车事件"></a>场景：绑定回车事件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Demo extends Components&#123;</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        document.addEventListener(&apos;keydown&apos;,this.handleEnterKey);</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillUmount()&#123;</span><br><span class="line">        document.removeEventListener(&apos;keydown&apos;,this.handleEenterKey);</span><br><span class="line">    &#125;</span><br><span class="line">    handleEnterKey = (e) =&gt; &#123;</span><br><span class="line">        if(e.keyCode === 13)&#123;</span><br><span class="line">          //do somethings</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        &lt;div&gt;hello,world!&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2230,7 +2227,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2326,9 +2323,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
