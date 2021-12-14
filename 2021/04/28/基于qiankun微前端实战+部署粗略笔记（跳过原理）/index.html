@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN,zh-tw,zh-Hans,zh-hk,en,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="基于qiankun微前端实战+部署粗略笔记（跳过原理）因业务需要，以下文字纯个人qiankun实战学习笔记，不谈原理只记操作过程，内容难免有纰漏部分，敬请不吝赐教批评指正。  目标场景 预备知识点 已对qiankun微前端有了初步认识; 熟悉react、vuejs; 了解github、docker、jenkins、nginx;  技术栈基座 使用create-react-app初始化项目; 安装&quot;">
+<meta name="keywords" content="Reactjs,qiankun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于qiankun微前端实战+部署粗略笔记（跳过原理）">
+<meta property="og:url" content="http://yoursite.com/2021/04/28/基于qiankun微前端实战+部署粗略笔记（跳过原理）/index.html">
+<meta property="og:site_name" content="一只小强">
+<meta property="og:description" content="基于qiankun微前端实战+部署粗略笔记（跳过原理）因业务需要，以下文字纯个人qiankun实战学习笔记，不谈原理只记操作过程，内容难免有纰漏部分，敬请不吝赐教批评指正。  目标场景 预备知识点 已对qiankun微前端有了初步认识; 熟悉react、vuejs; 了解github、docker、jenkins、nginx;  技术栈基座 使用create-react-app初始化项目; 安装&quot;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/BN6E45ZCUxtLhFX.gif">
+<meta property="og:image" content="https://i.loli.net/2021/04/27/RQycNgEzJBv5Som.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/27/g3iASuJNbG5pU7F.jpg">
+<meta property="og:updated_time" content="2021-04-27T22:16:32.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于qiankun微前端实战+部署粗略笔记（跳过原理）">
+<meta name="twitter:description" content="基于qiankun微前端实战+部署粗略笔记（跳过原理）因业务需要，以下文字纯个人qiankun实战学习笔记，不谈原理只记操作过程，内容难免有纰漏部分，敬请不吝赐教批评指正。  目标场景 预备知识点 已对qiankun微前端有了初步认识; 熟悉react、vuejs; 了解github、docker、jenkins、nginx;  技术栈基座 使用create-react-app初始化项目; 安装&quot;">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/23/BN6E45ZCUxtLhFX.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/04/28/基于qiankun微前端实战+部署粗略笔记（跳过原理）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>基于qiankun微前端实战+部署粗略笔记（跳过原理） | 一只小强</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一只小强</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">天道酬勤 厚德载物</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">30</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/28/基于qiankun微前端实战+部署粗略笔记（跳过原理）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="niexq">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一只小强">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于qiankun微前端实战+部署粗略笔记（跳过原理）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-28 06:15:00" itemprop="dateCreated datePublished" datetime="2021-04-28T06:15:00+08:00">2021-04-28</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Reactjs/" itemprop="url" rel="index"><span itemprop="name">Reactjs</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基于qiankun微前端实战-部署粗略笔记（跳过原理）"><a href="#基于qiankun微前端实战-部署粗略笔记（跳过原理）" class="headerlink" title="基于qiankun微前端实战+部署粗略笔记（跳过原理）"></a>基于qiankun微前端实战+部署粗略笔记（跳过原理）</h2><p>因业务需要，以下文字纯个人qiankun实战学习笔记，不谈原理只记操作过程，内容难免有纰漏部分，敬请不吝赐教批评指正。</p>
+<p><img src="https://i.loli.net/2021/04/23/BN6E45ZCUxtLhFX.gif" alt></p>
+<h3 id="目标场景"><a href="#目标场景" class="headerlink" title="目标场景"></a>目标场景</h3><p><img src="https://i.loli.net/2021/04/27/RQycNgEzJBv5Som.png" alt></p>
+<h3 id="预备知识点"><a href="#预备知识点" class="headerlink" title="预备知识点"></a>预备知识点</h3><ul>
+<li>已对<a href="https://qiankun.umijs.org/" target="_blank" rel="noopener">qiankun</a>微前端有了初步认识;</li>
+<li>熟悉<a href="https://react.docschina.org/" target="_blank" rel="noopener">react</a>、<a href="https://cn.vuejs.org/" target="_blank" rel="noopener">vuejs</a>;</li>
+<li>了解<a href="https://github.com/" target="_blank" rel="noopener">github</a>、<a href="https://www.docker.com/" target="_blank" rel="noopener">docker</a>、<a href="https://www.jenkins.io/" target="_blank" rel="noopener">jenkins</a>、<a href="http://nginx.org/" target="_blank" rel="noopener">nginx</a>;</li>
+</ul>
+<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><h4 id="基座"><a href="#基座" class="headerlink" title="基座"></a>基座</h4><ul>
+<li>使用<a href="https://github.com/facebook/create-react-app" target="_blank" rel="noopener">create-react-app</a>初始化项目;</li>
+<li><p>安装<figure class="highlight plain"><figcaption><span>"^2.4.0"```;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">+ 代码地址：[react-app-qiankun-main](https://github.com/niexq/react-app-qiankun-main);</span><br><span class="line">+ 独立仓库，独立部署，独立域名：https://qiankun.xiaoqiang.tech;</span><br><span class="line"></span><br><span class="line">#### react子应用</span><br><span class="line">+ 使用[create-react-app](https://github.com/facebook/create-react-app)初始化项目;</span><br><span class="line">+ 安装```&quot;react-app-rewired&quot;: &quot;^2.1.8&quot;```、```&quot;react-router-dom&quot;: &quot;^5.2.0&quot;```;</span><br><span class="line">+ 代码地址：[react-app-qiankun-sub](https://github.com/niexq/react-app-qiankun-sub);</span><br><span class="line">+ 独立仓库，独立部署，独立域名：https://react.xiaoqiang.tech;</span><br><span class="line"></span><br><span class="line">#### vue子应用</span><br><span class="line">+ 使用[vue-cli](https://github.com/vuejs/vue-cli)初始化项目，对应```&quot;vue&quot;: &quot;^3.0.0&quot;```;</span><br><span class="line">+ 安装```&quot;vue-router&quot;: &quot;^4.0.0-beta.11&quot;```;</span><br><span class="line">+ 代码地址：[vue-cli-qiankun-sub](https://github.com/niexq/vue-cli-qiankun-sub);</span><br><span class="line">+ 独立仓库，独立部署，独立域名：https://vue.xiaoqiang.tech;</span><br><span class="line"></span><br><span class="line">### 快速上手</span><br><span class="line"></span><br><span class="line">#### 基座</span><br><span class="line"></span><br><span class="line">+ 1.初始化项目</span><br><span class="line">```bash</span><br><span class="line">npm init react-app react-app-qiankun-main</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>2.安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```bash</span><br><span class="line">yarn add qiankun # 或者 npm i qiankun -S</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>3.目录结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">react-app-qiankun-main</span><br><span class="line">├── .env.local             <span class="comment">// 本地环境</span></span><br><span class="line">├── .env.development.local <span class="comment">// 测试环境</span></span><br><span class="line">├── .env.production.local  <span class="comment">// 生产环境</span></span><br><span class="line">├── README.md</span><br><span class="line">├── node_modules</span><br><span class="line">├── package.json</span><br><span class="line">├── .gitignore</span><br><span class="line">├── public</span><br><span class="line">│   ├── favicon.ico</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── manifest.json</span><br><span class="line">└── src</span><br><span class="line">    ├── components</span><br><span class="line">    │     └── Loading.jsx</span><br><span class="line">    ├── store</span><br><span class="line">    │     └── store.js    <span class="comment">// 主应用的全局状态</span></span><br><span class="line">    ├── apps.js           <span class="comment">// 子应用配置</span></span><br><span class="line">    ├── App.css</span><br><span class="line">    ├── App.js            <span class="comment">// 基座布局，挂载子应用</span></span><br><span class="line">    ├── App.test.js</span><br><span class="line">    ├── index.css</span><br><span class="line">    ├── index.js          <span class="comment">// 主应用中注册微应用</span></span><br><span class="line">    ├── logo.svg</span><br><span class="line">    ├── reportWebVitals.js</span><br><span class="line">    └── setupTests.js</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="基座（开撸代码）"><a href="#基座（开撸代码）" class="headerlink" title="基座（开撸代码）"></a>基座（开撸代码）</h4><ul>
+<li><p>新增3个<a href="https://github.com/motdotla/dotenv" target="_blank" rel="noopener">.env</a>文件，主要配置不同环境的对应的域名</p>
+<ul>
+<li><p>.env/.env.development.local（此处暂未区分本地和测试的域名，所有环境变量值都保持一致）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REACT_APP_SUB_REACT=<span class="comment">//localhost:2233/react</span></span><br><span class="line">REACT_APP_SUB_VUE=<span class="comment">//localhost:3344/vue</span></span><br><span class="line">PORT=<span class="number">1122</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>.env.production.local （生产环境）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REACT_APP_SUB_REACT = <span class="comment">//qiankun.xiaoqiang.tech/react</span></span><br><span class="line">REACT_APP_SUB_VUE = <span class="comment">//qiankun.xiaoqiang.tech/vue</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>修改index.html挂载dom的默认id，防止与子应用id冲突</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认root =&gt; main-root</span></span><br><span class="line">&lt;div id=<span class="string">"main-root"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增<a href="https://github.com/niexq/react-app-qiankun-main/blob/main/src/store/store.js" target="_blank" rel="noopener">store/store.js</a>，配置主应用的全局状态</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; initGlobalState &#125; <span class="keyword">from</span> <span class="string">'qiankun'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> initialState = &#123;</span><br><span class="line">  user: &#123;</span><br><span class="line">    name: <span class="string">'qiankun'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> actions = initGlobalState(initialState);</span><br><span class="line"></span><br><span class="line">actions.onGlobalStateChange(<span class="function">(<span class="params">state, prev</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">const</span> key <span class="keyword">in</span> state) &#123;</span><br><span class="line">    initialState[key] = state[key];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非官方api，https://github.com/umijs/qiankun/pull/729</span></span><br><span class="line">actions.getGlobalState = <span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> key ? initialState[key] : initialState;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> actions;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<a href="https://github.com/niexq/react-app-qiankun-main/blob/main/src/App.js" target="_blank" rel="noopener">src/App.js</a>，主要完成基座页面布局及增加挂载子应用的dom（id=”subapp-viewport”）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...省略，详细可见源码</span></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &lt;div className=<span class="string">"mainapp"</span>&gt;</span><br><span class="line">        &#123;<span class="comment">/* 标题栏 */</span>&#125;</span><br><span class="line">        &lt;header className=<span class="string">"mainapp-header"</span>&gt;</span><br><span class="line">          &lt;ul className=<span class="string">"mainapp-header-sidemenu"</span>&gt;</span><br><span class="line">            &#123;<span class="comment">/* 侧边栏 省略，详细可见源码 */</span>&#125;</span><br><span class="line">          &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>header&gt;</span><br><span class="line">        &lt;div className=<span class="string">"mainapp-main"</span>&gt;</span><br><span class="line">          &#123;<span class="comment">/* 子应用 */</span>&#125;</span><br><span class="line">          &lt;main id=<span class="string">"subapp-viewport"</span>&gt;&lt;<span class="regexp">/main&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>增加<a href="https://github.com/niexq/react-app-qiankun-main/blob/main/src/apps.js" target="_blank" rel="noopener">apps.js</a>，子应用的配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store/store'</span></span><br><span class="line"><span class="keyword">const</span> microApps = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'react'</span>,</span><br><span class="line">    entry: process.env.REACT_APP_SUB_REACT,</span><br><span class="line">    activeRule: <span class="string">'/react'</span>,</span><br><span class="line">    container: <span class="string">'#subapp-viewport'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'vue'</span>,</span><br><span class="line">    entry: process.env.REACT_APP_SUB_VUE,</span><br><span class="line">    activeRule: <span class="string">'/vue'</span>,</span><br><span class="line">    container: <span class="string">'#subapp-viewport'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> apps = microApps.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    ...item,</span><br><span class="line">    props: &#123;</span><br><span class="line">      routerBase: item.activeRule,</span><br><span class="line">      getGlobalState: store.getGlobalState,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> apps</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<a href="https://github.com/niexq/react-app-qiankun-main/blob/main/src/index.js" target="_blank" rel="noopener">src/index.js</a>，主应用中注册微（子）应用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.css'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; registerMicroApps, start, setDefaultMountApp &#125; <span class="keyword">from</span> <span class="string">'qiankun'</span>;</span><br><span class="line"><span class="keyword">import</span> apps <span class="keyword">from</span> <span class="string">'./apps'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">&#123; appContent, loading &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'main-root'</span>);</span><br><span class="line">  ReactDOM.render(</span><br><span class="line">    &lt;React.StrictMode&gt;</span><br><span class="line">      &lt;App loading=&#123;loading&#125; content=&#123;appContent&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/React.StrictMode&gt;,</span></span><br><span class="line"><span class="regexp">    container,</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const loader = loading =&gt; render(&#123; loading &#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">render(&#123; loading: true &#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const microApps = apps.map((app =&gt; (&#123;</span></span><br><span class="line"><span class="regexp">  ...app,</span></span><br><span class="line"><span class="regexp">  loader,</span></span><br><span class="line"><span class="regexp">&#125;)))</span></span><br><span class="line"><span class="regexp">registerMicroApps(microApps, &#123;</span></span><br><span class="line"><span class="regexp">  beforeLoad: app =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    console.log('before load app.name=====&gt;&gt;&gt;&gt;&gt;', app.name)</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  beforeMount: [</span></span><br><span class="line"><span class="regexp">    app =&gt; &#123;</span></span><br><span class="line"><span class="regexp">      console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name)</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  ],</span></span><br><span class="line"><span class="regexp">  afterMount: [</span></span><br><span class="line"><span class="regexp">    app =&gt; &#123;</span></span><br><span class="line"><span class="regexp">      console.log('[LifeCycle] after mount %c%s', 'color: green;', app.name)</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  ],</span></span><br><span class="line"><span class="regexp">  afterUnmount: [</span></span><br><span class="line"><span class="regexp">    app =&gt; &#123;</span></span><br><span class="line"><span class="regexp">      console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name)</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  ]</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">setDefaultMountApp('/</span>react<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">start();</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本地启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="react子应用"><a href="#react子应用" class="headerlink" title="react子应用"></a>react子应用</h4><ul>
+<li><p>1.初始化项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init react-app react-app-qiankun-sub</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">```bash</span><br><span class="line">npm i react-app-rewired --save-dev</span><br><span class="line">npm i react-router-dom --save</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>3.目录结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">react-app-qiankun-sub</span><br><span class="line">├── .env                 <span class="comment">// 本地环境</span></span><br><span class="line">├── config-overrides.js  <span class="comment">// 覆盖create-react-app的webpack配置</span></span><br><span class="line">├── README.md</span><br><span class="line">├── node_modules</span><br><span class="line">├── package.json</span><br><span class="line">├── .gitignore</span><br><span class="line">├── public</span><br><span class="line">│   ├── favicon.ico</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── manifest.json</span><br><span class="line">└── src</span><br><span class="line">    ├── components</span><br><span class="line">    │     └── LibVersion.jsx</span><br><span class="line">    ├── pages</span><br><span class="line">    │     └── Home.jsx</span><br><span class="line">    ├── public-path.js <span class="comment">// __webpack_public_path__</span></span><br><span class="line">    ├── App.css</span><br><span class="line">    ├── App.js         <span class="comment">// 子应用布局</span></span><br><span class="line">    ├── App.test.js</span><br><span class="line">    ├── index.css</span><br><span class="line">    ├── index.js       <span class="comment">// 子应用入口，挂载dom导出相应的生命周期钩子</span></span><br><span class="line">    ├── logo.svg</span><br><span class="line">    ├── reportWebVitals.js</span><br><span class="line">    └── setupTests.js</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="react子应用（开撸代码）"><a href="#react子应用（开撸代码）" class="headerlink" title="react子应用（开撸代码）"></a>react子应用（开撸代码）</h4><ul>
+<li><p>新增1个<a href="https://github.com/motdotla/dotenv" target="_blank" rel="noopener">.env</a>文件，主要配置本地环境</p>
+<p>此处PORT需要和基座<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```js</span><br><span class="line">  PORT=2233</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>修改index.html挂载dom的默认id，防止与基座及其他子应用id冲突</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认root =&gt; sub-react-root</span></span><br><span class="line">&lt;div id=<span class="string">"sub-react-root"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增<a href="https://github.com/niexq/react-app-qiankun-sub/blob/main/src/public-path.js" target="_blank" rel="noopener">src/public-path.js</a>，<strong>webpack_public_path</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.__POWERED_BY_QIANKUN__) &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  __webpack_public_path__ = <span class="built_in">window</span>.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<a href="https://github.com/niexq/react-app-qiankun-sub/blob/main/src/App.js" target="_blank" rel="noopener">src/App.js</a>，主要完成子应用页面布局（略，见源码）</p>
+</li>
+<li><p>修改<a href="https://github.com/niexq/react-app-qiankun-sub/blob/main/src/index.js" target="_blank" rel="noopener">src/index.js</a>，微（子）应用导出相应的生命周期钩子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./public-path'</span>;</span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.css'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSubRootContainer</span>(<span class="params">container</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> container ? container.querySelector(<span class="string">'#sub-react-root'</span>) : <span class="built_in">document</span>.querySelector(<span class="string">'#sub-react-root'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; container &#125; = props;</span><br><span class="line">  ReactDOM.render(</span><br><span class="line">    &lt;React.StrictMode&gt;</span><br><span class="line">      &lt;App store=&#123;&#123;...props&#125;&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/React.StrictMode&gt;,</span></span><br><span class="line"><span class="regexp">    getSubRootContainer(container),</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">function storeTest(props) &#123;</span></span><br><span class="line"><span class="regexp">  props.onGlobalStateChange((value, prev) =&gt; console.log(`[onGlobalStateChange - $&#123;props.name&#125;]:`, value, prev), true);</span></span><br><span class="line"><span class="regexp">  props.setGlobalState(&#123;</span></span><br><span class="line"><span class="regexp">    ignore: props.name,</span></span><br><span class="line"><span class="regexp">    user: &#123;</span></span><br><span class="line"><span class="regexp">      name: props.name,</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">  &#125;);</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">if (!window.__POWERED_BY_QIANKUN__) &#123;</span></span><br><span class="line"><span class="regexp">  render(&#123;&#125;);</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export async function bootstrap() &#123;</span></span><br><span class="line"><span class="regexp">  console.log('react app bootstraped');</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export async function mount(props) &#123;</span></span><br><span class="line"><span class="regexp">  console.log('props from main framework', props);</span></span><br><span class="line"><span class="regexp">  storeTest(props);</span></span><br><span class="line"><span class="regexp">  render(props);</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export async function unmount(props) &#123;</span></span><br><span class="line"><span class="regexp">  const &#123; container &#125; = props;</span></span><br><span class="line"><span class="regexp">  ReactDOM.unmountComponentAtNode(getSubRootContainer(container));</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加<a href="https://github.com/niexq/react-app-qiankun-sub/blob/main/config-overrides.js" target="_blank" rel="noopener">config-overrides.js</a>，覆盖create-react-app的webpack配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; name &#125; = <span class="built_in">require</span>(<span class="string">'./package'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  webpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config.output.library = <span class="string">`<span class="subst">$&#123;name&#125;</span>-[name]`</span>;</span><br><span class="line">    config.output.libraryTarget = <span class="string">'umd'</span>;</span><br><span class="line">    config.output.jsonpFunction = <span class="string">`webpackJsonp_<span class="subst">$&#123;name&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  devServer: <span class="function">(<span class="params">configFunction</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">proxy, allowedHost</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> config = configFunction(proxy, allowedHost);</span><br><span class="line">      config.historyApiFallback = <span class="literal">true</span>;</span><br><span class="line">      config.open = <span class="literal">false</span>;</span><br><span class="line">      config.hot = <span class="literal">false</span>;</span><br><span class="line">      config.watchContentBase = <span class="literal">false</span>;</span><br><span class="line">      config.liveReload = <span class="literal">false</span>;</span><br><span class="line">      config.headers = &#123;</span><br><span class="line">        <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'*'</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="keyword">return</span> config;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改package.json</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  -   <span class="string">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">  +   <span class="string">"start"</span>: <span class="string">"react-app-rewired start"</span>,</span><br><span class="line">  -   <span class="string">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">  +   <span class="string">"build"</span>: <span class="string">"react-app-rewired build"</span>,</span><br><span class="line">  -   <span class="string">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">  +   <span class="string">"test"</span>: <span class="string">"react-app-rewired test"</span>,</span><br><span class="line">  <span class="string">"eject"</span>: <span class="string">"react-scripts eject"</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本地启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="vue子应用"><a href="#vue子应用" class="headerlink" title="vue子应用"></a>vue子应用</h4><ul>
+<li><p>1.初始化项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli-service-global</span><br><span class="line">vue create vue-cli-qiankun-sub</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```bash</span><br><span class="line">npm i vue-router --save</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>3.目录结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">vue-cli-qiankun-sub</span><br><span class="line">├── .env                 <span class="comment">// 本地环境</span></span><br><span class="line">├── vue.config.js        <span class="comment">// vue可选的配置文件</span></span><br><span class="line">├── babel.config.js</span><br><span class="line">├── README.md</span><br><span class="line">├── node_modules</span><br><span class="line">├── package.json</span><br><span class="line">├── .gitignore</span><br><span class="line">├── public</span><br><span class="line">│   ├── favicon.ico</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── manifest.json</span><br><span class="line">└── src</span><br><span class="line">    ├── components</span><br><span class="line">    │    └── HelloWorld.vue</span><br><span class="line">    ├── router</span><br><span class="line">    │     └── index.js</span><br><span class="line">    ├── views</span><br><span class="line">    │     └── Home.vue</span><br><span class="line">    ├── public-path.js  <span class="comment">// __webpack_public_path__</span></span><br><span class="line">    ├── App.vue         <span class="comment">// 子应用布局</span></span><br><span class="line">    └── main.js         <span class="comment">// 子应用入口，挂载dom导出相应的生命周期钩子</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="vue子应用（开撸代码）"><a href="#vue子应用（开撸代码）" class="headerlink" title="vue子应用（开撸代码）"></a>vue子应用（开撸代码）</h4><ul>
+<li><p>新增1个<a href="https://github.com/motdotla/dotenv" target="_blank" rel="noopener">.env</a>文件，主要配置本地环境</p>
+<p>此处PORT需要和基座<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```js</span><br><span class="line">  PORT=3344</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>修改index.html挂载dom的默认id，防止与基座及其他子应用id冲突</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认root =&gt; sub-vue-root</span></span><br><span class="line">&lt;div id=<span class="string">"sub-vue-roott"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增<a href="https://github.com/niexq/vue-cli-qiankun-sub/blob/main/src/public-path.js" target="_blank" rel="noopener">src/public-path.js</a>，<strong>webpack_public_path</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.__POWERED_BY_QIANKUN__) &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  __webpack_public_path__ = <span class="built_in">window</span>.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<a href="https://github.com/niexq/vue-cli-qiankun-sub/blob/main/src/App.vue" target="_blank" rel="noopener">src/App.vue</a>，主要完成子应用页面布局（略，见源码）</p>
+</li>
+<li><p>修改<a href="https://github.com/niexq/vue-cli-qiankun-sub/blob/main/src/main.js" target="_blank" rel="noopener">src/mian.js</a>，微（子）应用导出相应的生命周期钩子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./public-path'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">'vue-router'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span>;</span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">'./router'</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> router = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> instance = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> history = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">props = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; container &#125; = props;</span><br><span class="line">  history = createWebHistory(<span class="built_in">window</span>.__POWERED_BY_QIANKUN__ ? <span class="string">'/vue'</span> : <span class="string">'/'</span>);</span><br><span class="line">  router = createRouter(&#123;</span><br><span class="line">    history,</span><br><span class="line">    routes,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  instance = createApp(App);</span><br><span class="line">  instance.use(router);</span><br><span class="line">  instance.use(store);</span><br><span class="line">  instance.mount(container ? container.querySelector(<span class="string">'#sub-vue-root'</span>) : <span class="string">'#sub-vue-root'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">window</span>.__POWERED_BY_QIANKUN__) &#123;</span><br><span class="line">  render();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">bootstrap</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'%c '</span>, <span class="string">'color: green;'</span>, <span class="string">'vue3.0 app bootstraped'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">storeTest</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  props.onGlobalStateChange &amp;&amp;</span><br><span class="line">    props.onGlobalStateChange(</span><br><span class="line">      (value, prev) =&gt; <span class="built_in">console</span>.log(<span class="string">`[onGlobalStateChange - <span class="subst">$&#123;props.name&#125;</span>]:`</span>, value, prev),</span><br><span class="line">      <span class="literal">true</span>,</span><br><span class="line">    );</span><br><span class="line">  props.setGlobalState &amp;&amp;</span><br><span class="line">    props.setGlobalState(&#123;</span><br><span class="line">      ignore: props.name,</span><br><span class="line">      user: &#123;</span><br><span class="line">        name: props.name,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">mount</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  storeTest(props);</span><br><span class="line">  render(props);</span><br><span class="line">  instance.config.globalProperties.$onGlobalStateChange = props.onGlobalStateChange;</span><br><span class="line">  instance.config.globalProperties.$setGlobalState = props.setGlobalState;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">unmount</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  instance.unmount();</span><br><span class="line">  instance._container.innerHTML = <span class="string">''</span>;</span><br><span class="line">  instance = <span class="literal">null</span>;</span><br><span class="line">  router = <span class="literal">null</span>;</span><br><span class="line">  history.destroy();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加<a href="https://github.com/niexq/vue-cli-qiankun-sub/blob/main/vue.config.js" target="_blank" rel="noopener">vue.config.js</a>配置文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; name &#125; = <span class="built_in">require</span>(<span class="string">'./package'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">dir</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.join(__dirname, dir);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  outputDir: <span class="string">'dist'</span>,</span><br><span class="line">  assetsDir: <span class="string">'static'</span>,</span><br><span class="line">  filenameHashing: <span class="literal">true</span>,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    hot: <span class="literal">true</span>,</span><br><span class="line">    disableHostCheck: <span class="literal">true</span>,</span><br><span class="line">    port,</span><br><span class="line">    overlay: &#123;</span><br><span class="line">      warnings: <span class="literal">false</span>,</span><br><span class="line">      errors: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'*'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 自定义webpack配置</span></span><br><span class="line">  configureWebpack: &#123;</span><br><span class="line">    resolve: &#123;</span><br><span class="line">      alias: &#123;</span><br><span class="line">        <span class="string">'@'</span>: resolve(<span class="string">'src'</span>),</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    output: &#123;</span><br><span class="line">      <span class="comment">// 把子应用打包成 umd 库格式</span></span><br><span class="line">      library: <span class="string">`<span class="subst">$&#123;name&#125;</span>-[name]`</span>,</span><br><span class="line">      libraryTarget: <span class="string">'umd'</span>,</span><br><span class="line">      jsonpFunction: <span class="string">`webpackJsonp_<span class="subst">$&#123;name&#125;</span>`</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改package.json</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  +   <span class="string">"start"</span>: <span class="string">"vue-cli-service serve"</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本地启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h3><p>以上操作完后，可以直接通过基座预览，子应用也可独立预览</p>
+<h4 id="基座预览"><a href="#基座预览" class="headerlink" title="基座预览"></a>基座预览</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//localhost:1122/</span></span><br></pre></td></tr></table></figure>
+<h4 id="react子应用预览"><a href="#react子应用预览" class="headerlink" title="react子应用预览"></a>react子应用预览</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//localhost:2233/</span></span><br></pre></td></tr></table></figure>
+<h4 id="vue子应用预览"><a href="#vue子应用预览" class="headerlink" title="vue子应用预览"></a>vue子应用预览</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//localhost:3344/</span></span><br></pre></td></tr></table></figure>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p><img src="https://i.loli.net/2021/04/27/g3iASuJNbG5pU7F.jpg" alt></p>
+<h4 id="备选方案"><a href="#备选方案" class="headerlink" title="备选方案"></a>备选方案</h4><ul>
+<li><p>1.单域名部署；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基座：https://qiankun.xiaoqiang.tech</span></span><br><span class="line"><span class="comment">// react子应用：https://qiankun.xiaoqiang.tech/react</span></span><br><span class="line"><span class="comment">// vue子应用：https://qiankun.xiaoqiang.tech/vue</span></span><br><span class="line"><span class="comment">// 编译后服务器存储目录</span></span><br><span class="line">react-app-qiankun</span><br><span class="line">├── main</span><br><span class="line">│   └── index.html</span><br><span class="line">├── react</span><br><span class="line">│   └── index.html</span><br><span class="line">└── vue</span><br><span class="line">    └── index.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.多域名独立部署；（当篇笔记选择了多域名部署）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基座：https://qiankun.xiaoqiang.tech</span></span><br><span class="line"><span class="comment">// 编译后服务器项目独立存储目录</span></span><br><span class="line">react-app-qiankun-main</span><br><span class="line">  └── index.html</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// react子应用：https://react.xiaoqiang.tech</span></span><br><span class="line"><span class="comment">// 编译后服务器项目独立存储目录</span></span><br><span class="line">react-app-qiankun-sub</span><br><span class="line">  └── index.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue子应用：https://vue.xiaoqiang.tech</span></span><br><span class="line"><span class="comment">// 编译后服务器项目独立存储目录</span></span><br><span class="line">react-app-qiankun-main</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
+<h4 id="部署（以下只初略记录部署过程，过于简陋）"><a href="#部署（以下只初略记录部署过程，过于简陋）" class="headerlink" title="部署（以下只初略记录部署过程，过于简陋）"></a>部署（以下只初略记录部署过程，过于简陋）</h4><ul>
+<li><p>前提：已购云服务器，并已安装<a href="https://help.aliyun.com/document_detail/51853.html?spm=a2c4g.11186623.4.1.20aa4c07DdFvHb" target="_blank" rel="noopener">docker</a>、<a href="https://hub.docker.com/_/nginx" target="_blank" rel="noopener">nginx</a>、<a href="https://www.jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">jenkins</a>、3个独立域名及ssl证书</p>
+</li>
+<li><p>本地编码，github存储代码，分别<a href="https://github.com/new" target="_blank" rel="noopener">新建3个公开代码库</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基座：react-app-qiankun-main 存储到 https://github.com/niexq/react-app-qiankun-main</span></span><br><span class="line"><span class="comment">// react子应用：react-app-qiankun-sub 存储到 https://github.com/niexq/react-app-qiankun-sub</span></span><br><span class="line"><span class="comment">// vue子应用：vue-cli-qiankun-sub 存储到 https://github.com/niexq/vue-cli-qiankun-sub</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://www.cloudbees.com/blog/better-integration-between-jenkins-and-github-github-jenkins-plugin" target="_blank" rel="noopener">github,jenkins持续集成</a></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 详细配置步骤略</span></span><br><span class="line"><span class="comment">// github webHooks设置</span></span><br><span class="line"><span class="comment">// jenkins构建部分执行shell</span></span><br><span class="line">BUILD_ID=dontKillMe</span><br><span class="line">cd /<span class="keyword">var</span>/jenkins_home/workspace/react-app-qiankun-main</span><br><span class="line">npm install</span><br><span class="line">npm run build</span><br><span class="line">rm -rf /srv/www/react-app-qiankun-main</span><br><span class="line">cp -rf /<span class="keyword">var</span>/jenkins_home/workspace/react-app-qiankun-main/build /srv/www/react-app-qiankun-main/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用nginx代理<br>nginx.conf<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">user root;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '</span><br><span class="line">                      '$status $body_bytes_sent "$http_referer" '</span><br><span class="line">                      '"$http_user_agent" "$http_x_forwarded_for"';</span><br><span class="line"></span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line">    #include /etc/nginx/conf.d/*.conf;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen 443;</span><br><span class="line">        server_name qiankun.xiaoqiang.tech; # 你的域名</span><br><span class="line">        ssl on;</span><br><span class="line">        root www/react-app-qiankun-main; # 前台文件存放文件夹，可改成别的</span><br><span class="line">        index index.html index.htm; # 上面配置的文件夹里面的index.html</span><br><span class="line">        ssl_certificate cert/5543142_qiankun.xiaoqiang.tech.pem;   #将domain name.pem替换成您证书的文件名。</span><br><span class="line">        ssl_certificate_key cert/5543142_qiankun.xiaoqiang.tech.key;   #将domain name.key替换成您证书的密钥文件名。</span><br><span class="line">        ssl_session_timeout 5m;</span><br><span class="line">        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_prefer_server_ciphers on;</span><br><span class="line">        location / &#123;</span><br><span class="line">          # 用于配合 browserHistory使用</span><br><span class="line">          try_files $uri $uri/ /index.html;</span><br><span class="line">          # root /srv/www/react-app-qiankun-main;</span><br><span class="line">          # index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen 443;</span><br><span class="line">        server_name react.xiaoqiang.tech; # 你的域名</span><br><span class="line">        add_header Access-Control-Allow-Origin *;</span><br><span class="line">        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';</span><br><span class="line">        add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';</span><br><span class="line">        if ($request_method = 'OPTIONS') &#123;</span><br><span class="line">            return 204;</span><br><span class="line">        &#125;</span><br><span class="line">        ssl on;</span><br><span class="line">        root www/react-app-qiankun-sub; # 前台文件存放文件夹，可改成别的</span><br><span class="line">        index index.html index.htm; # 上面配置的文件夹里面的index.html</span><br><span class="line">        ssl_certificate cert/4325684_react.xiaoqiang.tech.pem;   #将domain name.pem替换成您证书的文件名。</span><br><span class="line">        ssl_certificate_key cert/4325684_react.xiaoqiang.tech.key;   #将domain name.key替换成您证书的密钥文件名。</span><br><span class="line">        ssl_session_timeout 5m;</span><br><span class="line">        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_prefer_server_ciphers on;</span><br><span class="line">        location / &#123;</span><br><span class="line">          # 用于配合 browserHistory使用</span><br><span class="line">          try_files $uri $uri/ /index.html;</span><br><span class="line">          # root /srv/www/react-app-qiankun-sub;</span><br><span class="line">          # index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen 443;</span><br><span class="line">        server_name vue.xiaoqiang.tech; # 你的域名</span><br><span class="line">        add_header Access-Control-Allow-Origin *;</span><br><span class="line">        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';</span><br><span class="line">        add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';</span><br><span class="line">        if ($request_method = 'OPTIONS') &#123;</span><br><span class="line">            return 204;</span><br><span class="line">        &#125;</span><br><span class="line">        ssl on;</span><br><span class="line">        root www/vue-cli-qiankun-sub; # 前台文件存放文件夹，可改成别的</span><br><span class="line">        index index.html index.htm; # 上面配置的文件夹里面的index.html</span><br><span class="line">        ssl_certificate cert/5556275_vue.xiaoqiang.tech.pem;   #将domain name.pem替换成您证书的文件名。</span><br><span class="line">        ssl_certificate_key cert/5556275_vue.xiaoqiang.tech.key;   #将domain name.key替换成您证书的密钥文件名。</span><br><span class="line">        ssl_session_timeout 5m;</span><br><span class="line">        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_prefer_server_ciphers on;</span><br><span class="line">        location / &#123;</span><br><span class="line">          # 用于配合 browserHistory使用</span><br><span class="line">          try_files $uri $uri/ /index.html;</span><br><span class="line">          # root /srv/www/vue-cli-qiankun-sub;</span><br><span class="line">          # index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>docker运行nginx命令，重点关注<figure class="highlight plain"><figcaption><span>挂载目录```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```bash</span><br><span class="line">docker run --name nginx -p 80:80 -p 443:443 -v /root/nginx/config/nginx.conf:/etc/nginx/nginx.conf -v /root/nginx/cert:/etc/nginx/cert -v /root/nginx/logs:/var/log/nginx -v /srv/www/react-app-qiankun-main:/etc/nginx/www/react-app-qiankun-main -v /srv/www/react-app-qiankun-sub:/etc/nginx/www/react-app-qiankun-sub -v /srv/www/vue-cli-qiankun-sub:/etc/nginx/www/vue-cli-qiankun-sub --restart=always -d nginx:stable</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>没有总结，遇到的问题太多，笔记总结的太杂，后期再整理分享</p>
+<h4 id="线上预览地址：https-qiankun-xiaoqiang-tech"><a href="#线上预览地址：https-qiankun-xiaoqiang-tech" class="headerlink" title="线上预览地址：https://qiankun.xiaoqiang.tech"></a>线上预览地址：<a href="https://qiankun.xiaoqiang.tech" target="_blank" rel="noopener">https://qiankun.xiaoqiang.tech</a></h4><h4 id="子应用线上也可独立预览"><a href="#子应用线上也可独立预览" class="headerlink" title="子应用线上也可独立预览"></a>子应用线上也可独立预览</h4><p>react子应用预览：<a href="https://react.xiaoqiang.tech" target="_blank" rel="noopener">https://react.xiaoqiang.tech</a></p>
+<p>vue子应用预览：<a href="https://vue.xiaoqiang.tech" target="_blank" rel="noopener">https://vue.xiaoqiang.tech</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://qiankun.umijs.org/" target="_blank" rel="noopener">qiankun</a></p>
+<p><a href="https://juejin.cn/post/6875462470593904653" target="_blank" rel="noopener">qiankun-example</a></p>
+<p><a href="https://juejin.cn/post/6844904185910018062" target="_blank" rel="noopener">qiankun 微前端方案实践及总结</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="niexq 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="niexq 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Reactjs/" rel="tag"><i class="fa fa-tag"></i> Reactjs</a>
+          
+            <a href="/tags/qiankun/" rel="tag"><i class="fa fa-tag"></i> qiankun</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/03/将React APP部署到GitHub Pages/" rel="next" title="将React APP部署到GitHub Pages">
+                <i class="fa fa-chevron-left"></i> 将React APP部署到GitHub Pages
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/08/不用递归生成无限层级的树/" rel="prev" title="不用递归生成无限层级的树">
+                不用递归生成无限层级的树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzE0Ni8xOTY5Mg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="niexq">
+            
+              <p class="site-author-name" itemprop="name">niexq</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/niexq" title="GitHub &rarr; https://github.com/niexq" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:niexq0319@gmail.com" title="E-Mail &rarr; mailto:niexq0319@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/xq-nie" title="StackOverflow &rarr; https://stackoverflow.com/xq-nie" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="https://hexo.io/zh-cn/" rel="noopener" target="_blank">hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com" title="http://www.ruanyifeng.com" rel="noopener" target="_blank">ruanyifeng</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.w3school.com.cn/" title="http://www.w3school.com.cn/" rel="noopener" target="_blank">w3school</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com" title="http://www.runoob.com" rel="noopener" target="_blank">runoob</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于qiankun微前端实战-部署粗略笔记（跳过原理）"><span class="nav-number">1.</span> <span class="nav-text">基于qiankun微前端实战+部署粗略笔记（跳过原理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目标场景"><span class="nav-number">1.1.</span> <span class="nav-text">目标场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预备知识点"><span class="nav-number">1.2.</span> <span class="nav-text">预备知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术栈"><span class="nav-number">1.3.</span> <span class="nav-text">技术栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基座"><span class="nav-number">1.3.1.</span> <span class="nav-text">基座</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基座（开撸代码）"><span class="nav-number">1.3.2.</span> <span class="nav-text">基座（开撸代码）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react子应用"><span class="nav-number">1.3.3.</span> <span class="nav-text">react子应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react子应用（开撸代码）"><span class="nav-number">1.3.4.</span> <span class="nav-text">react子应用（开撸代码）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue子应用"><span class="nav-number">1.3.5.</span> <span class="nav-text">vue子应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue子应用（开撸代码）"><span class="nav-number">1.3.6.</span> <span class="nav-text">vue子应用（开撸代码）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预览"><span class="nav-number">1.4.</span> <span class="nav-text">预览</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基座预览"><span class="nav-number">1.4.1.</span> <span class="nav-text">基座预览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#react子应用预览"><span class="nav-number">1.4.2.</span> <span class="nav-text">react子应用预览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue子应用预览"><span class="nav-number">1.4.3.</span> <span class="nav-text">vue子应用预览</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">1.5.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#备选方案"><span class="nav-number">1.5.1.</span> <span class="nav-text">备选方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署（以下只初略记录部署过程，过于简陋）"><span class="nav-number">1.5.2.</span> <span class="nav-text">部署（以下只初略记录部署过程，过于简陋）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线上预览地址：https-qiankun-xiaoqiang-tech"><span class="nav-number">1.6.1.</span> <span class="nav-text">线上预览地址：https://qiankun.xiaoqiang.tech</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子应用线上也可独立预览"><span class="nav-number">1.6.2.</span> <span class="nav-text">子应用线上也可独立预览</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">2.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">niexq</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script>
+  window.livereOptions = {
+    refer: '2021/04/28/基于qiankun微前端实战+部署粗略笔记（跳过原理）/'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":80,"height":200,"position":"right","hOffset":-17,"vOffset":-90},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+</html>
